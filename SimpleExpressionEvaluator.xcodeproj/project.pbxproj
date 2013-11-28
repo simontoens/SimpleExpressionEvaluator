@@ -23,6 +23,8 @@
 		BEE4EF741846EBDF00AFBE36 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF721846EBDF00AFBE36 /* Node.m */; };
 		BEE4EF771846ECC500AFBE36 /* ASTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF761846ECC500AFBE36 /* ASTBuilder.m */; };
 		BEE4EF781846ECC500AFBE36 /* ASTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF761846ECC500AFBE36 /* ASTBuilder.m */; };
+		BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF7C1846EE7D00AFBE36 /* Stack.m */; };
+		BEE4EF7E1846EE7D00AFBE36 /* Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF7C1846EE7D00AFBE36 /* Stack.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		BEE4EF721846EBDF00AFBE36 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		BEE4EF751846ECC500AFBE36 /* ASTBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTBuilder.h; sourceTree = "<group>"; };
 		BEE4EF761846ECC500AFBE36 /* ASTBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASTBuilder.m; sourceTree = "<group>"; };
+		BEE4EF7B1846EE7D00AFBE36 /* Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stack.h; path = Submodules/STObjCToolbelt/Source/Stack.h; sourceTree = SOURCE_ROOT; };
+		BEE4EF7C1846EE7D00AFBE36 /* Stack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Stack.m; path = Submodules/STObjCToolbelt/Source/Stack.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,7 @@
 			children = (
 				BEE4EF481846EB9B00AFBE36 /* SimpleExpressionEvaluator */,
 				BEE4EF611846EB9B00AFBE36 /* SimpleExpressionEvaluatorTests */,
+				BEE4EF791846EE5500AFBE36 /* Submodules */,
 				BEE4EF411846EB9B00AFBE36 /* Frameworks */,
 				BEE4EF401846EB9B00AFBE36 /* Products */,
 			);
@@ -154,6 +159,24 @@
 				BEE4EF641846EB9B00AFBE36 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BEE4EF791846EE5500AFBE36 /* Submodules */ = {
+			isa = PBXGroup;
+			children = (
+				BEE4EF7A1846EE6700AFBE36 /* STObjCToolbelt */,
+			);
+			name = Submodules;
+			path = SimpleExpressionEvaluator;
+			sourceTree = "<group>";
+		};
+		BEE4EF7A1846EE6700AFBE36 /* STObjCToolbelt */ = {
+			isa = PBXGroup;
+			children = (
+				BEE4EF7B1846EE7D00AFBE36 /* Stack.h */,
+				BEE4EF7C1846EE7D00AFBE36 /* Stack.m */,
+			);
+			name = STObjCToolbelt;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +277,7 @@
 				BEE4EF531846EB9B00AFBE36 /* AppDelegate.m in Sources */,
 				BEE4EF4F1846EB9B00AFBE36 /* main.m in Sources */,
 				BEE4EF771846ECC500AFBE36 /* ASTBuilder.m in Sources */,
+				BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */,
 				BEE4EF731846EBDF00AFBE36 /* Node.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEE4EF7E1846EE7D00AFBE36 /* Stack.m in Sources */,
 				BEE4EF681846EB9B00AFBE36 /* SimpleExpressionEvaluatorTests.m in Sources */,
 				BEE4EF781846ECC500AFBE36 /* ASTBuilder.m in Sources */,
 				BEE4EF741846EBDF00AFBE36 /* Node.m in Sources */,
