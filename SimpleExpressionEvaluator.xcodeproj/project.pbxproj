@@ -31,6 +31,9 @@
 		BEF84A6A18490C9F0045B490 /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A6918490C9F0045B490 /* Tokenizer.m */; };
 		BEF84A6C18490DDC0045B490 /* TokenizerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A6B18490DDC0045B490 /* TokenizerTest.m */; };
 		BEF84A6F184916D20045B490 /* Preconditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A6E184916D20045B490 /* Preconditions.m */; };
+		BEF84A74184928E70045B490 /* ExpressionEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A73184928E70045B490 /* ExpressionEvaluator.m */; };
+		BEF84A75184928E70045B490 /* ExpressionEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A73184928E70045B490 /* ExpressionEvaluator.m */; };
+		BEF84A7718492A280045B490 /* ExpressionEvaluatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A7618492A280045B490 /* ExpressionEvaluatorTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +79,9 @@
 		BEF84A6B18490DDC0045B490 /* TokenizerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenizerTest.m; sourceTree = "<group>"; };
 		BEF84A6D184916D20045B490 /* Preconditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preconditions.h; path = Submodules/STObjCToolbelt/Source/Preconditions.h; sourceTree = SOURCE_ROOT; };
 		BEF84A6E184916D20045B490 /* Preconditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Preconditions.m; path = Submodules/STObjCToolbelt/Source/Preconditions.m; sourceTree = SOURCE_ROOT; };
+		BEF84A72184928E70045B490 /* ExpressionEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionEvaluator.h; sourceTree = "<group>"; };
+		BEF84A73184928E70045B490 /* ExpressionEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionEvaluator.m; sourceTree = "<group>"; };
+		BEF84A7618492A280045B490 /* ExpressionEvaluatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionEvaluatorTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +149,8 @@
 				BEE4EF761846ECC500AFBE36 /* ASTBuilder.m */,
 				BEB11CC91847F2F600F9BA77 /* ASTEvaluator.h */,
 				BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */,
+				BEF84A72184928E70045B490 /* ExpressionEvaluator.h */,
+				BEF84A73184928E70045B490 /* ExpressionEvaluator.m */,
 				BEE4EF711846EBDF00AFBE36 /* Node.h */,
 				BEE4EF721846EBDF00AFBE36 /* Node.m */,
 				BEF84A6818490C9F0045B490 /* Tokenizer.h */,
@@ -169,6 +177,7 @@
 			children = (
 				BEE4EF671846EB9B00AFBE36 /* ASTBuilderTest.m */,
 				BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */,
+				BEF84A7618492A280045B490 /* ExpressionEvaluatorTest.m */,
 				BE6E478A1848343F00672B69 /* NodeTest.m */,
 				BEF84A6B18490DDC0045B490 /* TokenizerTest.m */,
 				BEE4EF621846EB9B00AFBE36 /* Supporting Files */,
@@ -304,6 +313,7 @@
 				BEF84A6A18490C9F0045B490 /* Tokenizer.m in Sources */,
 				BEE4EF4F1846EB9B00AFBE36 /* main.m in Sources */,
 				BEF84A6F184916D20045B490 /* Preconditions.m in Sources */,
+				BEF84A74184928E70045B490 /* ExpressionEvaluator.m in Sources */,
 				BEE4EF771846ECC500AFBE36 /* ASTBuilder.m in Sources */,
 				BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */,
 				BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */,
@@ -315,9 +325,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEF84A7718492A280045B490 /* ExpressionEvaluatorTest.m in Sources */,
 				BEE4EF7E1846EE7D00AFBE36 /* Stack.m in Sources */,
 				BEE4EF681846EB9B00AFBE36 /* ASTBuilderTest.m in Sources */,
 				BEE4EF781846ECC500AFBE36 /* ASTBuilder.m in Sources */,
+				BEF84A75184928E70045B490 /* ExpressionEvaluator.m in Sources */,
 				BE6E478B1848343F00672B69 /* NodeTest.m in Sources */,
 				BEE4EF741846EBDF00AFBE36 /* Node.m in Sources */,
 				BEF84A6C18490DDC0045B490 /* TokenizerTest.m in Sources */,
