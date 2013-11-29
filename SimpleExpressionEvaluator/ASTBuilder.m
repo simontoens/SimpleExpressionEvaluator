@@ -36,7 +36,7 @@
     {
         Node *token = [tokens objectAtIndex:tokenIndex];
         
-        switch (token.nodeType)
+        switch (token.type)
         {
             case kNodeTypeConstant:
                 [_operandStack push:token];
@@ -86,8 +86,8 @@
 - (void)reduce
 {
     Node *root = [_operatorStack pop];
-    root.rightNode = [_operandStack pop];
-    root.leftNode = [_operandStack pop];
+    root.right = [_operandStack pop];
+    root.left = [_operandStack pop];
     [_operandStack push:root];
 }
 

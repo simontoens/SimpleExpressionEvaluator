@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 typedef enum NodeType {
-    kNodeTypeBinaryOperator, kNodeTypeConstant, kNodeTypeParen
+    kNodeTypeBinaryOperator,
+    kNodeTypeConstant,
+    kNodeTypeParen
 } NodeType;
 
 @interface Node : NSObject
@@ -19,10 +21,10 @@ typedef enum NodeType {
 - (NSArray *)nodesInPreorder;
 
 @property (nonatomic, strong) NSString *value;
-@property (nonatomic, assign) NodeType nodeType;
+@property (nonatomic, assign) NodeType type;
 @property (nonatomic, assign, readonly) NSUInteger precedence;
 
-@property (nonatomic, strong) Node *leftNode;
-@property (nonatomic, strong) Node *rightNode;
+@property (nonatomic, strong) Node *left;
+@property (nonatomic, strong) Node *right;
 
 @end

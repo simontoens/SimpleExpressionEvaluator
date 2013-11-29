@@ -20,14 +20,14 @@
 
 - (Node *)evaluateRecusively:(Node *)node
 {
-    if (node.nodeType == kNodeTypeConstant)
+    if (node.type == kNodeTypeConstant)
     {
         return node;
     }
     else
     {
-        Node *lhs = [self evaluateRecusively:node.leftNode];
-        Node *rhs = [self evaluateRecusively:node.rightNode];
+        Node *lhs = [self evaluateRecusively:node.left];
+        Node *rhs = [self evaluateRecusively:node.right];
         return [self compute:node op1:lhs op2:rhs];
     }
 }

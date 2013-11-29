@@ -27,8 +27,8 @@
 - (void)testEval1
 {
     Node *root = [self v:@"+" t:kNodeTypeBinaryOperator];
-    root.leftNode = [self v:@"1" t:kNodeTypeConstant];
-    root.rightNode = [self v:@"2" t:kNodeTypeConstant];
+    root.left = [self v:@"1" t:kNodeTypeConstant];
+    root.right = [self v:@"2" t:kNodeTypeConstant];
     NSInteger result = [eval evaluate:root];
     XCTAssertEqual(result, 3, @"");
 }
@@ -36,10 +36,10 @@
 - (void)testEval2
 {
     Node *root = [self v:@"+" t:kNodeTypeBinaryOperator];
-    root.leftNode = [self v:@"1" t:kNodeTypeConstant];
-    root.rightNode = [self v:@"*" t:kNodeTypeBinaryOperator];
-    root.rightNode.leftNode = [self v:@"4" t:kNodeTypeConstant];
-    root.rightNode.rightNode = [self v:@"2" t:kNodeTypeConstant];
+    root.left = [self v:@"1" t:kNodeTypeConstant];
+    root.right = [self v:@"*" t:kNodeTypeBinaryOperator];
+    root.right.left = [self v:@"4" t:kNodeTypeConstant];
+    root.right.right = [self v:@"2" t:kNodeTypeConstant];
     NSInteger result = [eval evaluate:root];
     XCTAssertEqual(result, 9, @"");
 }
@@ -47,10 +47,10 @@
 - (void)testEval3
 {
     Node *root = [self v:@"*" t:kNodeTypeBinaryOperator];
-    root.leftNode = [self v:@"+" t:kNodeTypeBinaryOperator];
-    root.leftNode.leftNode = [self v:@"1" t:kNodeTypeConstant];
-    root.leftNode.rightNode = [self v:@"2" t:kNodeTypeConstant];
-    root.rightNode = [self v:@"3" t:kNodeTypeConstant];
+    root.left = [self v:@"+" t:kNodeTypeBinaryOperator];
+    root.left.left = [self v:@"1" t:kNodeTypeConstant];
+    root.left.right = [self v:@"2" t:kNodeTypeConstant];
+    root.right = [self v:@"3" t:kNodeTypeConstant];
     NSInteger result = [eval evaluate:root];
     XCTAssertEqual(result, 9, @"");
 }

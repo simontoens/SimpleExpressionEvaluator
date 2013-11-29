@@ -15,7 +15,7 @@
     if (self = [super init])
     {
         _value = value;
-        _nodeType = nodeType;
+        _type = nodeType;
         _precedence = [Node getPrecedenceForNodeType:nodeType value:value];
     }
     return self;
@@ -51,13 +51,13 @@
 - (void)preorder:(Node *)node collectInto:(NSMutableArray *)nodes
 {
     [nodes addObject:node];
-    if (node.leftNode)
+    if (node.left)
     {
-        [self preorder:node.leftNode collectInto:nodes];
+        [self preorder:node.left collectInto:nodes];
     }
-    if (node.rightNode)
+    if (node.right)
     {
-        [self preorder:node.rightNode collectInto:nodes];
+        [self preorder:node.right collectInto:nodes];
     }
 }
 
