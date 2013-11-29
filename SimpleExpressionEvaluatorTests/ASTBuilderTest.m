@@ -3,12 +3,25 @@
 #import <XCTest/XCTest.h>
 #import "ASTBuilder.h"
 #import "Node.h"
+#import "Tokenizer.h"
 
 @interface ASTBuilderTest : XCTestCase
+{
+    Tokenizer *tokenizer;
+}
+@end
 
+@interface Tokenizer()
+- (NSUInteger)getPrecedenceForToken:(NSString *)token ofType:(NodeType)type;
 @end
 
 @implementation ASTBuilderTest
+
+- (void)setUp
+{
+    [super setUp];
+    tokenizer = [[Tokenizer alloc] init];
+}
 
 - (void)tearDown
 {
@@ -51,7 +64,11 @@
 
 - (Node *)v:(NSString *)value t:(NodeType)nodeType
 {
-    return [[Node alloc] initWithValue:value nodeType:nodeType];
+    Node *n = [[Node alloc] init];
+    n.value = value;
+    n.type = nodeType;
+    n.precedence = [tokenizer getPrecedenceForToken:value ofType:nodeType];
+    return n;
 }
 
 - (void)assertAST:(NSArray *)tokens expectedPreorderTokens:(NSArray *)expectedTokens

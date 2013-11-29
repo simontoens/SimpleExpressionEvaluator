@@ -11,18 +11,17 @@
 typedef enum NodeType {
     kNodeTypeBinaryOperator,
     kNodeTypeConstant,
-    kNodeTypeParen
+    kNodeTypeParen,
+    kNodeTypeUnknown
 } NodeType;
 
 @interface Node : NSObject
-
-- (id)initWithValue:(NSString *)value nodeType:(NodeType)nodeType;
 
 - (NSArray *)nodesInPreorder;
 
 @property (nonatomic, strong) NSString *value;
 @property (nonatomic, assign) NodeType type;
-@property (nonatomic, assign, readonly) NSUInteger precedence;
+@property (nonatomic, assign) NSUInteger precedence;
 
 @property (nonatomic, strong) Node *left;
 @property (nonatomic, strong) Node *right;

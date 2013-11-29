@@ -8,6 +8,7 @@
 
 #import "ASTBuilder.h"
 #import "Node.h"
+#import "Preconditions.h"
 #import "Stack.h"
 
 @interface ASTBuilder()
@@ -42,6 +43,7 @@
                 [_operandStack push:token];
                 tokenIndex += 1;
                 break;
+                
             case kNodeTypeParen:
                 if ([token.value isEqualToString:@"("])
                 {
@@ -61,6 +63,7 @@
                     }
                 }
                 break;
+                
             case kNodeTypeBinaryOperator:
                 if (_operatorStack.empty || token.precedence >= ((Node *)[_operatorStack peek]).precedence)
                 {
@@ -71,6 +74,10 @@
                 {
                     [self reduce];
                 }
+                break;
+                
+            case kNodeTypeUnknown:
+                [Preconditions fail:@"Unexpected: unknown node type"];
                 break;
         }
     }

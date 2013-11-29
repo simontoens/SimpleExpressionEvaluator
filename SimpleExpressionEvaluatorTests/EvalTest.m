@@ -57,7 +57,10 @@
 
 - (Node *)v:(NSString *)value t:(NodeType)nodeType
 {
-    return [[Node alloc] initWithValue:value nodeType:nodeType];
+    Node *n = [[Node alloc] init];
+    n.value = value;
+    n.type = nodeType;
+    return n;
 }
 
 @end
