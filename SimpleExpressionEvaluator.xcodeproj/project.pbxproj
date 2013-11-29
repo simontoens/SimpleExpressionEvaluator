@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE6B07581847D614003C7FDC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF5B1846EB9B00AFBE36 /* XCTest.framework */; };
+		BEB11CCB1847F2F600F9BA77 /* Eval.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCA1847F2F600F9BA77 /* Eval.m */; };
+		BEB11CCD1848203000F9BA77 /* EvalTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCC1848203000F9BA77 /* EvalTest.m */; };
 		BEE4EF431846EB9B00AFBE36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF421846EB9B00AFBE36 /* Foundation.framework */; };
 		BEE4EF451846EB9B00AFBE36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF441846EB9B00AFBE36 /* CoreGraphics.framework */; };
 		BEE4EF471846EB9B00AFBE36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF461846EB9B00AFBE36 /* UIKit.framework */; };
@@ -14,11 +17,10 @@
 		BEE4EF4F1846EB9B00AFBE36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF4E1846EB9B00AFBE36 /* main.m */; };
 		BEE4EF531846EB9B00AFBE36 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF521846EB9B00AFBE36 /* AppDelegate.m */; };
 		BEE4EF551846EB9B00AFBE36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEE4EF541846EB9B00AFBE36 /* Images.xcassets */; };
-		BEE4EF5C1846EB9B00AFBE36 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF5B1846EB9B00AFBE36 /* XCTest.framework */; };
 		BEE4EF5D1846EB9B00AFBE36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF421846EB9B00AFBE36 /* Foundation.framework */; };
 		BEE4EF5E1846EB9B00AFBE36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF461846EB9B00AFBE36 /* UIKit.framework */; };
 		BEE4EF661846EB9B00AFBE36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEE4EF641846EB9B00AFBE36 /* InfoPlist.strings */; };
-		BEE4EF681846EB9B00AFBE36 /* SimpleExpressionEvaluatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF671846EB9B00AFBE36 /* SimpleExpressionEvaluatorTests.m */; };
+		BEE4EF681846EB9B00AFBE36 /* ASTBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF671846EB9B00AFBE36 /* ASTBuilderTest.m */; };
 		BEE4EF731846EBDF00AFBE36 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF721846EBDF00AFBE36 /* Node.m */; };
 		BEE4EF741846EBDF00AFBE36 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF721846EBDF00AFBE36 /* Node.m */; };
 		BEE4EF771846ECC500AFBE36 /* ASTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF761846ECC500AFBE36 /* ASTBuilder.m */; };
@@ -38,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE25108B184725E600EB6E1B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		BEB11CC91847F2F600F9BA77 /* Eval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Eval.h; sourceTree = "<group>"; };
+		BEB11CCA1847F2F600F9BA77 /* Eval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Eval.m; sourceTree = "<group>"; };
+		BEB11CCC1848203000F9BA77 /* EvalTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvalTest.m; sourceTree = "<group>"; };
 		BEE4EF3F1846EB9B00AFBE36 /* SimpleExpressionEvaluator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleExpressionEvaluator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE4EF421846EB9B00AFBE36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BEE4EF441846EB9B00AFBE36 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,7 +59,7 @@
 		BEE4EF5B1846EB9B00AFBE36 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		BEE4EF631846EB9B00AFBE36 /* SimpleExpressionEvaluatorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimpleExpressionEvaluatorTests-Info.plist"; sourceTree = "<group>"; };
 		BEE4EF651846EB9B00AFBE36 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BEE4EF671846EB9B00AFBE36 /* SimpleExpressionEvaluatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleExpressionEvaluatorTests.m; sourceTree = "<group>"; };
+		BEE4EF671846EB9B00AFBE36 /* ASTBuilderTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASTBuilderTest.m; sourceTree = "<group>"; };
 		BEE4EF711846EBDF00AFBE36 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		BEE4EF721846EBDF00AFBE36 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		BEE4EF751846ECC500AFBE36 /* ASTBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTBuilder.h; sourceTree = "<group>"; };
@@ -77,7 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEE4EF5C1846EB9B00AFBE36 /* XCTest.framework in Frameworks */,
+				BE6B07581847D614003C7FDC /* XCTest.framework in Frameworks */,
 				BEE4EF5E1846EB9B00AFBE36 /* UIKit.framework in Frameworks */,
 				BEE4EF5D1846EB9B00AFBE36 /* Foundation.framework in Frameworks */,
 			);
@@ -109,6 +115,7 @@
 		BEE4EF411846EB9B00AFBE36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE25108B184725E600EB6E1B /* SenTestingKit.framework */,
 				BEE4EF421846EB9B00AFBE36 /* Foundation.framework */,
 				BEE4EF441846EB9B00AFBE36 /* CoreGraphics.framework */,
 				BEE4EF461846EB9B00AFBE36 /* UIKit.framework */,
@@ -124,6 +131,8 @@
 				BEE4EF521846EB9B00AFBE36 /* AppDelegate.m */,
 				BEE4EF751846ECC500AFBE36 /* ASTBuilder.h */,
 				BEE4EF761846ECC500AFBE36 /* ASTBuilder.m */,
+				BEB11CC91847F2F600F9BA77 /* Eval.h */,
+				BEB11CCA1847F2F600F9BA77 /* Eval.m */,
 				BEE4EF711846EBDF00AFBE36 /* Node.h */,
 				BEE4EF721846EBDF00AFBE36 /* Node.m */,
 				BEE4EF541846EB9B00AFBE36 /* Images.xcassets */,
@@ -146,7 +155,8 @@
 		BEE4EF611846EB9B00AFBE36 /* SimpleExpressionEvaluatorTests */ = {
 			isa = PBXGroup;
 			children = (
-				BEE4EF671846EB9B00AFBE36 /* SimpleExpressionEvaluatorTests.m */,
+				BEE4EF671846EB9B00AFBE36 /* ASTBuilderTest.m */,
+				BEB11CCC1848203000F9BA77 /* EvalTest.m */,
 				BEE4EF621846EB9B00AFBE36 /* Supporting Files */,
 			);
 			path = SimpleExpressionEvaluatorTests;
@@ -277,6 +287,7 @@
 				BEE4EF531846EB9B00AFBE36 /* AppDelegate.m in Sources */,
 				BEE4EF4F1846EB9B00AFBE36 /* main.m in Sources */,
 				BEE4EF771846ECC500AFBE36 /* ASTBuilder.m in Sources */,
+				BEB11CCB1847F2F600F9BA77 /* Eval.m in Sources */,
 				BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */,
 				BEE4EF731846EBDF00AFBE36 /* Node.m in Sources */,
 			);
@@ -287,9 +298,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEE4EF7E1846EE7D00AFBE36 /* Stack.m in Sources */,
-				BEE4EF681846EB9B00AFBE36 /* SimpleExpressionEvaluatorTests.m in Sources */,
+				BEE4EF681846EB9B00AFBE36 /* ASTBuilderTest.m in Sources */,
 				BEE4EF781846ECC500AFBE36 /* ASTBuilder.m in Sources */,
 				BEE4EF741846EBDF00AFBE36 /* Node.m in Sources */,
+				BEB11CCD1848203000F9BA77 /* EvalTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +496,7 @@
 				BEE4EF6D1846EB9B00AFBE36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BEE4EF6E1846EB9B00AFBE36 /* Build configuration list for PBXNativeTarget "SimpleExpressionEvaluatorTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +505,7 @@
 				BEE4EF701846EB9B00AFBE36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

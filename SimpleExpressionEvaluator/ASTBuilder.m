@@ -11,8 +11,11 @@
 #import "Stack.h"
 
 @interface ASTBuilder()
-@property (nonatomic, strong) Stack *operatorStack;
-@property (nonatomic, strong) Stack *operandStack;
+{
+    @private
+    Stack *_operatorStack;
+    Stack *_operandStack;
+}
 @end
 
 @implementation ASTBuilder
@@ -22,34 +25,49 @@
     if (self = [super init])
     {
         _operandStack = [[Stack alloc] init];
-        _operandStack = [[Stack alloc] init];
+        _operatorStack = [[Stack alloc] init];
     }
     return self;
 }
 
 - (Node *)build:(NSArray *)tokens
 {
-    for (Node *token in tokens)
+    for (int tokenIndex = 0; tokenIndex < [tokens count];)
     {
+        Node *token = [tokens objectAtIndex:tokenIndex];
         if (token.nodeType == kOperandNode)
         {
             [_operandStack push:token];
+            tokenIndex += 1;
         }
         else
         {
-            if (_operatorStack.empty)
+            if (_operatorStack.empty || token.precedence >= ((Node *)[_operatorStack peek]).precedence)
             {
                 [_operatorStack push:token];
+                tokenIndex += 1;
             }
             else
             {
-                Node *top = [_operatorStack peek];
+                [self reduce];
             }
-            [_operatorStack push:token];
         }
     }
-    return nil;
+    
+    while (!_operatorStack.empty)
+    {
+        [self reduce];
+    }
+    
+    return [_operandStack pop];
 }
 
+- (void)reduce
+{
+    Node *root = [_operatorStack pop];
+    root.rightNode = [_operandStack pop];
+    root.leftNode = [_operandStack pop];
+    [_operandStack push:root];
+}
 
 @end

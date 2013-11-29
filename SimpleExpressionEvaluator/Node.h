@@ -8,14 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum kNodeType {
+typedef enum NodeType {
     kOperatorNode, kOperandNode
-} kNodeType;
+} NodeType;
 
 @interface Node : NSObject
 
+- (id)initWithValue:(NSString *)value nodeType:(NodeType)nodeType precedence:(NSUInteger)precedence;
+
+- (NSArray *)nodesInPreorder;
+- (NSArray *)nodesInPostorder;
+
 @property (nonatomic, strong) NSString *value;
-@property (nonatomic, assign) kNodeType nodeType;
+@property (nonatomic, assign) NodeType nodeType;
 @property (nonatomic, assign) NSUInteger precedence;
 
 @property (nonatomic, strong) Node *leftNode;
