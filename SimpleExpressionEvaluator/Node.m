@@ -10,15 +10,35 @@
 
 @implementation Node
 
-- (id)initWithValue:(NSString *)value nodeType:(NodeType)nodeType precedence:(NSUInteger)precedence
+- (id)initWithValue:(NSString *)value nodeType:(NodeType)nodeType
 {
     if (self = [super init])
     {
         _value = value;
         _nodeType = nodeType;
-        _precedence = precedence;
+        _precedence = [Node getPrecedenceForNodeType:nodeType value:value];
     }
     return self;
+}
+
++ (NSUInteger)getPrecedenceForNodeType:(NodeType)nodeType value:(NSString *)value
+{
+    switch (nodeType)
+    {
+        case kNodeTypeConstant:
+            return 1;
+        case kNodeTypeBinaryOperator:
+            if ([value isEqualToString:@"-"] || [value isEqualToString:@"+"])
+            {
+                return 2;
+            }
+            else
+            {
+                return 3;
+            }
+        case kNodeTypeParen:
+            return [value isEqualToString:@"("] ? 0 : 10;
+    }
 }
 
 - (NSArray *)nodesInPreorder

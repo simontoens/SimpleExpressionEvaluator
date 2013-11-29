@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE6B07581847D614003C7FDC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF5B1846EB9B00AFBE36 /* XCTest.framework */; };
+		BE6E478B1848343F00672B69 /* NodeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6E478A1848343F00672B69 /* NodeTest.m */; };
 		BEB11CCB1847F2F600F9BA77 /* Eval.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCA1847F2F600F9BA77 /* Eval.m */; };
 		BEB11CCD1848203000F9BA77 /* EvalTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCC1848203000F9BA77 /* EvalTest.m */; };
 		BEE4EF431846EB9B00AFBE36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF421846EB9B00AFBE36 /* Foundation.framework */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		BE25108B184725E600EB6E1B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		BE6E478A1848343F00672B69 /* NodeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTest.m; sourceTree = "<group>"; };
 		BEB11CC91847F2F600F9BA77 /* Eval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Eval.h; sourceTree = "<group>"; };
 		BEB11CCA1847F2F600F9BA77 /* Eval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Eval.m; sourceTree = "<group>"; };
 		BEB11CCC1848203000F9BA77 /* EvalTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvalTest.m; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			children = (
 				BEE4EF671846EB9B00AFBE36 /* ASTBuilderTest.m */,
 				BEB11CCC1848203000F9BA77 /* EvalTest.m */,
+				BE6E478A1848343F00672B69 /* NodeTest.m */,
 				BEE4EF621846EB9B00AFBE36 /* Supporting Files */,
 			);
 			path = SimpleExpressionEvaluatorTests;
@@ -300,6 +303,7 @@
 				BEE4EF7E1846EE7D00AFBE36 /* Stack.m in Sources */,
 				BEE4EF681846EB9B00AFBE36 /* ASTBuilderTest.m in Sources */,
 				BEE4EF781846ECC500AFBE36 /* ASTBuilder.m in Sources */,
+				BE6E478B1848343F00672B69 /* NodeTest.m in Sources */,
 				BEE4EF741846EBDF00AFBE36 /* Node.m in Sources */,
 				BEB11CCD1848203000F9BA77 /* EvalTest.m in Sources */,
 			);
