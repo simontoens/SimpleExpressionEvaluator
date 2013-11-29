@@ -14,22 +14,27 @@
 
 - (NSInteger)evaluate:(Node *)ast
 {
-    Stack *evalStack = [[Stack alloc] init];
-    for (Node *node in [ast nodesInPreorder])
-    {
-        [evalStack push:node];
-    }
+    Node *op1 = nil;
+    Node *op2 = nil;
     
-    while (evalStack.count > 1)
+    for (Node *n in [ast nodesInPostorderRight])
     {
-        Node *op1 = [evalStack pop];
-        Node *op2 = [evalStack pop];
-        Node *operator = [evalStack pop];
-        Node *result = [self compute:operator op1:op1 op2:op2];
-        [evalStack push:result];
+        NSLog(@"NODE %@", n);
+        if (!op1)
+        {
+            op1 = n;
+        }
+        else if (!op2)
+        {
+            op2 = n;
+        }
+        else
+        {
+            op1 = [self compute:n op1:op1 op2:op2];
+            op2 = nil;
+        }
     }
-    Node *result = [evalStack pop];
-    return [result.value integerValue];
+    return [op1.value integerValue];
 }
 
 - (Node *)compute:(Node *)operator op1:(Node *)op1 op2:(Node *)op2
