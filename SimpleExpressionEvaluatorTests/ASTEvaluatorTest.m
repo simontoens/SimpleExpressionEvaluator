@@ -7,21 +7,21 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "Eval.h"
+#import "ASTEvaluator.h"
 
-@interface EvalTest : XCTestCase
+@interface ASTEvaluatorTest : XCTestCase
 {
-    Eval *eval;
+    ASTEvaluator *eval;
 }
 
 @end
 
-@implementation EvalTest
+@implementation ASTEvaluatorTest
 
 - (void)setUp
 {
     [super setUp];
-    eval = [[Eval alloc] init];
+    eval = [[ASTEvaluator alloc] init];
 }
 
 - (void)testEval1

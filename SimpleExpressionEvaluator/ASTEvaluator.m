@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Simon Toens. All rights reserved.
 //
 
-#import "Eval.h"
+#import "ASTEvaluator.h"
 #import "Node.h"
 #import "Stack.h"
 
-@implementation Eval
+@implementation ASTEvaluator
 
 - (NSInteger)evaluate:(Node *)ast
 {

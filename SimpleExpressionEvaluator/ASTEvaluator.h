@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Node.h"
 
-@interface Eval : NSObject
+@interface ASTEvaluator : NSObject
 
 - (NSInteger)evaluate:(Node *)ast;
 

@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		BE6B07581847D614003C7FDC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF5B1846EB9B00AFBE36 /* XCTest.framework */; };
 		BE6E478B1848343F00672B69 /* NodeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6E478A1848343F00672B69 /* NodeTest.m */; };
-		BEB11CCB1847F2F600F9BA77 /* Eval.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCA1847F2F600F9BA77 /* Eval.m */; };
-		BEB11CCD1848203000F9BA77 /* EvalTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCC1848203000F9BA77 /* EvalTest.m */; };
+		BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */; };
+		BEB11CCD1848203000F9BA77 /* ASTEvaluatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */; };
 		BEE4EF431846EB9B00AFBE36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF421846EB9B00AFBE36 /* Foundation.framework */; };
 		BEE4EF451846EB9B00AFBE36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF441846EB9B00AFBE36 /* CoreGraphics.framework */; };
 		BEE4EF471846EB9B00AFBE36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF461846EB9B00AFBE36 /* UIKit.framework */; };
@@ -46,9 +46,9 @@
 /* Begin PBXFileReference section */
 		BE25108B184725E600EB6E1B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		BE6E478A1848343F00672B69 /* NodeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTest.m; sourceTree = "<group>"; };
-		BEB11CC91847F2F600F9BA77 /* Eval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Eval.h; sourceTree = "<group>"; };
-		BEB11CCA1847F2F600F9BA77 /* Eval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Eval.m; sourceTree = "<group>"; };
-		BEB11CCC1848203000F9BA77 /* EvalTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvalTest.m; sourceTree = "<group>"; };
+		BEB11CC91847F2F600F9BA77 /* ASTEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTEvaluator.h; sourceTree = "<group>"; };
+		BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASTEvaluator.m; sourceTree = "<group>"; };
+		BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASTEvaluatorTest.m; sourceTree = "<group>"; };
 		BEE4EF3F1846EB9B00AFBE36 /* SimpleExpressionEvaluator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleExpressionEvaluator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE4EF421846EB9B00AFBE36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BEE4EF441846EB9B00AFBE36 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -141,8 +141,8 @@
 				BEE4EF521846EB9B00AFBE36 /* AppDelegate.m */,
 				BEE4EF751846ECC500AFBE36 /* ASTBuilder.h */,
 				BEE4EF761846ECC500AFBE36 /* ASTBuilder.m */,
-				BEB11CC91847F2F600F9BA77 /* Eval.h */,
-				BEB11CCA1847F2F600F9BA77 /* Eval.m */,
+				BEB11CC91847F2F600F9BA77 /* ASTEvaluator.h */,
+				BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */,
 				BEE4EF711846EBDF00AFBE36 /* Node.h */,
 				BEE4EF721846EBDF00AFBE36 /* Node.m */,
 				BEF84A6818490C9F0045B490 /* Tokenizer.h */,
@@ -168,7 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				BEE4EF671846EB9B00AFBE36 /* ASTBuilderTest.m */,
-				BEB11CCC1848203000F9BA77 /* EvalTest.m */,
+				BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */,
 				BE6E478A1848343F00672B69 /* NodeTest.m */,
 				BEF84A6B18490DDC0045B490 /* TokenizerTest.m */,
 				BEE4EF621846EB9B00AFBE36 /* Supporting Files */,
@@ -305,7 +305,7 @@
 				BEE4EF4F1846EB9B00AFBE36 /* main.m in Sources */,
 				BEF84A6F184916D20045B490 /* Preconditions.m in Sources */,
 				BEE4EF771846ECC500AFBE36 /* ASTBuilder.m in Sources */,
-				BEB11CCB1847F2F600F9BA77 /* Eval.m in Sources */,
+				BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */,
 				BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */,
 				BEE4EF731846EBDF00AFBE36 /* Node.m in Sources */,
 			);
@@ -321,7 +321,7 @@
 				BE6E478B1848343F00672B69 /* NodeTest.m in Sources */,
 				BEE4EF741846EBDF00AFBE36 /* Node.m in Sources */,
 				BEF84A6C18490DDC0045B490 /* TokenizerTest.m in Sources */,
-				BEB11CCD1848203000F9BA77 /* EvalTest.m in Sources */,
+				BEB11CCD1848203000F9BA77 /* ASTEvaluatorTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
