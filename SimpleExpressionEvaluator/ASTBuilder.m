@@ -35,22 +35,43 @@
     for (int tokenIndex = 0; tokenIndex < [tokens count];)
     {
         Node *token = [tokens objectAtIndex:tokenIndex];
-        if (token.nodeType == kNodeTypeConstant)
+        
+        switch (token.nodeType)
         {
-            [_operandStack push:token];
-            tokenIndex += 1;
-        }
-        else
-        {
-            if (_operatorStack.empty || token.precedence >= ((Node *)[_operatorStack peek]).precedence)
-            {
-                [_operatorStack push:token];
+            case kNodeTypeConstant:
+                [_operandStack push:token];
                 tokenIndex += 1;
-            }
-            else
-            {
-                [self reduce];
-            }
+                break;
+            case kNodeTypeParen:
+                if ([token.value isEqualToString:@"("])
+                {
+                    [_operatorStack push:token];
+                    tokenIndex += 1;
+                }
+                else
+                {
+                    if ([((Node *)[_operatorStack peek]).value isEqualToString:@"("])
+                    {
+                        [_operatorStack pop];
+                        tokenIndex += 1;
+                    }
+                    else
+                    {
+                        [self reduce];
+                    }
+                }
+                break;
+            case kNodeTypeBinaryOperator:
+                if (_operatorStack.empty || token.precedence >= ((Node *)[_operatorStack peek]).precedence)
+                {
+                    [_operatorStack push:token];
+                    tokenIndex += 1;
+                }
+                else
+                {
+                    [self reduce];
+                }
+                break;
         }
     }
     

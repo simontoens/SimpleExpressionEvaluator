@@ -36,6 +36,19 @@
     [self assertAST:tokens expectedPreorderTokens:[NSArray arrayWithObjects:@"+", @"1", @"*", @"2", @"3", nil]];
 }
 
+- (void)testExprWithParens1
+{
+    NSArray *tokens = [NSArray arrayWithObjects:
+                       [self v:@"(" t:kNodeTypeParen],
+                       [self v:@"1" t:kNodeTypeConstant],
+                       [self v:@"+" t:kNodeTypeBinaryOperator],
+                       [self v:@"2" t:kNodeTypeConstant],
+                       [self v:@")" t:kNodeTypeParen],
+                       [self v:@"*" t:kNodeTypeBinaryOperator],
+                       [self v:@"3" t:kNodeTypeConstant], nil];
+    [self assertAST:tokens expectedPreorderTokens:[NSArray arrayWithObjects:@"*", @"+", @"1", @"2", @"3", nil]];
+}
+
 - (Node *)v:(NSString *)value t:(NodeType)nodeType
 {
     return [[Node alloc] initWithValue:value nodeType:nodeType];
@@ -46,7 +59,8 @@
     ASTBuilder *astBuilder = [[ASTBuilder alloc] init];
     Node *ast = [astBuilder build:tokens];
     NSArray *preorderderNodes = [ast nodesInPreorder];
-    XCTAssertEqual([preorderderNodes count], [tokens count], @"Unexpected node count");
+    NSLog(@"PRE %@", preorderderNodes);
+    XCTAssertEqual([preorderderNodes count], [expectedTokens count], @"Unexpected node count");
     
     for (int i = 0; i < [preorderderNodes count]; i++)
     {

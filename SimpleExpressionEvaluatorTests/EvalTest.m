@@ -44,6 +44,17 @@
     XCTAssertEqual(result, 9, @"");
 }
 
+- (void)testEval3
+{
+    Node *root = [self v:@"*" t:kNodeTypeBinaryOperator];
+    root.leftNode = [self v:@"+" t:kNodeTypeBinaryOperator];
+    root.leftNode.leftNode = [self v:@"1" t:kNodeTypeConstant];
+    root.leftNode.rightNode = [self v:@"2" t:kNodeTypeConstant];
+    root.rightNode = [self v:@"3" t:kNodeTypeConstant];
+    NSInteger result = [eval evaluate:root];
+    XCTAssertEqual(result, 9, @"");
+}
+
 - (Node *)v:(NSString *)value t:(NodeType)nodeType
 {
     return [[Node alloc] initWithValue:value nodeType:nodeType];

@@ -14,27 +14,22 @@
 
 - (NSInteger)evaluate:(Node *)ast
 {
-    Node *op1 = nil;
-    Node *op2 = nil;
-    
-    for (Node *n in [ast nodesInPostorderRight])
+    Node *result = [self evaluateRecusively:ast];
+    return [result.value integerValue];
+}
+
+- (Node *)evaluateRecusively:(Node *)node
+{
+    if (node.nodeType == kNodeTypeConstant)
     {
-        NSLog(@"NODE %@", n);
-        if (!op1)
-        {
-            op1 = n;
-        }
-        else if (!op2)
-        {
-            op2 = n;
-        }
-        else
-        {
-            op1 = [self compute:n op1:op1 op2:op2];
-            op2 = nil;
-        }
+        return node;
     }
-    return [op1.value integerValue];
+    else
+    {
+        Node *lhs = [self evaluateRecusively:node.leftNode];
+        Node *rhs = [self evaluateRecusively:node.rightNode];
+        return [self compute:node op1:lhs op2:rhs];
+    }
 }
 
 - (Node *)compute:(Node *)operator op1:(Node *)op1 op2:(Node *)op2

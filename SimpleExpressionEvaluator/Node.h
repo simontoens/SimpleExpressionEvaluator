@@ -17,8 +17,6 @@ typedef enum NodeType {
 - (id)initWithValue:(NSString *)value nodeType:(NodeType)nodeType;
 
 - (NSArray *)nodesInPreorder;
-- (NSArray *)nodesInPostorder;
-- (NSArray *)nodesInPostorderRight;
 
 @property (nonatomic, strong) NSString *value;
 @property (nonatomic, assign) NodeType nodeType;

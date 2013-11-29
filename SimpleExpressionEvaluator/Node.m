@@ -48,20 +48,6 @@
     return nodes;
 }
 
-- (NSArray *)nodesInPostorder
-{
-    NSMutableArray *nodes = [[NSMutableArray alloc] init];
-    [self postorder:self collectInto:nodes];
-    return nodes;
-}
-
-- (NSArray *)nodesInPostorderRight
-{
-    NSMutableArray *nodes = [[NSMutableArray alloc] init];
-    [self postorderRight:self collectInto:nodes];
-    return nodes;
-}
-
 - (void)preorder:(Node *)node collectInto:(NSMutableArray *)nodes
 {
     [nodes addObject:node];
@@ -73,32 +59,6 @@
     {
         [self preorder:node.rightNode collectInto:nodes];
     }
-}
-
-- (void)postorderRight:(Node *)node collectInto:(NSMutableArray *)nodes
-{
-    if (node.rightNode)
-    {
-        [self postorderRight:node.rightNode collectInto:nodes];
-    }
-    if (node.leftNode)
-    {
-        [self postorderRight:node.leftNode collectInto:nodes];
-    }
-    [nodes addObject:node];
-}
-
-- (void)postorder:(Node *)node collectInto:(NSMutableArray *)nodes
-{
-    if (node.leftNode)
-    {
-        [self postorder:node.leftNode collectInto:nodes];
-    }
-    if (node.rightNode)
-    {
-        [self postorder:node.rightNode collectInto:nodes];
-    }
-    [nodes addObject:node];
 }
 
 - (NSString *)description
