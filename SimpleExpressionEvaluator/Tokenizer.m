@@ -15,9 +15,13 @@
 static NSCharacterSet *kLeftParen;
 static NSCharacterSet *kRightParen;
 static NSCharacterSet *kParensCharacterSet;
+
 static NSCharacterSet *kBinaryOperatorLowerPrecedenceCharacterSet;
 static NSCharacterSet *kBinaryOperatorHigherPrecedenceCharacterSet;
 static NSCharacterSet *kBinaryOperatorCharacterSet;
+
+static NSCharacterSet *kSeparatorCharacterSet;
+static NSCharacterSet *kSingleCharacterTokenCharacterSet;
 
 + (void)initialize
 {
@@ -34,6 +38,16 @@ static NSCharacterSet *kBinaryOperatorCharacterSet;
     [s formUnionWithCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet];
     [s formUnionWithCharacterSet:kBinaryOperatorHigherPrecedenceCharacterSet];
     kBinaryOperatorCharacterSet = s;
+    
+    s = [[NSMutableCharacterSet alloc] init];
+    [s formUnionWithCharacterSet:kParensCharacterSet];
+    [s formUnionWithCharacterSet:kBinaryOperatorCharacterSet];
+    kSingleCharacterTokenCharacterSet = s;
+    
+    s = [[NSMutableCharacterSet alloc] init];
+    [s formUnionWithCharacterSet:kSingleCharacterTokenCharacterSet];
+    [s formUnionWithCharacterSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    kSeparatorCharacterSet = s;
 }
 
 - (NSArray *)tokenize:(NSString *)expression
@@ -58,13 +72,45 @@ static NSCharacterSet *kBinaryOperatorCharacterSet;
 - (NSArray *)split:(NSString *)expression
 {
     NSMutableArray *tokens = [[NSMutableArray alloc] init];
-    for (NSString *token in [expression componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]])
+    
+    NSMutableString *currentToken = nil;
+    
+    for (int i = 0; i < [expression length]; i++)
     {
-        if ([token length] > 0)
+        unichar c = [expression characterAtIndex:i];
+
+        if ([kSeparatorCharacterSet characterIsMember:c])
         {
-            [tokens addObject:token];
+            if (currentToken)
+            {
+                [tokens addObject:currentToken];
+                currentToken = nil;
+            }
+            if ([[NSCharacterSet whitespaceAndNewlineCharacterSet] characterIsMember:c])
+            {
+                continue;
+            }
+        }
+        
+        if (!currentToken)
+        {
+            currentToken = [[NSMutableString alloc] init];
+        }
+        
+        [currentToken appendString:[NSString stringWithFormat:@"%C", c]];
+        
+        if ([kSingleCharacterTokenCharacterSet characterIsMember:c])
+        {
+            [tokens addObject:currentToken];
+            currentToken = nil;
         }
     }
+    
+    if ([currentToken length] > 0)
+    {
+        [tokens addObject:currentToken];
+    }
+    
     return tokens;
 }
 

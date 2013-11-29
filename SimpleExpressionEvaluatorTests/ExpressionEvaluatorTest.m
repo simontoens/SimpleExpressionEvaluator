@@ -29,10 +29,10 @@
     XCTAssertEqual([evaluator evaluate:@"15 * 2"], 30, @"");
     
     XCTAssertEqual([evaluator evaluate:@"15 * 2 + 1"], 31, @"");
-    XCTAssertEqual([evaluator evaluate:@"15 *  ( 2 + 1 )"], 45, @"");
+    XCTAssertEqual([evaluator evaluate:@"15 * (2 + 1)"], 45, @"");
 
-    XCTAssertEqual([evaluator evaluate:@"2 + 1 * 2 + 2"], 6, @"");
-    XCTAssertEqual([evaluator evaluate:@"( 2 + 1 ) *  ( 2 + 2 )"], 12, @"");
+    XCTAssertEqual([evaluator evaluate:@"2 + 1 * 2 + 2 "], 6, @"");
+    XCTAssertEqual([evaluator evaluate:@"(2 + 1) * (2 + 2)"], 12, @"");
 }
 
 @end

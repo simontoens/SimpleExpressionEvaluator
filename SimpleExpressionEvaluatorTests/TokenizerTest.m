@@ -33,14 +33,23 @@
 
 - (void)testSplit
 {
-    NSArray *expected = [NSArray arrayWithObjects:@"a", nil];
-    XCTAssertEqualObjects([tokenizer split:@"a"], expected, @"");
+    NSArray *expected = [NSArray arrayWithObjects:@"1", nil];
+    XCTAssertEqualObjects([tokenizer split:@"1"], expected, @"");
     
-    [NSArray arrayWithObjects:@" a  ", nil];
-    XCTAssertEqualObjects([tokenizer split:@"a"], expected, @"");
+    [NSArray arrayWithObjects:@" 1  ", nil];
+    XCTAssertEqualObjects([tokenizer split:@"1"], expected, @"");
     
-    expected = [NSArray arrayWithObjects:@"a", @"b", @"c", nil];
-    XCTAssertEqualObjects([tokenizer split:@" a  b   c  "], expected, @"");
+    expected = [NSArray arrayWithObjects:@"1", @"2", @"3", nil];
+    XCTAssertEqualObjects([tokenizer split:@" 1  2   3  "], expected, @"");
+    
+    expected = [NSArray arrayWithObjects:@"1", @"+", @"3", nil];
+    XCTAssertEqualObjects([tokenizer split:@"1 + 3"], expected, @"");
+    
+    expected = [NSArray arrayWithObjects:@"1", @"+", @"3", nil];
+    XCTAssertEqualObjects([tokenizer split:@"1+3"], expected, @"");
+    
+    expected = [NSArray arrayWithObjects:@"1", @"+", @"(", @"3", @")", nil];
+    XCTAssertEqualObjects([tokenizer split:@"1+(3)"], expected, @"");
 }
 
 - (void)testGetNodeType
