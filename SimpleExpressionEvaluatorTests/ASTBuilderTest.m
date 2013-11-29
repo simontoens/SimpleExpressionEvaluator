@@ -19,20 +19,20 @@
 - (void)testExpr1
 {
     NSArray *tokens = [NSArray arrayWithObjects:
-                       [self v:@"1" t:kOperandNode p:1],
-                       [self v:@"+" t:kOperatorNode p:2],
-                       [self v:@"2" t:kOperandNode p:1], nil];
+                       [self v:@"1" t:kNodeTypeConstant p:1],
+                       [self v:@"+" t:kNodeTypeBinaryOperator p:2],
+                       [self v:@"2" t:kNodeTypeConstant p:1], nil];
     [self assertAST:tokens expectedPreorderTokens:[NSArray arrayWithObjects:@"+", @"1", @"2", nil]];
 }
 
 - (void)testExpr2
 {
     NSArray *tokens = [NSArray arrayWithObjects:
-                       [self v:@"1" t:kOperandNode p:1],
-                       [self v:@"+" t:kOperatorNode p:2],
-                       [self v:@"2" t:kOperandNode p:1],
-                       [self v:@"*" t:kOperatorNode p:3],
-                       [self v:@"3" t:kOperandNode p:1], nil];
+                       [self v:@"1" t:kNodeTypeConstant p:1],
+                       [self v:@"+" t:kNodeTypeBinaryOperator p:2],
+                       [self v:@"2" t:kNodeTypeConstant p:1],
+                       [self v:@"*" t:kNodeTypeBinaryOperator p:3],
+                       [self v:@"3" t:kNodeTypeConstant p:1], nil];
     [self assertAST:tokens expectedPreorderTokens:[NSArray arrayWithObjects:@"+", @"1", @"*", @"2", @"3", nil]];
 }
 

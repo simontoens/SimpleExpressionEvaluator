@@ -26,20 +26,20 @@
 
 - (void)testEval1
 {
-    Node *root = [self v:@"+" t:kOperatorNode p:2];
-    root.leftNode = [self v:@"1" t:kOperandNode p:1];
-    root.rightNode = [self v:@"2" t:kOperandNode p:1];
+    Node *root = [self v:@"+" t:kNodeTypeBinaryOperator p:2];
+    root.leftNode = [self v:@"1" t:kNodeTypeConstant p:1];
+    root.rightNode = [self v:@"2" t:kNodeTypeConstant p:1];
     NSInteger result = [eval evaluate:root];
     XCTAssertEqual(result, 3, @"");
 }
 
 - (void)testEval2
 {
-    Node *root = [self v:@"+" t:kOperatorNode p:2];
-    root.leftNode = [self v:@"1" t:kOperandNode p:1];
-    root.rightNode = [self v:@"*" t:kOperatorNode p:2];
-    root.rightNode.leftNode = [self v:@"4" t:kOperandNode p:1];
-    root.rightNode.rightNode = [self v:@"2" t:kOperandNode p:1];
+    Node *root = [self v:@"+" t:kNodeTypeBinaryOperator p:2];
+    root.leftNode = [self v:@"1" t:kNodeTypeConstant p:1];
+    root.rightNode = [self v:@"*" t:kNodeTypeBinaryOperator p:2];
+    root.rightNode.leftNode = [self v:@"4" t:kNodeTypeConstant p:1];
+    root.rightNode.rightNode = [self v:@"2" t:kNodeTypeConstant p:1];
     NSInteger result = [eval evaluate:root];
     XCTAssertEqual(result, 9, @"");
 }

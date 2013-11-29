@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef enum NodeType {
-    kOperatorNode, kOperandNode
+    kNodeTypeBinaryOperator, kNodeTypeConstant
 } NodeType;
 
 @interface Node : NSObject

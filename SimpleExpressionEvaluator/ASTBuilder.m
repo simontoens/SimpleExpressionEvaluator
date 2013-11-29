@@ -35,7 +35,7 @@
     for (int tokenIndex = 0; tokenIndex < [tokens count];)
     {
         Node *token = [tokens objectAtIndex:tokenIndex];
-        if (token.nodeType == kOperandNode)
+        if (token.nodeType == kNodeTypeConstant)
         {
             [_operandStack push:token];
             tokenIndex += 1;
