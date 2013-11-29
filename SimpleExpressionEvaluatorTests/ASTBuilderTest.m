@@ -25,7 +25,7 @@
 
 - (void)tearDown
 {
-    [NSThread sleepForTimeInterval:1]; // crappy XCode bug
+    [NSThread sleepForTimeInterval:1]; // crappy Xcode bug, utests can't run too fast
     [super tearDown];
 }
 
@@ -76,7 +76,6 @@
     ASTBuilder *astBuilder = [[ASTBuilder alloc] init];
     Node *ast = [astBuilder build:tokens];
     NSArray *preorderderNodes = [ast nodesInPreorder];
-    NSLog(@"PRE %@", preorderderNodes);
     XCTAssertEqual([preorderderNodes count], [expectedTokens count], @"Unexpected node count");
     
     for (int i = 0; i < [preorderderNodes count]; i++)

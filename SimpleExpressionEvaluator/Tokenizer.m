@@ -106,7 +106,7 @@ static NSCharacterSet *kSingleCharacterTokenCharacterSet;
         }
     }
     
-    if ([currentToken length] > 0)
+    if (currentToken)
     {
         [tokens addObject:currentToken];
     }
