@@ -9,6 +9,10 @@
 #import <XCTest/XCTest.h>
 #import "ASTEvaluator.h"
 
+@interface ASTEvaluator()
+- (Node *)compute:(Node *)operator arg1:(Node *)op1 arg2:(Node *)op2;
+@end
+
 @interface ASTEvaluatorTest : XCTestCase
 {
     ASTEvaluator *eval;
@@ -22,6 +26,21 @@
 {
     [super setUp];
     eval = [[ASTEvaluator alloc] init];
+}
+
+- (void)testCompute
+{
+    Node *result = [eval compute:[self v:@"+"] arg1:[self v:@"1"] arg2:[self v:@"3"]];
+    XCTAssertEqualObjects(result.value, @"4", @"");
+    
+    result = [eval compute:[self v:@"*"] arg1:[self v:@"2"] arg2:[self v:@"3"]];
+    XCTAssertEqualObjects(result.value, @"6", @"");
+    
+    result = [eval compute:[self v:@"-"] arg1:[self v:@"2"] arg2:[self v:@"3"]];
+    XCTAssertEqualObjects(result.value, @"-1", @"");
+    
+    result = [eval compute:[self v:@"/"] arg1:[self v:@"16"] arg2:[self v:@"4"]];
+    XCTAssertEqualObjects(result.value, @"4", @"");
 }
 
 - (void)testEval1
@@ -55,6 +74,11 @@
     XCTAssertEqual(result, 9, @"");
 }
 
+- (Node *)v:(NSString *)value
+{
+    return [self v:value t:kNodeTypeUnknown];
+}
+     
 - (Node *)v:(NSString *)value t:(NodeType)nodeType
 {
     Node *n = [[Node alloc] init];

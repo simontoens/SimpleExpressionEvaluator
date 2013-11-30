@@ -1,5 +1,5 @@
 //
-//  Eval.m
+//  ASTEvaluator.m
 //  SimpleExpressionEvaluator
 //
 //  Created by Simon Toens on 11/28/13.
@@ -28,24 +28,31 @@
     {
         Node *lhs = [self evaluateRecusively:node.left];
         Node *rhs = [self evaluateRecusively:node.right];
-        return [self compute:node op1:lhs op2:rhs];
+        return [self compute:node arg1:lhs arg2:rhs];
     }
 }
 
-- (Node *)compute:(Node *)operator op1:(Node *)op1 op2:(Node *)op2
+- (Node *)compute:(Node *)operator arg1:(Node *)arg1 arg2:(Node *)arg2
 {
-    int i1 = [op1.value integerValue];
-    int i2 = [op2.value integerValue];
-    Node *result = [[Node alloc] init];
-    if ([@"*" isEqualToString:operator.value])
+    int i1 = [arg1.value integerValue];
+    int i2 = [arg2.value integerValue];
+
+    int result = 0;
+    
+    char op = [operator.value characterAtIndex:0];
+    
+    switch (op)
     {
-        result.value = [NSString stringWithFormat:@"%i", i1 * i2];
+        case '+': result = i1 + i2; break;
+        case '-': result = i1 - i2; break;
+        case '*': result = i1 * i2; break;
+        case '/': result = i1 / i2; break;
     }
-    else
-    {
-        result.value = [NSString stringWithFormat:@"%i", i1 + i2];
-    }
-    return result;
+    
+    Node *node = [[Node alloc] init];
+    node.type = kNodeTypeConstant;
+    node.value = [NSString stringWithFormat:@"%i", result];
+    return node;
 }
 
 @end

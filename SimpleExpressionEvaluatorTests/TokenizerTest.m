@@ -50,6 +50,9 @@
     
     expected = [NSArray arrayWithObjects:@"1", @"+", @"(", @"3", @")", nil];
     XCTAssertEqualObjects([tokenizer split:@"1+(3)"], expected, @"");
+    
+    expected = [NSArray arrayWithObjects:@"1", @"/", @"2", @"-", @"3", nil];
+    XCTAssertEqualObjects([tokenizer split:@"1/2-3"], expected, @"");
 }
 
 - (void)testGetNodeType

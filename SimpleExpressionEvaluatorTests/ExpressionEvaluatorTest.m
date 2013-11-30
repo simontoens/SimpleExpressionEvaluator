@@ -33,6 +33,8 @@
 
     XCTAssertEqual([evaluator evaluate:@"2 + 1 * 2 + 2 "], 6, @"");
     XCTAssertEqual([evaluator evaluate:@"(2 + 1) * (2 + 2)"], 12, @"");
+    
+    XCTAssertEqual([evaluator evaluate:@"10/2+1-4"], 2, @"");
 }
 
 @end
