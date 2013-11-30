@@ -65,13 +65,16 @@
                 break;
                 
             case kNodeTypeBinaryOperator:
-                if (_operatorStack.empty || token.precedence >= ((Node *)[_operatorStack peek]).precedence)
+                if (_operatorStack.empty || token.precedence > ((Node *)[_operatorStack peek]).precedence)
                 {
                     [_operatorStack push:token];
                     tokenIndex += 1;
                 }
                 else
                 {
+                    // reduce if the current op's precedence is lower or equal to the precedence of the op on the stack
+                    // 2*3+3 => (2*3)+3
+                    // this also enforces "left-to-right" evaluation: (100/2)/2, not 100/(2/2)
                     [self reduce];
                 }
                 break;
