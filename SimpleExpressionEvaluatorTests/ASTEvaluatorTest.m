@@ -31,16 +31,16 @@
 - (void)testCompute
 {
     Node *result = [eval compute:[self v:@"+"] arg1:[self v:@"1"] arg2:[self v:@"3"]];
-    XCTAssertEqualObjects(result.value, @"4", @"");
+    XCTAssertEqualObjects(result.value, @"4");
     
     result = [eval compute:[self v:@"*"] arg1:[self v:@"2"] arg2:[self v:@"3"]];
-    XCTAssertEqualObjects(result.value, @"6", @"");
+    XCTAssertEqualObjects(result.value, @"6");
     
     result = [eval compute:[self v:@"-"] arg1:[self v:@"2"] arg2:[self v:@"3"]];
-    XCTAssertEqualObjects(result.value, @"-1", @"");
+    XCTAssertEqualObjects(result.value, @"-1");
     
     result = [eval compute:[self v:@"/"] arg1:[self v:@"16"] arg2:[self v:@"4"]];
-    XCTAssertEqualObjects(result.value, @"4", @"");
+    XCTAssertEqualObjects(result.value, @"4");
 }
 
 - (void)testEval1
@@ -49,7 +49,7 @@
     root.left = [self v:@"1" t:kNodeTypeConstant];
     root.right = [self v:@"2" t:kNodeTypeConstant];
     NSInteger result = [eval evaluate:root];
-    XCTAssertEqual(result, 3, @"");
+    XCTAssertEqual(result, 3);
 }
 
 - (void)testEval2
@@ -60,7 +60,7 @@
     root.right.left = [self v:@"4" t:kNodeTypeConstant];
     root.right.right = [self v:@"2" t:kNodeTypeConstant];
     NSInteger result = [eval evaluate:root];
-    XCTAssertEqual(result, 9, @"");
+    XCTAssertEqual(result, 9);
 }
 
 - (void)testEval3
@@ -71,7 +71,7 @@
     root.left.right = [self v:@"2" t:kNodeTypeConstant];
     root.right = [self v:@"3" t:kNodeTypeConstant];
     NSInteger result = [eval evaluate:root];
-    XCTAssertEqual(result, 9, @"");
+    XCTAssertEqual(result, 9);
 }
 
 - (Node *)v:(NSString *)value

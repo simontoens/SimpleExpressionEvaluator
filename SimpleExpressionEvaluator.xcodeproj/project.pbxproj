@@ -56,7 +56,7 @@
 		BE6E478A1848343F00672B69 /* NodeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTest.m; sourceTree = "<group>"; };
 		BEB11CC91847F2F600F9BA77 /* ASTEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTEvaluator.h; sourceTree = "<group>"; };
 		BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASTEvaluator.m; sourceTree = "<group>"; };
-		BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASTEvaluatorTest.m; sourceTree = "<group>"; };
+		BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ASTEvaluatorTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BEE4EF3F1846EB9B00AFBE36 /* SimpleExpressionEvaluator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleExpressionEvaluator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE4EF421846EB9B00AFBE36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BEE4EF441846EB9B00AFBE36 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -86,7 +86,7 @@
 		BEF84A6E184916D20045B490 /* Preconditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Preconditions.m; path = Submodules/STObjCToolbelt/Source/Preconditions.m; sourceTree = SOURCE_ROOT; };
 		BEF84A72184928E70045B490 /* ExpressionEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionEvaluator.h; sourceTree = "<group>"; };
 		BEF84A73184928E70045B490 /* ExpressionEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionEvaluator.m; sourceTree = "<group>"; };
-		BEF84A7618492A280045B490 /* ExpressionEvaluatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionEvaluatorTest.m; sourceTree = "<group>"; };
+		BEF84A7618492A280045B490 /* ExpressionEvaluatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ExpressionEvaluatorTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

@@ -25,22 +25,22 @@
 
 - (void)testExample
 {
-    XCTAssertEqual([evaluator evaluate:@"1 + 2"], 3, @"");
-    XCTAssertEqual([evaluator evaluate:@"15 * 2"], 30, @"");
+    XCTAssertEqual([evaluator evaluate:@"1 + 2"], 3);
+    XCTAssertEqual([evaluator evaluate:@"15 * 2"], 30);
     
-    XCTAssertEqual([evaluator evaluate:@"15 * 2 + 1"], 31, @"");
-    XCTAssertEqual([evaluator evaluate:@"15 * (2 + 1)"], 45, @"");
+    XCTAssertEqual([evaluator evaluate:@"15 * 2 + 1"], 31);
+    XCTAssertEqual([evaluator evaluate:@"15 * (2 + 1)"], 45);
 
-    XCTAssertEqual([evaluator evaluate:@"2 + 1 * 2 + 2 "], 6, @"");
-    XCTAssertEqual([evaluator evaluate:@"(2 + 1) * (2 + 2)"], 12, @"");
+    XCTAssertEqual([evaluator evaluate:@"2 + 1 * 2 + 2 "], 6);
+    XCTAssertEqual([evaluator evaluate:@"(2 + 1) * (2 + 2)"], 12);
     
-    XCTAssertEqual([evaluator evaluate:@"10/2+1-4"], 2, @"");
+    XCTAssertEqual([evaluator evaluate:@"10/2+1-4"], 2);
     
-    XCTAssertEqual([evaluator evaluate:@"100/2"], 50, @"");
+    XCTAssertEqual([evaluator evaluate:@"100/2"], 50);
     
-    XCTAssertEqual([evaluator evaluate:@"100/2/2"], 25, @"");
-    XCTAssertEqual([evaluator evaluate:@"(100/2)/2"], 25, @"");
-    XCTAssertEqual([evaluator evaluate:@"100/(2/2)"], 100, @"");
+    XCTAssertEqual([evaluator evaluate:@"100/2/2"], 25);
+    XCTAssertEqual([evaluator evaluate:@"(100/2)/2"], 25);
+    XCTAssertEqual([evaluator evaluate:@"100/(2/2)"], 100);
 }
 
 @end
