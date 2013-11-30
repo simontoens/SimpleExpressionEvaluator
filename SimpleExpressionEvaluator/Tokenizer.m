@@ -22,6 +22,7 @@ static NSCharacterSet *kBinaryOperatorCharacterSet;
 
 static NSCharacterSet *kSeparatorCharacterSet;
 static NSCharacterSet *kSingleCharacterTokenCharacterSet;
+static NSCharacterSet *kStartTokenCharacterSet;
 
 + (void)initialize
 {
@@ -48,6 +49,12 @@ static NSCharacterSet *kSingleCharacterTokenCharacterSet;
     [s formUnionWithCharacterSet:kSingleCharacterTokenCharacterSet];
     [s formUnionWithCharacterSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     kSeparatorCharacterSet = s;
+    
+    s = [[NSMutableCharacterSet alloc] init];
+    [s formUnionWithCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet];
+    [s formUnionWithCharacterSet:[NSCharacterSet decimalDigitCharacterSet]];
+    kStartTokenCharacterSet = s;
+
 }
 
 - (NSArray *)tokenize:(NSString *)expression
@@ -78,7 +85,7 @@ static NSCharacterSet *kSingleCharacterTokenCharacterSet;
     for (int i = 0; i < [expression length]; i++)
     {
         unichar c = [expression characterAtIndex:i];
-
+        
         if ([kSeparatorCharacterSet characterIsMember:c])
         {
             if (currentToken)
@@ -99,7 +106,14 @@ static NSCharacterSet *kSingleCharacterTokenCharacterSet;
         
         [currentToken appendString:[NSString stringWithFormat:@"%C", c]];
         
-        if ([kSingleCharacterTokenCharacterSet characterIsMember:c])
+        NSString *previousToken = [tokens count] > 0 ? [tokens lastObject] : nil;
+        NodeType previousTokenType = previousToken ? [self getNodeType:previousToken] : kNodeTypeUnknown;
+        
+        if ([kStartTokenCharacterSet characterIsMember:c] && previousTokenType != kNodeTypeConstant)
+        {
+            // -2, not -,2
+        }
+        else if ([kSingleCharacterTokenCharacterSet characterIsMember:c])
         {
             [tokens addObject:currentToken];
             currentToken = nil;
@@ -128,6 +142,14 @@ static NSCharacterSet *kSingleCharacterTokenCharacterSet;
     {
         return kNodeTypeParen;
     }
+    if ([token length] > 1 &&
+        [self token:[token substringToIndex:1] matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] &&
+        [self token:[token substringFromIndex:1] matchesCharacterSet:[NSCharacterSet decimalDigitCharacterSet]])
+    {
+        // -1
+        return kNodeTypeConstant;
+    }
+    
     return kNodeTypeUnknown;
 }
 

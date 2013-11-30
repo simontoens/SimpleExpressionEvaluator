@@ -23,7 +23,7 @@
     evaluator = [[ExpressionEvaluator alloc] init];
 }
 
-- (void)testExample
+- (void)testEvaluate
 {
     XCTAssertEqual([evaluator evaluate:@"1 + 2"], 3);
     XCTAssertEqual([evaluator evaluate:@"15 * 2"], 30);
@@ -41,6 +41,10 @@
     XCTAssertEqual([evaluator evaluate:@"100/2/2"], 25);
     XCTAssertEqual([evaluator evaluate:@"(100/2)/2"], 25);
     XCTAssertEqual([evaluator evaluate:@"100/(2/2)"], 100);
+    
+    XCTAssertEqual([evaluator evaluate:@"-1*2"], -2);
+    XCTAssertEqual([evaluator evaluate:@"-1*-1"], 1);
+    XCTAssertEqual([evaluator evaluate:@"-1*(-1+-3)"], 4);
 }
 
 @end
