@@ -19,7 +19,7 @@ typedef enum NodeType {
 
 @interface Node : NSObject
 
-- (NSArray *)nodesInPreorder;
+- (NSString *)prefix;
 
 @property (nonatomic, strong) NSString *value;
 @property (nonatomic, assign) NodeType type;

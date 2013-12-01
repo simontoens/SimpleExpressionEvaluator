@@ -12,4 +12,6 @@
 
 - (NSInteger)evaluate:(NSString *)expression;
 
+@property (nonatomic, strong, readonly) NSString *prefix;
+
 @end

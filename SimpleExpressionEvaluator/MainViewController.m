@@ -12,6 +12,7 @@
 @interface MainViewController()
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 @property (nonatomic, strong) IBOutlet UILabel *resultLabel;
+@property (nonatomic, strong) IBOutlet UITextView *astTextView;
 @end
 
 @implementation MainViewController
@@ -27,8 +28,8 @@
     ExpressionEvaluator *eval = [[ExpressionEvaluator alloc] init];
     NSInteger result = [eval evaluate:self.textField.text];
     self.resultLabel.text = [NSString stringWithFormat:@"%i", result];
+    self.astTextView.text = eval.prefix;
     return YES;
 }
 
 @end
-

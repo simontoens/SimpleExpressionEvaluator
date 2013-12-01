@@ -11,6 +11,10 @@
 }
 @end
 
+@interface Node()
+- (NSArray *)preorder;
+@end;
+
 @interface Tokenizer()
 - (NSUInteger)getPrecedenceForToken:(NSString *)token ofType:(NodeType)type;
 @end
@@ -95,7 +99,7 @@
 {
     ASTBuilder *astBuilder = [[ASTBuilder alloc] init];
     Node *ast = [astBuilder build:tokens];
-    NSArray *preorderderNodes = [ast nodesInPreorder];
+    NSArray *preorderderNodes = [ast preorder];
     XCTAssertEqual([preorderderNodes count], [expectedTokens count], @"Unexpected node count");
     
     for (int i = 0; i < [preorderderNodes count]; i++)

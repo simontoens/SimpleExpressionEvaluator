@@ -21,6 +21,7 @@
     
     ASTBuilder *astBuilder = [[ASTBuilder alloc] init];
     Node *ast = [astBuilder build:tokens];
+    _prefix = [ast prefix];
     
     ASTEvaluator *eval = [[ASTEvaluator alloc] init];
     return [eval evaluate:ast];
