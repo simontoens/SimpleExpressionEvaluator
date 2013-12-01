@@ -65,6 +65,15 @@
     
     expected = [NSArray arrayWithObjects:@"-1", @"*", @"(", @"-3", @")", nil];
     XCTAssertEqualObjects([tokenizer split:@"-1*(-3)"], expected);
+    
+    expected = [NSArray arrayWithObjects:@"=", nil];
+    XCTAssertEqualObjects([tokenizer split:@"="], expected);
+    
+    expected = [NSArray arrayWithObjects:@"x", @"=", @"1", nil];
+    XCTAssertEqualObjects([tokenizer split:@"x=1"], expected);
+
+    expected = [NSArray arrayWithObjects:@"myvar", @"=", @"1", nil];
+    XCTAssertEqualObjects([tokenizer split:@"myvar=1"], expected);
 }
 
 - (void)testGetNodeType
@@ -85,6 +94,12 @@
     XCTAssertEqual([tokenizer getNodeType:@"+3"], kNodeTypeConstant);
     XCTAssertEqual([tokenizer getNodeType:@"*3"], kNodeTypeUnknown);
     XCTAssertEqual([tokenizer getNodeType:@"/3"], kNodeTypeUnknown);
+    
+    XCTAssertEqual([tokenizer getNodeType:@"="], kNodeTypeAssignment);
+    
+    XCTAssertEqual([tokenizer getNodeType:@"a"], kNodeTypeIdentifier);
+    XCTAssertEqual([tokenizer getNodeType:@"abc"], kNodeTypeIdentifier);
+    XCTAssertEqual([tokenizer getNodeType:@"abc1"], kNodeTypeUnknown);
 }
 
 - (void)testPrecedence

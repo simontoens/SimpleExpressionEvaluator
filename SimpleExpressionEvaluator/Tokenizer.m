@@ -20,6 +20,9 @@ static NSCharacterSet *kBinaryOperatorLowerPrecedenceCharacterSet;
 static NSCharacterSet *kBinaryOperatorHigherPrecedenceCharacterSet;
 static NSCharacterSet *kBinaryOperatorCharacterSet;
 
+static NSCharacterSet *kAssignmentCharacterSet;
+static NSCharacterSet *kIdentifierCharacterSet;
+
 static NSCharacterSet *kSeparatorCharacterSet;
 static NSCharacterSet *kSingleCharacterTokenCharacterSet;
 static NSCharacterSet *kStartTokenCharacterSet;
@@ -35,6 +38,9 @@ static NSCharacterSet *kStartTokenCharacterSet;
     
     kBinaryOperatorLowerPrecedenceCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"-+"];
     kBinaryOperatorHigherPrecedenceCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"*/"];
+    kAssignmentCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"="];
+    kIdentifierCharacterSet = [NSCharacterSet letterCharacterSet];
+    
     s =[[NSMutableCharacterSet alloc] init];
     [s formUnionWithCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet];
     [s formUnionWithCharacterSet:kBinaryOperatorHigherPrecedenceCharacterSet];
@@ -43,6 +49,7 @@ static NSCharacterSet *kStartTokenCharacterSet;
     s = [[NSMutableCharacterSet alloc] init];
     [s formUnionWithCharacterSet:kParensCharacterSet];
     [s formUnionWithCharacterSet:kBinaryOperatorCharacterSet];
+    [s formUnionWithCharacterSet:kAssignmentCharacterSet];
     kSingleCharacterTokenCharacterSet = s;
     
     s = [[NSMutableCharacterSet alloc] init];
@@ -54,7 +61,6 @@ static NSCharacterSet *kStartTokenCharacterSet;
     [s formUnionWithCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet];
     [s formUnionWithCharacterSet:[NSCharacterSet decimalDigitCharacterSet]];
     kStartTokenCharacterSet = s;
-
 }
 
 - (NSArray *)tokenize:(NSString *)expression
@@ -111,7 +117,8 @@ static NSCharacterSet *kStartTokenCharacterSet;
         
         if ([kStartTokenCharacterSet characterIsMember:c] && previousTokenType != kNodeTypeConstant)
         {
-            // -2, not -,2
+            // 3-2  -> 3,-,2
+            // 3+-2 -> 3, +, -2
         }
         else if ([kSingleCharacterTokenCharacterSet characterIsMember:c])
         {
@@ -142,6 +149,14 @@ static NSCharacterSet *kStartTokenCharacterSet;
     {
         return kNodeTypeParen;
     }
+    if ([self token:token matchesCharacterSet:kAssignmentCharacterSet])
+    {
+        return kNodeTypeAssignment;
+    }
+    if ([self token:token matchesCharacterSet:kIdentifierCharacterSet])
+    {
+        return kNodeTypeIdentifier;
+    }
     if ([token length] > 1 &&
         [self token:[token substringToIndex:1] matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] &&
         [self token:[token substringFromIndex:1] matchesCharacterSet:[NSCharacterSet decimalDigitCharacterSet]])
@@ -157,7 +172,9 @@ static NSCharacterSet *kStartTokenCharacterSet;
 {
     switch (type)
     {
+        case kNodeTypeAssignment:
         case kNodeTypeConstant:
+        case kNodeTypeIdentifier:
             return 1;
         case kNodeTypeBinaryOperator:
             return [self token:token matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] ? 2: 3;

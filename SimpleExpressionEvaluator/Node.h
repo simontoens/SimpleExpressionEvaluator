@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 
 typedef enum NodeType {
+    kNodeTypeAssignment,
     kNodeTypeBinaryOperator,
     kNodeTypeConstant,
+    kNodeTypeIdentifier,
     kNodeTypeParen,
     kNodeTypeUnknown
 } NodeType;

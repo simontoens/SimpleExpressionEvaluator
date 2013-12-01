@@ -40,6 +40,7 @@
         switch (token.type)
         {
             case kNodeTypeConstant:
+            case kNodeTypeIdentifier:
                 [_operandStack push:token];
                 tokenIndex += 1;
                 break;
@@ -65,6 +66,7 @@
                 break;
                 
             case kNodeTypeBinaryOperator:
+            case kNodeTypeAssignment:
                 if (_operatorStack.empty || token.precedence > ((Node *)[_operatorStack peek]).precedence)
                 {
                     [_operatorStack push:token];

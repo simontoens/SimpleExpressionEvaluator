@@ -45,6 +45,8 @@
     XCTAssertEqual([evaluator evaluate:@"-1*2"], -2);
     XCTAssertEqual([evaluator evaluate:@"-1*-1"], 1);
     XCTAssertEqual([evaluator evaluate:@"-1*(-1+-3)"], 4);
+    
+    XCTAssertEqual([evaluator evaluate:@"x=2*3+1"], 7);
 }
 
 @end

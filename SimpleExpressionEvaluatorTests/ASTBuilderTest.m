@@ -62,6 +62,26 @@
     [self assertAST:tokens expectedPreorderTokens:[NSArray arrayWithObjects:@"*", @"+", @"1", @"2", @"3", nil]];
 }
 
+- (void)testAssignment1
+{
+    NSArray *tokens = [NSArray arrayWithObjects:
+                       [self v:@"x" t:kNodeTypeIdentifier],
+                       [self v:@"=" t:kNodeTypeAssignment],
+                       [self v:@"1" t:kNodeTypeConstant], nil];
+    [self assertAST:tokens expectedPreorderTokens:[NSArray arrayWithObjects:@"=", @"x", @"1", nil]];
+}
+
+- (void)testAssignment2
+{
+    NSArray *tokens = [NSArray arrayWithObjects:
+                       [self v:@"x" t:kNodeTypeIdentifier],
+                       [self v:@"=" t:kNodeTypeAssignment],
+                       [self v:@"1" t:kNodeTypeConstant],
+                       [self v:@"*" t:kNodeTypeBinaryOperator],
+                       [self v:@"2" t:kNodeTypeConstant], nil];
+    [self assertAST:tokens expectedPreorderTokens:[NSArray arrayWithObjects:@"=", @"x", @"*", @"1", @"2", nil]];
+}
+
 - (Node *)v:(NSString *)value t:(NodeType)nodeType
 {
     Node *n = [[Node alloc] init];

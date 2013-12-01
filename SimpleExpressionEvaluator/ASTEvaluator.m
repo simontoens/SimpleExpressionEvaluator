@@ -10,7 +10,23 @@
 #import "Node.h"
 #import "Stack.h"
 
+@interface ASTEvaluator()
+{
+    @private
+    NSMutableDictionary *_environment;
+}
+@end
+
 @implementation ASTEvaluator
+
+- (id)init
+{
+    if (self = [super init])
+    {
+        _environment = [[NSMutableDictionary alloc] init];
+    }
+    return self;
+}
 
 - (NSInteger)evaluate:(Node *)ast
 {
@@ -24,6 +40,11 @@
     {
         return node;
     }
+    else if (node.type == kNodeTypeIdentifier)
+    {
+        Node *n = [self resolve:node];
+        return n ? n : node; // resolve to self if undefined
+    }
     else
     {
         Node *lhs = [self evaluateRecusively:node.left];
@@ -34,25 +55,45 @@
 
 - (Node *)compute:(Node *)operator arg1:(Node *)arg1 arg2:(Node *)arg2
 {
-    int i1 = [arg1.value integerValue];
-    int i2 = [arg2.value integerValue];
-
-    int result = 0;
+    Node *resultNode = [[Node alloc] init];
+    resultNode.type = kNodeTypeConstant;
     
-    char op = [operator.value characterAtIndex:0];
-    
-    switch (op)
+    if (operator.type == kNodeTypeBinaryOperator)
     {
-        case '+': result = i1 + i2; break;
-        case '-': result = i1 - i2; break;
-        case '*': result = i1 * i2; break;
-        case '/': result = i1 / i2; break;
+        int i1 = [arg1.value integerValue];
+        int i2 = [arg2.value integerValue];
+
+        int result = 0;
+        
+        char op = [operator.value characterAtIndex:0];
+        
+        switch (op)
+        {
+            case '+': result = i1 + i2; break;
+            case '-': result = i1 - i2; break;
+            case '*': result = i1 * i2; break;
+            case '/': result = i1 / i2; break;
+        }
+        
+        resultNode.value = [NSString stringWithFormat:@"%i", result];
     }
-    
-    Node *node = [[Node alloc] init];
-    node.type = kNodeTypeConstant;
-    node.value = [NSString stringWithFormat:@"%i", result];
-    return node;
+    else if (operator.type == kNodeTypeAssignment)
+    {
+        [self bind:arg2 to:arg1];
+        resultNode.value = arg2.value;
+    }
+
+    return resultNode;
+}
+
+- (void)bind:(Node *)value to:(Node *)ident
+{
+    [_environment setObject:value forKey:ident.value];
+}
+
+- (Node *)resolve:(Node *)reference
+{
+    return [_environment objectForKey:reference.value];
 }
 
 @end
