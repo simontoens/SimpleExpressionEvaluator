@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MainViewController : UIViewController <UITextFieldDelegate>
+@interface MainViewController : UIViewController
 
 @end
