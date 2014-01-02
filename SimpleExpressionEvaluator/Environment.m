@@ -22,6 +22,16 @@
     return self;
 }
 
+- (void)bind:(Node *)value to:(Node *)ident
+{
+    _env[ident.value] = value;
+}
+
+- (Node *)resolve:(Node *)reference
+{
+    return _env[reference.value];
+}
+
 - (instancetype)objectForKeyedSubscript:(id <NSCopying>)key
 {
     return _env[key];

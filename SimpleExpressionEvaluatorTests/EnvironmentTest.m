@@ -26,10 +26,13 @@
 
 - (void)testEnv
 {
-    NSString *var = @"a";
-    NSString *value = @"10";
-    _environment[var] = value;
-    XCTAssertEqualObjects(_environment[var], value);
+    Node *ref = [[Node alloc] init];
+    ref.value = @"a";
+    
+    Node *val = [[Node alloc] init];
+    val.value = @"10";
+    [_environment bind:val to:ref];
+    XCTAssertEqualObjects([_environment resolve:ref], val);
 }
 
 @end

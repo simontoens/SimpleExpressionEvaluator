@@ -7,9 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Environment.h"
 #import "Node.h"
 
 @interface ASTEvaluator : NSObject
+
+- (instancetype)init;
+- (instancetype)initWithEnvironment:(Environment *)environment;
 
 - (NSInteger)evaluate:(Node *)ast;
 

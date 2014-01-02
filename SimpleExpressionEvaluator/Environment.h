@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Node.h"
 
 @interface Environment : NSObject
 
-- (instancetype)objectForKeyedSubscript:(id <NSCopying>)key;
-- (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key;
+- (void)bind:(Node *)value to:(Node *)ident;
+- (Node *)resolve:(Node *)reference;
 
 @end

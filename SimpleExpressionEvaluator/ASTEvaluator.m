@@ -10,20 +10,21 @@
 #import "Node.h"
 #import "Stack.h"
 
-@interface ASTEvaluator()
-{
-    @private
-    NSMutableDictionary *_environment;
-}
-@end
-
 @implementation ASTEvaluator
+{
+    Environment *_environment;
+}
 
 - (instancetype)init
 {
+    return [self initWithEnvironment:[[Environment alloc] init]];
+}
+
+- (instancetype)initWithEnvironment:(Environment *)environment
+{
     if (self = [super init])
     {
-        _environment = [[NSMutableDictionary alloc] init];
+        _environment = environment;
     }
     return self;
 }
@@ -42,7 +43,7 @@
     }
     else if (node.type == kNodeTypeIdentifier)
     {
-        Node *n = [self resolve:node];
+        Node *n = [_environment resolve:node];
         return n ? n : node; // resolve to self if undefined
     }
     else
@@ -79,21 +80,11 @@
     }
     else if (operator.type == kNodeTypeAssignment)
     {
-        [self bind:arg2 to:arg1];
+        [_environment bind:arg2 to:arg1];
         resultNode.value = arg2.value;
     }
 
     return resultNode;
-}
-
-- (void)bind:(Node *)value to:(Node *)ident
-{
-    [_environment setObject:value forKey:ident.value];
-}
-
-- (Node *)resolve:(Node *)reference
-{
-    return [_environment objectForKey:reference.value];
 }
 
 @end
