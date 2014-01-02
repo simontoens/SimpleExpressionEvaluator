@@ -11,6 +11,8 @@
 		BE2836481849618A00E60DBD /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2836471849618A00E60DBD /* MainViewController.m */; };
 		BE6B07581847D614003C7FDC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF5B1846EB9B00AFBE36 /* XCTest.framework */; };
 		BE6E478B1848343F00672B69 /* NodeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6E478A1848343F00672B69 /* NodeTest.m */; };
+		BE9942FE18750D6A0080C499 /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9942FD18750D6A0080C499 /* Environment.m */; };
+		BE994300187512380080C499 /* EnvironmentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9942FF187512380080C499 /* EnvironmentTest.m */; };
 		BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */; };
 		BEB11CCD1848203000F9BA77 /* ASTEvaluatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */; };
 		BEE4EF431846EB9B00AFBE36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF421846EB9B00AFBE36 /* Foundation.framework */; };
@@ -54,6 +56,9 @@
 		BE2836461849618A00E60DBD /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		BE2836471849618A00E60DBD /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		BE6E478A1848343F00672B69 /* NodeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTest.m; sourceTree = "<group>"; };
+		BE9942FC18750D6A0080C499 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
+		BE9942FD18750D6A0080C499 /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
+		BE9942FF187512380080C499 /* EnvironmentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvironmentTest.m; sourceTree = "<group>"; };
 		BEB11CC91847F2F600F9BA77 /* ASTEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTEvaluator.h; sourceTree = "<group>"; };
 		BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASTEvaluator.m; sourceTree = "<group>"; };
 		BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ASTEvaluatorTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -154,6 +159,8 @@
 				BEE4EF761846ECC500AFBE36 /* ASTBuilder.m */,
 				BEB11CC91847F2F600F9BA77 /* ASTEvaluator.h */,
 				BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */,
+				BE9942FC18750D6A0080C499 /* Environment.h */,
+				BE9942FD18750D6A0080C499 /* Environment.m */,
 				BEF84A72184928E70045B490 /* ExpressionEvaluator.h */,
 				BEF84A73184928E70045B490 /* ExpressionEvaluator.m */,
 				BEE4EF711846EBDF00AFBE36 /* Node.h */,
@@ -185,6 +192,7 @@
 			children = (
 				BEE4EF671846EB9B00AFBE36 /* ASTBuilderTest.m */,
 				BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */,
+				BE9942FF187512380080C499 /* EnvironmentTest.m */,
 				BEF84A7618492A280045B490 /* ExpressionEvaluatorTest.m */,
 				BE6E478A1848343F00672B69 /* NodeTest.m */,
 				BEF84A6B18490DDC0045B490 /* TokenizerTest.m */,
@@ -325,6 +333,7 @@
 				BEF84A6F184916D20045B490 /* Preconditions.m in Sources */,
 				BEF84A74184928E70045B490 /* ExpressionEvaluator.m in Sources */,
 				BEE4EF771846ECC500AFBE36 /* ASTBuilder.m in Sources */,
+				BE9942FE18750D6A0080C499 /* Environment.m in Sources */,
 				BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */,
 				BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */,
 				BEE4EF731846EBDF00AFBE36 /* Node.m in Sources */,
@@ -336,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEF84A7718492A280045B490 /* ExpressionEvaluatorTest.m in Sources */,
+				BE994300187512380080C499 /* EnvironmentTest.m in Sources */,
 				BEE4EF7E1846EE7D00AFBE36 /* Stack.m in Sources */,
 				BEE4EF681846EB9B00AFBE36 /* ASTBuilderTest.m in Sources */,
 				BEE4EF781846ECC500AFBE36 /* ASTBuilder.m in Sources */,

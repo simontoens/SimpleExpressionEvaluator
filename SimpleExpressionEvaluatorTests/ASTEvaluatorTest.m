@@ -52,7 +52,7 @@
     root.left = [self v:@"1" t:kNodeTypeConstant];
     root.right = [self v:@"2" t:kNodeTypeConstant];
     NSInteger result = [eval evaluate:root];
-    XCTAssertEqual(result, 3);
+    XCTAssertEqual(result, (NSInteger)3);
 }
 
 - (void)testEvalBinOp2
@@ -63,7 +63,7 @@
     root.right.left = [self v:@"4" t:kNodeTypeConstant];
     root.right.right = [self v:@"2" t:kNodeTypeConstant];
     NSInteger result = [eval evaluate:root];
-    XCTAssertEqual(result, 9);
+    XCTAssertEqual(result, (NSInteger)9);
 }
 
 - (void)testEvalBinOp3
@@ -74,7 +74,7 @@
     root.left.right = [self v:@"2" t:kNodeTypeConstant];
     root.right = [self v:@"3" t:kNodeTypeConstant];
     NSInteger result = [eval evaluate:root];
-    XCTAssertEqual(result, 9);
+    XCTAssertEqual(result, (NSInteger)9);
 }
 
 - (void)testEvalAssignment
@@ -83,7 +83,7 @@
     root.left = [self v:@"x" t:kNodeTypeIdentifier];
     root.right = [self v:@"2" t:kNodeTypeConstant];
     NSInteger result = [eval evaluate:root];
-    XCTAssertEqual(result, 2);
+    XCTAssertEqual(result, (NSInteger)2);
 }
 
 - (Node *)v:(NSString *)value
