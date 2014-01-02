@@ -10,7 +10,7 @@
 
 @interface Environment : NSObject
 
-- (id)objectForKeyedSubscript:(id <NSCopying>)key;
+- (instancetype)objectForKeyedSubscript:(id <NSCopying>)key;
 - (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key;
 
 @end

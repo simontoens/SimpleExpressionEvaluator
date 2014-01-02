@@ -22,7 +22,7 @@
     return self;
 }
 
-- (id)objectForKeyedSubscript:(id <NSCopying>)key
+- (instancetype)objectForKeyedSubscript:(id <NSCopying>)key
 {
     return _env[key];
 }
