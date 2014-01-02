@@ -115,7 +115,8 @@ static NSCharacterSet *kStartTokenCharacterSet;
         NSString *previousToken = [tokens count] > 0 ? [tokens lastObject] : nil;
         NodeType previousTokenType = previousToken ? [self getNodeType:previousToken] : kNodeTypeUnknown;
         
-        if ([kStartTokenCharacterSet characterIsMember:c] && previousTokenType != kNodeTypeConstant)
+        if ([kStartTokenCharacterSet characterIsMember:c] &&
+            previousTokenType != kNodeTypeConstant && previousTokenType != kNodeTypeIdentifier)
         {
             // 3-2  -> 3,-,2
             // 3+-2 -> 3, +, -2

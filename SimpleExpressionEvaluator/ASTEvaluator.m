@@ -46,6 +46,12 @@
         Node *n = [_environment resolve:node];
         return n ? n : node; // resolve to self if undefined
     }
+    else if (node.type == kNodeTypeAssignment)
+    {
+        Node *lhs = node.left;
+        Node *rhs = [self evaluateRecusively:node.right];
+        return [self compute:node arg1:lhs arg2:rhs];
+    }
     else
     {
         Node *lhs = [self evaluateRecusively:node.left];

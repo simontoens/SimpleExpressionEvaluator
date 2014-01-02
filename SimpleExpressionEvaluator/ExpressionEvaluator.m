@@ -8,11 +8,24 @@
 
 #import "ASTBuilder.h"
 #import "ASTEvaluator.h"
+#import "Environment.h"
 #import "ExpressionEvaluator.h"
 #import "Node.h"
 #import "Tokenizer.h"
 
 @implementation ExpressionEvaluator
+{
+    Environment *env;
+}
+
+- (instancetype)init
+{
+    if (self = [super init])
+    {
+        env = [[Environment alloc] init];
+    }
+    return self;
+}
 
 - (NSInteger)evaluate:(NSString *)expression
 {
@@ -23,7 +36,7 @@
     Node *ast = [astBuilder build:tokens];
     _prefix = [ast prefix];
     
-    ASTEvaluator *eval = [[ASTEvaluator alloc] init];
+    ASTEvaluator *eval = [[ASTEvaluator alloc] initWithEnvironment:env];
     return [eval evaluate:ast];
 }
 

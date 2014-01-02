@@ -12,6 +12,9 @@
 
 - (NSInteger)evaluate:(NSString *)expression;
 
+/**
+ * Last evaluated expression in prefix notation.
+ */
 @property (nonatomic, strong, readonly) NSString *prefix;
 
 @end

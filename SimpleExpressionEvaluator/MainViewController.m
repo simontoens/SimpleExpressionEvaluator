@@ -11,12 +11,30 @@
 
 @interface MainViewController()
 @property (nonatomic, strong) IBOutlet UITextView *inputTextView;
-@property (nonatomic, strong) IBOutlet UITextField *outputTextView;
+@property (nonatomic, strong) IBOutlet UILabel *outputLabel;
+@property (nonatomic, strong) IBOutlet UILabel *outputPrefix;
 @end
 
 @implementation MainViewController
+{
+    ExpressionEvaluator *eval;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    eval = [[ExpressionEvaluator alloc] init];
+}
 
 - (IBAction)onEval:(id)sender
+{
+    NSString *expr = [self getExprLeftOfCursor];
+    NSInteger result = [eval evaluate:expr];
+    self.outputLabel.text = [NSString stringWithFormat:@"%li", (long)result];
+    self.outputPrefix.text = eval.prefix;
+}
+
+- (NSString *)getExprLeftOfCursor
 {
     NSString *allText = self.inputTextView.text;
     NSUInteger currentPosition = self.inputTextView.selectedRange.location;
@@ -28,16 +46,7 @@
         NSRange exprRange = NSMakeRange(resultRange.location, currentPosition - resultRange.location);
         exprToEval = [allText substringWithRange:exprRange];
     }
-    NSLog(@"EXPR %@", exprToEval);
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-//    ExpressionEvaluator *eval = [[ExpressionEvaluator alloc] init];
-//    NSInteger result = [eval evaluate:self.textField.text];
-//    self.resultLabel.text = [NSString stringWithFormat:@"%i", result];
-//    self.astTextView.text = eval.prefix;
-    return YES;
+    return exprToEval;
 }
 
 @end

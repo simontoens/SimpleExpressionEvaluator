@@ -23,7 +23,7 @@
     evaluator = [[ExpressionEvaluator alloc] init];
 }
 
-- (void)testEvaluate
+- (void)testEvaluateExpressions
 {
     XCTAssertEqual([evaluator evaluate:@"1 + 2"], (NSInteger)3);
     XCTAssertEqual([evaluator evaluate:@"15 * 2"], (NSInteger)30);
@@ -46,7 +46,26 @@
     XCTAssertEqual([evaluator evaluate:@"-1*-1"], (NSInteger)1);
     XCTAssertEqual([evaluator evaluate:@"-1*(-1+-3)"], (NSInteger)4);
     
+}
+
+- (void)testEvaluateExpressionsWithVariables
+{
     XCTAssertEqual([evaluator evaluate:@"x=2*3+1"], (NSInteger)7);
+
+    XCTAssertEqual([evaluator evaluate:@"a=1"], (NSInteger)1);
+    XCTAssertEqual([evaluator evaluate:@"b=2"], (NSInteger)2);
+    XCTAssertEqual([evaluator evaluate:@"a"], (NSInteger)1);
+    XCTAssertEqual([evaluator evaluate:@"b"], (NSInteger)2);
+    XCTAssertEqual([evaluator evaluate:@"a+b"], (NSInteger)3);
+    
+    XCTAssertEqual([evaluator evaluate:@"x*a+b"], (NSInteger)9);
+}
+
+- (void)testReassignVariables
+{
+    XCTAssertEqual([evaluator evaluate:@"a=1"], (NSInteger)1);
+    XCTAssertEqual([evaluator evaluate:@"a=2"], (NSInteger)2);
+    XCTAssertEqual([evaluator evaluate:@"a"], (NSInteger)2);
 }
 
 @end

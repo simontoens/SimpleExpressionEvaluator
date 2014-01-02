@@ -42,4 +42,9 @@
     _env[key] = obj;
 }
 
+- (NSString *)description
+{
+    return [_env description];
+}
+
 @end

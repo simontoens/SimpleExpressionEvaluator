@@ -74,6 +74,9 @@
 
     expected = [NSArray arrayWithObjects:@"myvar", @"=", @"1", nil];
     XCTAssertEqualObjects([tokenizer split:@"myvar=1"], expected);
+    
+    expected = [NSArray arrayWithObjects:@"myvar", @"+", @"yourvar", nil];
+    XCTAssertEqualObjects([tokenizer split:@"myvar+yourvar"], expected);
 }
 
 - (void)testGetNodeType
