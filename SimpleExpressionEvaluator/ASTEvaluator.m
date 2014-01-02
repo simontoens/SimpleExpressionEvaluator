@@ -60,10 +60,10 @@
     
     if (operator.type == kNodeTypeBinaryOperator)
     {
-        int i1 = [arg1.value integerValue];
-        int i2 = [arg2.value integerValue];
+        NSInteger i1 = [arg1.value integerValue];
+        NSInteger i2 = [arg2.value integerValue];
 
-        int result = 0;
+        NSInteger result = 0;
         
         char op = [operator.value characterAtIndex:0];
         
@@ -75,7 +75,7 @@
             case '/': result = i1 / i2; break;
         }
         
-        resultNode.value = [NSString stringWithFormat:@"%i", result];
+        resultNode.value = [NSString stringWithFormat:@"%li", (long)result];
     }
     else if (operator.type == kNodeTypeAssignment)
     {
