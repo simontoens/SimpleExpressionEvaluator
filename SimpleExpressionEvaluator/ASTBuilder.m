@@ -41,11 +41,13 @@
         {
             case kNodeTypeConstant:
             case kNodeTypeIdentifier:
+            {
                 [_operandStack push:token];
                 tokenIndex += 1;
                 break;
-                
+            }
             case kNodeTypeParen:
+            {
                 if ([token.value isEqualToString:@"("])
                 {
                     [_operatorStack push:token];
@@ -64,26 +66,41 @@
                     }
                 }
                 break;
-                
-            case kNodeTypeBinaryOperator:
+            }
             case kNodeTypeAssignment:
-                if (_operatorStack.empty || token.precedence > ((Node *)[_operatorStack peek]).precedence)
+            case kNodeTypeBinaryOperator:
+            {
+                Node *previousToken = _operatorStack.empty ? nil : [_operatorStack peek];
+                if (!previousToken || token.precedence > previousToken.precedence)
                 {
                     [_operatorStack push:token];
                     tokenIndex += 1;
                 }
                 else
                 {
-                    // reduce if the current op's precedence is lower or equal to the precedence of the op on the stack
-                    // 2*3+3 => (2*3)+3
-                    // this also enforces "left-to-right" evaluation: (100/2)/2, not 100/(2/2)
-                    [self reduce];
+                    if (token.type == kNodeTypeAssignment && previousToken.type == kNodeTypeAssignment)
+                    {
+                        // for assignment we want right associativity: a=b=3 -> a=(b=3) so don't reduce
+                        [_operatorStack push:token];
+                        tokenIndex += 1;
+                    }
+                    else
+                    {
+                        // reduce if the current op's precedence is lower or equal to the precedence of the op on the stack
+                        // 2*3+3 => (2*3)+3
+                        // this also enforces left associativity of operators that have the same precedence:
+                        // (100/2)/2, not 100/(2/2)
+                        [self reduce];
+                    }
+
                 }
                 break;
-                
+            }
             case kNodeTypeUnknown:
+            {
                 [Preconditions fail:@"Unexpected: unknown node type"];
                 break;
+            }
         }
     }
     

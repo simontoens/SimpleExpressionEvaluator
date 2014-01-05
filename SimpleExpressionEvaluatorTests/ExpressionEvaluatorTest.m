@@ -68,4 +68,11 @@
     XCTAssertEqual([evaluator evaluate:@"a"], (NSInteger)2);
 }
 
+- (void)testMultipleAssignmentsInOneStatement
+{
+    XCTAssertEqual([evaluator evaluate:@"a=b=3"], (NSInteger)3);
+    XCTAssertEqual([evaluator evaluate:@"a"], (NSInteger)3);
+    XCTAssertEqual([evaluator evaluate:@"b"], (NSInteger)3);
+}
+
 @end
