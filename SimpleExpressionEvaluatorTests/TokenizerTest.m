@@ -139,4 +139,15 @@
     XCTAssertTrue(((Node *)[tokens objectAtIndex:2]).precedence > 0);
 }
 
+- (void)testInvalidExpression
+{
+    // the tokenizer is ok with this
+    NSArray *tokens = [tokenizer tokenize:@"++++-12(((33--)"];
+    XCTAssertEqualObjects(((Node *)[tokens objectAtIndex:0]).value, @"+");
+    XCTAssertEqualObjects(((Node *)[tokens objectAtIndex:1]).value, @"+");
+    XCTAssertEqualObjects(((Node *)[tokens objectAtIndex:2]).value, @"+");
+    XCTAssertEqualObjects(((Node *)[tokens objectAtIndex:3]).value, @"+");
+    XCTAssertEqualObjects(((Node *)[tokens objectAtIndex:4]).value, @"-12");
+}
+
 @end

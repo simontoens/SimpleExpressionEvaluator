@@ -13,6 +13,8 @@
 		BE6E478B1848343F00672B69 /* NodeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6E478A1848343F00672B69 /* NodeTest.m */; };
 		BE9942FE18750D6A0080C499 /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9942FD18750D6A0080C499 /* Environment.m */; };
 		BE994300187512380080C499 /* EnvironmentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9942FF187512380080C499 /* EnvironmentTest.m */; };
+		BEAEB3BB18830A64003C2CDE /* InvalidTokenException.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAEB3BA18830A64003C2CDE /* InvalidTokenException.m */; };
+		BEAEB3BC18830A64003C2CDE /* InvalidTokenException.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAEB3BA18830A64003C2CDE /* InvalidTokenException.m */; };
 		BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */; };
 		BEB11CCD1848203000F9BA77 /* ASTEvaluatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */; };
 		BEE4EF431846EB9B00AFBE36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF421846EB9B00AFBE36 /* Foundation.framework */; };
@@ -59,6 +61,8 @@
 		BE9942FC18750D6A0080C499 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		BE9942FD18750D6A0080C499 /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
 		BE9942FF187512380080C499 /* EnvironmentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvironmentTest.m; sourceTree = "<group>"; };
+		BEAEB3B918830A64003C2CDE /* InvalidTokenException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvalidTokenException.h; sourceTree = "<group>"; };
+		BEAEB3BA18830A64003C2CDE /* InvalidTokenException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvalidTokenException.m; sourceTree = "<group>"; };
 		BEB11CC91847F2F600F9BA77 /* ASTEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTEvaluator.h; sourceTree = "<group>"; };
 		BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASTEvaluator.m; sourceTree = "<group>"; };
 		BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ASTEvaluatorTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -163,6 +167,8 @@
 				BE9942FD18750D6A0080C499 /* Environment.m */,
 				BEF84A72184928E70045B490 /* ExpressionEvaluator.h */,
 				BEF84A73184928E70045B490 /* ExpressionEvaluator.m */,
+				BEAEB3B918830A64003C2CDE /* InvalidTokenException.h */,
+				BEAEB3BA18830A64003C2CDE /* InvalidTokenException.m */,
 				BEE4EF711846EBDF00AFBE36 /* Node.h */,
 				BEE4EF721846EBDF00AFBE36 /* Node.m */,
 				BEF84A6818490C9F0045B490 /* Tokenizer.h */,
@@ -327,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEE4EF531846EB9B00AFBE36 /* AppDelegate.m in Sources */,
+				BEAEB3BB18830A64003C2CDE /* InvalidTokenException.m in Sources */,
 				BEF84A6A18490C9F0045B490 /* Tokenizer.m in Sources */,
 				BEE4EF4F1846EB9B00AFBE36 /* main.m in Sources */,
 				BE2836481849618A00E60DBD /* MainViewController.m in Sources */,
@@ -349,6 +356,7 @@
 				BEE4EF7E1846EE7D00AFBE36 /* Stack.m in Sources */,
 				BEE4EF681846EB9B00AFBE36 /* ASTBuilderTest.m in Sources */,
 				BEE4EF781846ECC500AFBE36 /* ASTBuilder.m in Sources */,
+				BEAEB3BC18830A64003C2CDE /* InvalidTokenException.m in Sources */,
 				BEF84A75184928E70045B490 /* ExpressionEvaluator.m in Sources */,
 				BE6E478B1848343F00672B69 /* NodeTest.m in Sources */,
 				BEE4EF741846EBDF00AFBE36 /* Node.m in Sources */,
