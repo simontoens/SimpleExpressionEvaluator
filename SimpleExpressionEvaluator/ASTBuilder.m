@@ -37,69 +37,55 @@
     {
         Node *token = [tokens objectAtIndex:tokenIndex];
         
-        switch (token.type)
+        if (token.type == [TokenType constant] || token.type == [TokenType identifier])
         {
-            case kNodeTypeConstant:
-            case kNodeTypeIdentifier:
+            [_operandStack push:token];
+            tokenIndex += 1;
+        }
+        else if (token.type == [TokenType paren])
+        {
+            if ([token.value isEqualToString:@"("])
             {
-                [_operandStack push:token];
+                [_operatorStack push:token];
                 tokenIndex += 1;
-                break;
             }
-            case kNodeTypeParen:
+            else
             {
-                if ([token.value isEqualToString:@"("])
+                if ([((Node *)[_operatorStack peek]).value isEqualToString:@"("])
                 {
+                    [_operatorStack pop];
+                    tokenIndex += 1;
+                }
+                else
+                {
+                    [self reduce];
+                }
+            }
+        }
+        else if (token.type == [TokenType assign] || token.type == [TokenType op])
+        {
+            Node *previousToken = _operatorStack.empty ? nil : [_operatorStack peek];
+            if (!previousToken || token.precedence > previousToken.precedence)
+            {
+                [_operatorStack push:token];
+                tokenIndex += 1;
+            }
+            else
+            {
+                if (token.type == [TokenType assign] && previousToken.type == [TokenType assign])
+                {
+                    // for assignment we want right associativity: a=b=3 -> a=(b=3) so don't reduce
                     [_operatorStack push:token];
                     tokenIndex += 1;
                 }
                 else
                 {
-                    if ([((Node *)[_operatorStack peek]).value isEqualToString:@"("])
-                    {
-                        [_operatorStack pop];
-                        tokenIndex += 1;
-                    }
-                    else
-                    {
-                        [self reduce];
-                    }
+                    // reduce if the current op's precedence is lower or equal to the precedence of the op on the stack
+                    // 2*3+3 => (2*3)+3
+                    // this also enforces left associativity of operators that have the same precedence:
+                    // (100/2)/2, not 100/(2/2)
+                    [self reduce];
                 }
-                break;
-            }
-            case kNodeTypeAssignment:
-            case kNodeTypeBinaryOperator:
-            {
-                Node *previousToken = _operatorStack.empty ? nil : [_operatorStack peek];
-                if (!previousToken || token.precedence > previousToken.precedence)
-                {
-                    [_operatorStack push:token];
-                    tokenIndex += 1;
-                }
-                else
-                {
-                    if (token.type == kNodeTypeAssignment && previousToken.type == kNodeTypeAssignment)
-                    {
-                        // for assignment we want right associativity: a=b=3 -> a=(b=3) so don't reduce
-                        [_operatorStack push:token];
-                        tokenIndex += 1;
-                    }
-                    else
-                    {
-                        // reduce if the current op's precedence is lower or equal to the precedence of the op on the stack
-                        // 2*3+3 => (2*3)+3
-                        // this also enforces left associativity of operators that have the same precedence:
-                        // (100/2)/2, not 100/(2/2)
-                        [self reduce];
-                    }
-
-                }
-                break;
-            }
-            case kNodeTypeUnknown:
-            {
-                [Preconditions fail:@"Unexpected: unknown node type"];
-                break;
             }
         }
     }

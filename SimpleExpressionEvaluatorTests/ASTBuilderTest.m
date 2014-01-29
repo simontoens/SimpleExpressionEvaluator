@@ -16,7 +16,7 @@
 @end;
 
 @interface Tokenizer()
-- (NSUInteger)getPrecedenceForToken:(NSString *)token ofType:(NodeType)type;
+- (NSUInteger)getPrecedenceForToken:(NSString *)token ofType:(TokenType *)type;
 @end
 
 @implementation ASTBuilderTest
@@ -35,85 +35,78 @@
 
 - (void)testExpr1
 {
-    NSArray *tokens = [NSArray arrayWithObjects:
-                       [self v:@"1" t:kNodeTypeConstant],
-                       [self v:@"+" t:kNodeTypeBinaryOperator],
-                       [self v:@"2" t:kNodeTypeConstant], nil];
-    [self assertAST:tokens expectedPreorderTokens:[NSArray arrayWithObjects:@"+", @"1", @"2", nil]];
+    NSArray *tokens = @[[self v:@"1" t:[TokenType constant]],
+                        [self v:@"+" t:[TokenType op]],
+                        [self v:@"2" t:[TokenType constant]]];
+    [self assertAST:tokens expectedPreorderTokens:@[@"+", @"1", @"2"]];
 }
 
 - (void)testExpr2
 {
-    NSArray *tokens = [NSArray arrayWithObjects:
-                       [self v:@"1" t:kNodeTypeConstant],
-                       [self v:@"+" t:kNodeTypeBinaryOperator],
-                       [self v:@"2" t:kNodeTypeConstant],
-                       [self v:@"*" t:kNodeTypeBinaryOperator],
-                       [self v:@"3" t:kNodeTypeConstant], nil];
-    [self assertAST:tokens expectedPreorderTokens:[NSArray arrayWithObjects:@"+", @"1", @"*", @"2", @"3", nil]];
+    NSArray *tokens = @[[self v:@"1" t:[TokenType constant]],
+                        [self v:@"+" t:[TokenType op]],
+                        [self v:@"2" t:[TokenType constant]],
+                        [self v:@"*" t:[TokenType op]],
+                        [self v:@"3" t:[TokenType constant]]];
+    [self assertAST:tokens expectedPreorderTokens:@[@"+", @"1", @"*", @"2", @"3"]];
 }
 
 - (void)testExprWithParens1
 {
-    NSArray *tokens = [NSArray arrayWithObjects:
-                       [self v:@"(" t:kNodeTypeParen],
-                       [self v:@"1" t:kNodeTypeConstant],
-                       [self v:@"+" t:kNodeTypeBinaryOperator],
-                       [self v:@"2" t:kNodeTypeConstant],
-                       [self v:@")" t:kNodeTypeParen],
-                       [self v:@"*" t:kNodeTypeBinaryOperator],
-                       [self v:@"3" t:kNodeTypeConstant], nil];
-    [self assertAST:tokens expectedPreorderTokens:[NSArray arrayWithObjects:@"*", @"+", @"1", @"2", @"3", nil]];
+    NSArray *tokens = @[[self v:@"(" t:[TokenType paren]],
+                        [self v:@"1" t:[TokenType constant]],
+                        [self v:@"+" t:[TokenType op]],
+                        [self v:@"2" t:[TokenType constant]],
+                        [self v:@")" t:[TokenType paren]],
+                        [self v:@"*" t:[TokenType op]],
+                        [self v:@"3" t:[TokenType constant]]];
+    [self assertAST:tokens expectedPreorderTokens:@[@"*", @"+", @"1", @"2", @"3"]];
 }
 
 - (void)testAssignment1
 {
-    NSArray *tokens = [NSArray arrayWithObjects:
-                       [self v:@"x" t:kNodeTypeIdentifier],
-                       [self v:@"=" t:kNodeTypeAssignment],
-                       [self v:@"1" t:kNodeTypeConstant], nil];
-    [self assertAST:tokens expectedPreorderTokens:[NSArray arrayWithObjects:@"=", @"x", @"1", nil]];
+    NSArray *tokens = @[[self v:@"x" t:[TokenType identifier]],
+                        [self v:@"=" t:[TokenType assign]],
+                        [self v:@"1" t:[TokenType constant]]];
+    [self assertAST:tokens expectedPreorderTokens:@[@"=", @"x", @"1"]];
 }
 
 - (void)testAssignment2
 {
-    NSArray *tokens = [NSArray arrayWithObjects:
-                       [self v:@"x" t:kNodeTypeIdentifier],
-                       [self v:@"=" t:kNodeTypeAssignment],
-                       [self v:@"1" t:kNodeTypeConstant],
-                       [self v:@"*" t:kNodeTypeBinaryOperator],
-                       [self v:@"2" t:kNodeTypeConstant], nil];
-    [self assertAST:tokens expectedPreorderTokens:[NSArray arrayWithObjects:@"=", @"x", @"*", @"1", @"2", nil]];
+    NSArray *tokens = @[[self v:@"x" t:[TokenType identifier]],
+                        [self v:@"=" t:[TokenType assign]],
+                        [self v:@"1" t:[TokenType constant]],
+                        [self v:@"*" t:[TokenType op]],
+                        [self v:@"2" t:[TokenType constant]]];
+    [self assertAST:tokens expectedPreorderTokens:@[@"=", @"x", @"*", @"1", @"2"]];
 }
 
 - (void)testAssignmentIsRightAssociative
 {
-    NSArray *tokens = [NSArray arrayWithObjects:
-                       [self v:@"a" t:kNodeTypeIdentifier],
-                       [self v:@"=" t:kNodeTypeAssignment],
-                       [self v:@"b" t:kNodeTypeIdentifier],
-                       [self v:@"=" t:kNodeTypeAssignment],
-                       [self v:@"3" t:kNodeTypeConstant], nil];
-    [self assertAST:tokens expectedPreorderTokens:[NSArray arrayWithObjects:@"=", @"a", @"=", @"b", @"3", nil]];
+    NSArray *tokens = @[[self v:@"a" t:[TokenType identifier]],
+                        [self v:@"=" t:[TokenType assign]],
+                        [self v:@"b" t:[TokenType identifier]],
+                        [self v:@"=" t:[TokenType assign]],
+                        [self v:@"3" t:[TokenType constant]]];
+    [self assertAST:tokens expectedPreorderTokens:@[@"=", @"a", @"=", @"b", @"3"]];
 }
 
 - (void)testOtherOperatorsAreRightAssociative
 {
-    NSArray *tokens = [NSArray arrayWithObjects:
-                       [self v:@"3" t:kNodeTypeConstant],
-                       [self v:@"-" t:kNodeTypeBinaryOperator],
-                       [self v:@"2" t:kNodeTypeConstant],
-                       [self v:@"-" t:kNodeTypeBinaryOperator],
-                       [self v:@"1" t:kNodeTypeConstant], nil];
-    [self assertAST:tokens expectedPreorderTokens:[NSArray arrayWithObjects:@"-", @"-", @"3", @"2", @"1", nil]];
+    NSArray *tokens = @[[self v:@"3" t:[TokenType constant]],
+                        [self v:@"-" t:[TokenType op]],
+                        [self v:@"2" t:[TokenType constant]],
+                        [self v:@"-" t:[TokenType op]],
+                        [self v:@"1" t:[TokenType constant]]];
+    [self assertAST:tokens expectedPreorderTokens:@[@"-", @"-", @"3", @"2", @"1"]];
 }
 
-- (Node *)v:(NSString *)value t:(NodeType)nodeType
+- (Node *)v:(NSString *)value t:(TokenType *)tokenType
 {
     Node *n = [[Node alloc] init];
     n.value = value;
-    n.type = nodeType;
-    n.precedence = [tokenizer getPrecedenceForToken:value ofType:nodeType];
+    n.type = tokenType;
+    n.precedence = [tokenizer getPrecedenceForToken:value ofType:tokenType];
     return n;
 }
 

@@ -7,22 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef enum NodeType {
-    kNodeTypeAssignment,
-    kNodeTypeBinaryOperator,
-    kNodeTypeConstant,
-    kNodeTypeIdentifier,
-    kNodeTypeParen,
-    kNodeTypeUnknown
-} NodeType;
+#import "TokenType.h"
 
 @interface Node : NSObject
 
 - (NSString *)prefix;
 
 @property (nonatomic, strong) NSString *value;
-@property (nonatomic, assign) NodeType type;
+@property (nonatomic, assign) TokenType *type;
 @property (nonatomic, assign) NSUInteger precedence;
 
 @property (nonatomic, strong) Node *left;

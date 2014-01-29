@@ -68,15 +68,15 @@ static NSCharacterSet *kStartTokenCharacterSet;
     NSMutableArray *nodes = [[NSMutableArray alloc] init];
     for (NSString *token in [self split:expression])
     {
-        NodeType nodeType = [self getNodeType:token];
-        if (nodeType == kNodeTypeUnknown)
+        TokenType *tokenType = [self getTokenType:token];
+        if (!tokenType)
         {
-            return nil; // error handling
+            // error handling
         }
         Node *node = [[Node alloc] init];
         node.value = token;
-        node.type = nodeType;
-        node.precedence = [self getPrecedenceForToken:token ofType:nodeType];
+        node.type = tokenType;
+        node.precedence = [self getPrecedenceForToken:token ofType:tokenType];
         [nodes addObject:node];
     }
     return nodes;
@@ -113,10 +113,10 @@ static NSCharacterSet *kStartTokenCharacterSet;
         [currentToken appendString:[NSString stringWithFormat:@"%C", c]];
         
         NSString *previousToken = [tokens count] > 0 ? [tokens lastObject] : nil;
-        NodeType previousTokenType = previousToken ? [self getNodeType:previousToken] : kNodeTypeUnknown;
+        TokenType *previousTokenType = previousToken ? [self getTokenType:previousToken] : nil;
         
         if ([kStartTokenCharacterSet characterIsMember:c] &&
-            previousTokenType != kNodeTypeConstant && previousTokenType != kNodeTypeIdentifier)
+            previousTokenType != [TokenType constant] && previousTokenType != [TokenType identifier])
         {
             // 3-2  -> 3,-,2
             // 3+-2 -> 3, +, -2
@@ -136,55 +136,54 @@ static NSCharacterSet *kStartTokenCharacterSet;
     return tokens;
 }
 
-- (NodeType)getNodeType:(NSString *)token
+- (TokenType *)getTokenType:(NSString *)token
 {
     if ([self token:token matchesCharacterSet:[NSCharacterSet decimalDigitCharacterSet]])
     {
-        return kNodeTypeConstant;
+        return [TokenType constant];
     }
     if ([self token:token matchesCharacterSet:kBinaryOperatorCharacterSet])
     {
-        return kNodeTypeBinaryOperator;
+        return [TokenType op];
     }
     if ([self token:token matchesCharacterSet:kParensCharacterSet])
     {
-        return kNodeTypeParen;
+        return [TokenType paren];
     }
     if ([self token:token matchesCharacterSet:kAssignmentCharacterSet])
     {
-        return kNodeTypeAssignment;
+        return [TokenType assign];
     }
     if ([self token:token matchesCharacterSet:kIdentifierCharacterSet])
     {
-        return kNodeTypeIdentifier;
+        return [TokenType identifier];
     }
     if ([token length] > 1 &&
         [self token:[token substringToIndex:1] matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] &&
         [self token:[token substringFromIndex:1] matchesCharacterSet:[NSCharacterSet decimalDigitCharacterSet]])
     {
         // -1
-        return kNodeTypeConstant;
+        return [TokenType constant];
     }
     
-    return kNodeTypeUnknown;
+    return nil;
 }
 
-- (NSUInteger)getPrecedenceForToken:(NSString *)token ofType:(NodeType)type
+- (NSUInteger)getPrecedenceForToken:(NSString *)token ofType:(TokenType *)type
 {
-    switch (type)
+    if (type == [TokenType assign] || type == [TokenType constant] || type == [TokenType identifier])
     {
-        case kNodeTypeAssignment:
-        case kNodeTypeConstant:
-        case kNodeTypeIdentifier:
-            return 1;
-        case kNodeTypeBinaryOperator:
-            return [self token:token matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] ? 2: 3;
-        case kNodeTypeParen:
-            return [self token:token matchesCharacterSet:kLeftParen] ? 0 : 10;
-        case kNodeTypeUnknown:
-            [Preconditions fail:@"Unexpected: unkown node type"];
-            return -1;
+        return 1;
     }
+    if (type == [TokenType op])
+    {
+        return [self token:token matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] ? 2: 3;
+    }
+    if (type == [TokenType paren])
+    {
+        return [self token:token matchesCharacterSet:kLeftParen] ? 0 : 10;
+    }
+    return -1;
 }
 
 - (BOOL)token:(NSString *)token matchesCharacterSet:(NSCharacterSet *)charSet

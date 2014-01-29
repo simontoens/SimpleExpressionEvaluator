@@ -37,16 +37,16 @@
 
 - (Node *)evaluateRecusively:(Node *)node
 {
-    if (node.type == kNodeTypeConstant)
+    if (node.type == [TokenType constant])
     {
         return node;
     }
-    else if (node.type == kNodeTypeIdentifier)
+    else if (node.type == [TokenType identifier])
     {
         Node *n = [_environment resolve:node];
         return n ? n : node; // resolve to self if undefined
     }
-    else if (node.type == kNodeTypeAssignment)
+    else if (node.type == [TokenType assign])
     {
         Node *lhs = node.left;
         Node *rhs = [self evaluateRecusively:node.right];
@@ -63,9 +63,9 @@
 - (Node *)compute:(Node *)operator arg1:(Node *)arg1 arg2:(Node *)arg2
 {
     Node *resultNode = [[Node alloc] init];
-    resultNode.type = kNodeTypeConstant;
+    resultNode.type = [TokenType constant];
     
-    if (operator.type == kNodeTypeBinaryOperator)
+    if (operator.type == [TokenType op])
     {
         NSInteger i1 = [arg1.value integerValue];
         NSInteger i2 = [arg2.value integerValue];
@@ -84,7 +84,7 @@
         
         resultNode.value = [NSString stringWithFormat:@"%li", (long)result];
     }
-    else if (operator.type == kNodeTypeAssignment)
+    else if (operator.type == [TokenType assign])
     {
         [_environment bind:arg2 to:arg1];
         resultNode.value = arg2.value;

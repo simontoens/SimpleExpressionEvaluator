@@ -12,8 +12,8 @@
 
 @interface Tokenizer()
 - (NSArray *)split:(NSString *)expression;
-- (NodeType)getNodeType:(NSString *)token;
-- (NSUInteger)getPrecedenceForToken:(NSString *)token ofType:(NodeType)type;
+- (TokenType *)getTokenType:(NSString *)token;
+- (NSUInteger)getPrecedenceForToken:(NSString *)token ofType:(TokenType *)type;
 @end
 
 @interface TokenizerTest : XCTestCase
@@ -31,96 +31,100 @@
     tokenizer = [[Tokenizer alloc] init];
 }
 
+- (void)tearDown
+{
+    [NSThread sleepForTimeInterval:1]; // crappy Xcode bug, utests can't run too fast
+    [super tearDown];
+}
+
 - (void)testSplit
 {
-    NSArray *expected = [NSArray arrayWithObjects:@"1", nil];
+    NSArray *expected = @[@"1"];
     XCTAssertEqualObjects([tokenizer split:@"1"], expected);
+    XCTAssertEqualObjects([tokenizer split:@"   1  "], expected);
     
-    [NSArray arrayWithObjects:@" 1  ", nil];
-    XCTAssertEqualObjects([tokenizer split:@"1"], expected);
-    
-    expected = [NSArray arrayWithObjects:@"1", @"2", @"3", nil];
+    expected = @[@"1", @"2", @"3"];
     XCTAssertEqualObjects([tokenizer split:@" 1  2   3  "], expected);
     
-    expected = [NSArray arrayWithObjects:@"1", @"+", @"3", nil];
+    expected = @[@"1", @"+", @"3"];
     XCTAssertEqualObjects([tokenizer split:@"1 + 3"], expected);
     
-    expected = [NSArray arrayWithObjects:@"1", @"+", @"3", nil];
+    expected = @[@"1", @"+", @"3"];
     XCTAssertEqualObjects([tokenizer split:@"1+3"], expected);
     
-    expected = [NSArray arrayWithObjects:@"1", @"+", @"(", @"3", @")", nil];
+    expected = @[@"1", @"+", @"(", @"3", @")"];
     XCTAssertEqualObjects([tokenizer split:@"1+(3)"], expected);
     
-    expected = [NSArray arrayWithObjects:@"1", @"/", @"2", @"-", @"3", nil];
+    expected = @[@"1", @"/", @"2", @"-", @"3"];
     XCTAssertEqualObjects([tokenizer split:@"1/2-3"], expected);
     
-    expected = [NSArray arrayWithObjects:@"-1", nil];
+    expected = @[@"-1"];
     XCTAssertEqualObjects([tokenizer split:@"-1"], expected);
     
-    expected = [NSArray arrayWithObjects:@"-1", @"+", @"3", nil];
+    expected = @[@"-1", @"+", @"3"];
     XCTAssertEqualObjects([tokenizer split:@"-1+3"], expected);
     
-    expected = [NSArray arrayWithObjects:@"-1", @"*", @"-3", nil];
+    expected = @[@"-1", @"*", @"-3"];
     XCTAssertEqualObjects([tokenizer split:@"-1*-3"], expected);
     
-    expected = [NSArray arrayWithObjects:@"-1", @"*", @"(", @"-3", @")", nil];
+    expected = @[@"-1", @"*", @"(", @"-3", @")"];
     XCTAssertEqualObjects([tokenizer split:@"-1*(-3)"], expected);
     
-    expected = [NSArray arrayWithObjects:@"=", nil];
+    expected = @[@"="];
     XCTAssertEqualObjects([tokenizer split:@"="], expected);
     
-    expected = [NSArray arrayWithObjects:@"x", @"=", @"1", nil];
+    expected = @[@"x", @"=", @"1"];
     XCTAssertEqualObjects([tokenizer split:@"x=1"], expected);
 
-    expected = [NSArray arrayWithObjects:@"myvar", @"=", @"1", nil];
+    expected = @[@"myvar", @"=", @"1"];
     XCTAssertEqualObjects([tokenizer split:@"myvar=1"], expected);
     
-    expected = [NSArray arrayWithObjects:@"myvar", @"+", @"yourvar", nil];
+    expected = @[@"myvar", @"+", @"yourvar"];
     XCTAssertEqualObjects([tokenizer split:@"myvar+yourvar"], expected);
 }
 
 - (void)testGetNodeType
 {
-    XCTAssertEqual([tokenizer getNodeType:@"2a3"], kNodeTypeUnknown);
-    XCTAssertEqual([tokenizer getNodeType:@"1.533"], kNodeTypeUnknown);
-    XCTAssertEqual([tokenizer getNodeType:@"1,533"], kNodeTypeUnknown);
+    XCTAssertNil([tokenizer getTokenType:@"2a3"]);
+    XCTAssertNil([tokenizer getTokenType:@"1.533"]);
+    XCTAssertNil([tokenizer getTokenType:@"1,533"]);
 
-    XCTAssertEqual([tokenizer getNodeType:@"1533"], kNodeTypeConstant);
-    XCTAssertEqual([tokenizer getNodeType:@"+"], kNodeTypeBinaryOperator);
-    XCTAssertEqual([tokenizer getNodeType:@"-"], kNodeTypeBinaryOperator);
-    XCTAssertEqual([tokenizer getNodeType:@"*"], kNodeTypeBinaryOperator);
-    XCTAssertEqual([tokenizer getNodeType:@"/"], kNodeTypeBinaryOperator);
-    XCTAssertEqual([tokenizer getNodeType:@"("], kNodeTypeParen);
-    XCTAssertEqual([tokenizer getNodeType:@")"], kNodeTypeParen);
+    XCTAssertEqualObjects([tokenizer getTokenType:@"1533"], [TokenType constant]);
+    XCTAssertEqual([tokenizer getTokenType:@"+"], [TokenType op]);
+    XCTAssertEqual([tokenizer getTokenType:@"-"], [TokenType op]);
+    XCTAssertEqual([tokenizer getTokenType:@"*"], [TokenType op]);
+    XCTAssertEqual([tokenizer getTokenType:@"/"], [TokenType op]);
+    XCTAssertEqual([tokenizer getTokenType:@"("], [TokenType paren]);
+    XCTAssertEqual([tokenizer getTokenType:@")"], [TokenType paren]);
     
-    XCTAssertEqual([tokenizer getNodeType:@"-1"], kNodeTypeConstant);
-    XCTAssertEqual([tokenizer getNodeType:@"+3"], kNodeTypeConstant);
-    XCTAssertEqual([tokenizer getNodeType:@"*3"], kNodeTypeUnknown);
-    XCTAssertEqual([tokenizer getNodeType:@"/3"], kNodeTypeUnknown);
+    XCTAssertEqual([tokenizer getTokenType:@"-1"], [TokenType constant]);
+    XCTAssertEqual([tokenizer getTokenType:@"+3"], [TokenType constant]);
+    XCTAssertNil([tokenizer getTokenType:@"*3"]);
+    XCTAssertNil([tokenizer getTokenType:@"/3"]);
     
-    XCTAssertEqual([tokenizer getNodeType:@"="], kNodeTypeAssignment);
+    XCTAssertEqual([tokenizer getTokenType:@"="], [TokenType assign]);
     
-    XCTAssertEqual([tokenizer getNodeType:@"a"], kNodeTypeIdentifier);
-    XCTAssertEqual([tokenizer getNodeType:@"abc"], kNodeTypeIdentifier);
-    XCTAssertEqual([tokenizer getNodeType:@"abc1"], kNodeTypeUnknown);
+    XCTAssertEqual([tokenizer getTokenType:@"a"], [TokenType identifier]);
+    XCTAssertEqual([tokenizer getTokenType:@"abc"], [TokenType identifier]);
+    XCTAssertNil([tokenizer getTokenType:@"abc1"]);
 }
 
 - (void)testPrecedence
 {
-    XCTAssertTrue([tokenizer getPrecedenceForToken:@"+" ofType:kNodeTypeBinaryOperator] >
-                  [tokenizer getPrecedenceForToken:@"(" ofType:kNodeTypeParen]);
+    XCTAssertTrue([tokenizer getPrecedenceForToken:@"+" ofType:[TokenType op]] >
+                  [tokenizer getPrecedenceForToken:@"(" ofType:[TokenType paren]]);
     
-    XCTAssertTrue([tokenizer getPrecedenceForToken:@"+" ofType:kNodeTypeBinaryOperator] ==
-                  [tokenizer getPrecedenceForToken:@"-" ofType:kNodeTypeBinaryOperator]);
+    XCTAssertTrue([tokenizer getPrecedenceForToken:@"+" ofType:[TokenType op]] ==
+                  [tokenizer getPrecedenceForToken:@"-" ofType:[TokenType op]]);
     
-    XCTAssertTrue([tokenizer getPrecedenceForToken:@"*" ofType:kNodeTypeBinaryOperator] >
-                  [tokenizer getPrecedenceForToken:@"-" ofType:kNodeTypeBinaryOperator]);
+    XCTAssertTrue([tokenizer getPrecedenceForToken:@"*" ofType:[TokenType op]] >
+                  [tokenizer getPrecedenceForToken:@"-" ofType:[TokenType op]]);
     
-    XCTAssertTrue([tokenizer getPrecedenceForToken:@"*" ofType:kNodeTypeBinaryOperator] ==
-                  [tokenizer getPrecedenceForToken:@"/" ofType:kNodeTypeBinaryOperator]);
+    XCTAssertTrue([tokenizer getPrecedenceForToken:@"*" ofType:[TokenType op]] ==
+                  [tokenizer getPrecedenceForToken:@"/" ofType:[TokenType op]]);
     
-    XCTAssertTrue([tokenizer getPrecedenceForToken:@")" ofType:kNodeTypeParen] >
-                  [tokenizer getPrecedenceForToken:@"*" ofType:kNodeTypeBinaryOperator]);
+    XCTAssertTrue([tokenizer getPrecedenceForToken:@")" ofType:[TokenType paren]] >
+                  [tokenizer getPrecedenceForToken:@"*" ofType:[TokenType op]]);
 }
 
 - (void)testTokenize

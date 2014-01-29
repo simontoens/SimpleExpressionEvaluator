@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE098BA918837FB6003E1308 /* TokenType.m in Sources */ = {isa = PBXBuildFile; fileRef = BE098BA818837FB6003E1308 /* TokenType.m */; };
 		BE2836451849615400E60DBD /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE2836441849615400E60DBD /* MainView.xib */; };
 		BE2836481849618A00E60DBD /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2836471849618A00E60DBD /* MainViewController.m */; };
+		BE44246F189895F3000FEE96 /* TokenTypeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE44246E189895F3000FEE96 /* TokenTypeTest.m */; };
 		BE6B07581847D614003C7FDC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF5B1846EB9B00AFBE36 /* XCTest.framework */; };
 		BE6E478B1848343F00672B69 /* NodeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6E478A1848343F00672B69 /* NodeTest.m */; };
 		BE9942FE18750D6A0080C499 /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9942FD18750D6A0080C499 /* Environment.m */; };
 		BE994300187512380080C499 /* EnvironmentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9942FF187512380080C499 /* EnvironmentTest.m */; };
 		BEAEB3BB18830A64003C2CDE /* InvalidTokenException.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAEB3BA18830A64003C2CDE /* InvalidTokenException.m */; };
-		BEAEB3BC18830A64003C2CDE /* InvalidTokenException.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAEB3BA18830A64003C2CDE /* InvalidTokenException.m */; };
 		BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */; };
 		BEB11CCD1848203000F9BA77 /* ASTEvaluatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */; };
 		BEE4EF431846EB9B00AFBE36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF421846EB9B00AFBE36 /* Foundation.framework */; };
@@ -29,16 +30,12 @@
 		BEE4EF661846EB9B00AFBE36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEE4EF641846EB9B00AFBE36 /* InfoPlist.strings */; };
 		BEE4EF681846EB9B00AFBE36 /* ASTBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF671846EB9B00AFBE36 /* ASTBuilderTest.m */; };
 		BEE4EF731846EBDF00AFBE36 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF721846EBDF00AFBE36 /* Node.m */; };
-		BEE4EF741846EBDF00AFBE36 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF721846EBDF00AFBE36 /* Node.m */; };
 		BEE4EF771846ECC500AFBE36 /* ASTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF761846ECC500AFBE36 /* ASTBuilder.m */; };
-		BEE4EF781846ECC500AFBE36 /* ASTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF761846ECC500AFBE36 /* ASTBuilder.m */; };
 		BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF7C1846EE7D00AFBE36 /* Stack.m */; };
-		BEE4EF7E1846EE7D00AFBE36 /* Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF7C1846EE7D00AFBE36 /* Stack.m */; };
 		BEF84A6A18490C9F0045B490 /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A6918490C9F0045B490 /* Tokenizer.m */; };
 		BEF84A6C18490DDC0045B490 /* TokenizerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A6B18490DDC0045B490 /* TokenizerTest.m */; };
 		BEF84A6F184916D20045B490 /* Preconditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A6E184916D20045B490 /* Preconditions.m */; };
 		BEF84A74184928E70045B490 /* ExpressionEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A73184928E70045B490 /* ExpressionEvaluator.m */; };
-		BEF84A75184928E70045B490 /* ExpressionEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A73184928E70045B490 /* ExpressionEvaluator.m */; };
 		BEF84A7718492A280045B490 /* ExpressionEvaluatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A7618492A280045B490 /* ExpressionEvaluatorTest.m */; };
 /* End PBXBuildFile section */
 
@@ -53,10 +50,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE098BA718837FB6003E1308 /* TokenType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenType.h; sourceTree = "<group>"; };
+		BE098BA818837FB6003E1308 /* TokenType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenType.m; sourceTree = "<group>"; };
 		BE25108B184725E600EB6E1B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		BE2836441849615400E60DBD /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		BE2836461849618A00E60DBD /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		BE2836471849618A00E60DBD /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		BE44246E189895F3000FEE96 /* TokenTypeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenTypeTest.m; sourceTree = "<group>"; };
 		BE6E478A1848343F00672B69 /* NodeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTest.m; sourceTree = "<group>"; };
 		BE9942FC18750D6A0080C499 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		BE9942FD18750D6A0080C499 /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 		BEE4EF7C1846EE7D00AFBE36 /* Stack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Stack.m; path = Submodules/STObjCToolbelt/Source/Stack.m; sourceTree = SOURCE_ROOT; };
 		BEF84A6818490C9F0045B490 /* Tokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tokenizer.h; sourceTree = "<group>"; };
 		BEF84A6918490C9F0045B490 /* Tokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tokenizer.m; sourceTree = "<group>"; };
-		BEF84A6B18490DDC0045B490 /* TokenizerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenizerTest.m; sourceTree = "<group>"; };
+		BEF84A6B18490DDC0045B490 /* TokenizerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TokenizerTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BEF84A6D184916D20045B490 /* Preconditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preconditions.h; path = Submodules/STObjCToolbelt/Source/Preconditions.h; sourceTree = SOURCE_ROOT; };
 		BEF84A6E184916D20045B490 /* Preconditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Preconditions.m; path = Submodules/STObjCToolbelt/Source/Preconditions.m; sourceTree = SOURCE_ROOT; };
 		BEF84A72184928E70045B490 /* ExpressionEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionEvaluator.h; sourceTree = "<group>"; };
@@ -176,6 +176,8 @@
 				BE2836441849615400E60DBD /* MainView.xib */,
 				BE2836461849618A00E60DBD /* MainViewController.h */,
 				BE2836471849618A00E60DBD /* MainViewController.m */,
+				BE098BA718837FB6003E1308 /* TokenType.h */,
+				BE098BA818837FB6003E1308 /* TokenType.m */,
 				BEE4EF541846EB9B00AFBE36 /* Images.xcassets */,
 				BEE4EF491846EB9B00AFBE36 /* Supporting Files */,
 			);
@@ -202,6 +204,7 @@
 				BEF84A7618492A280045B490 /* ExpressionEvaluatorTest.m */,
 				BE6E478A1848343F00672B69 /* NodeTest.m */,
 				BEF84A6B18490DDC0045B490 /* TokenizerTest.m */,
+				BE44246E189895F3000FEE96 /* TokenTypeTest.m */,
 				BEE4EF621846EB9B00AFBE36 /* Supporting Files */,
 			);
 			path = SimpleExpressionEvaluatorTests;
@@ -341,6 +344,7 @@
 				BEF84A74184928E70045B490 /* ExpressionEvaluator.m in Sources */,
 				BEE4EF771846ECC500AFBE36 /* ASTBuilder.m in Sources */,
 				BE9942FE18750D6A0080C499 /* Environment.m in Sources */,
+				BE098BA918837FB6003E1308 /* TokenType.m in Sources */,
 				BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */,
 				BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */,
 				BEE4EF731846EBDF00AFBE36 /* Node.m in Sources */,
@@ -353,13 +357,9 @@
 			files = (
 				BEF84A7718492A280045B490 /* ExpressionEvaluatorTest.m in Sources */,
 				BE994300187512380080C499 /* EnvironmentTest.m in Sources */,
-				BEE4EF7E1846EE7D00AFBE36 /* Stack.m in Sources */,
+				BE44246F189895F3000FEE96 /* TokenTypeTest.m in Sources */,
 				BEE4EF681846EB9B00AFBE36 /* ASTBuilderTest.m in Sources */,
-				BEE4EF781846ECC500AFBE36 /* ASTBuilder.m in Sources */,
-				BEAEB3BC18830A64003C2CDE /* InvalidTokenException.m in Sources */,
-				BEF84A75184928E70045B490 /* ExpressionEvaluator.m in Sources */,
 				BE6E478B1848343F00672B69 /* NodeTest.m in Sources */,
-				BEE4EF741846EBDF00AFBE36 /* Node.m in Sources */,
 				BEF84A6C18490DDC0045B490 /* TokenizerTest.m in Sources */,
 				BEB11CCD1848203000F9BA77 /* ASTEvaluatorTest.m in Sources */,
 			);
