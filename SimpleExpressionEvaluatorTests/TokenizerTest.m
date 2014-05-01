@@ -31,12 +31,6 @@
     tokenizer = [[Tokenizer alloc] init];
 }
 
-- (void)tearDown
-{
-    [NSThread sleepForTimeInterval:1]; // crappy Xcode bug, utests can't run too fast
-    [super tearDown];
-}
-
 - (void)testSplit
 {
     NSArray *expected = @[@"1"];

@@ -27,12 +27,6 @@
     tokenizer = [[Tokenizer alloc] init];
 }
 
-- (void)tearDown
-{
-    [NSThread sleepForTimeInterval:1]; // crappy Xcode bug, utests can't run too fast
-    [super tearDown];
-}
-
 - (void)testExpr1
 {
     NSArray *tokens = @[[self v:@"1" t:[TokenType constant]],

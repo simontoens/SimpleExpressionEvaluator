@@ -15,12 +15,6 @@
 
 @implementation TokenTypeTest
 
-- (void)tearDown
-{
-    [NSThread sleepForTimeInterval:1]; // crappy Xcode bug, utests can't run too fast
-    [super tearDown];
-}
-
 - (void)testTokenType
 {
     XCTAssertEqual([TokenType constant], [TokenType constant]);
