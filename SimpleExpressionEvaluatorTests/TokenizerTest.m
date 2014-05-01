@@ -75,6 +75,9 @@
     
     expected = @[@"myvar", @"+", @"yourvar"];
     XCTAssertEqualObjects([tokenizer split:@"myvar+yourvar"], expected);
+    
+//    expected = @[@"f", @"2"];
+//    XCTAssertEqualObjects([tokenizer split:@"f(2)"], expected);
 }
 
 - (void)testGetNodeType

@@ -83,15 +83,17 @@ static NSCharacterSet *kStartTokenCharacterSet;
     return nodes;
 }
 
-- (NSArray *)split:(NSString *)expression
+- (NSArray *)split:(NSString *)expr
 {
     NSMutableArray *tokens = [[NSMutableArray alloc] init];
     
     NSMutableString *currentToken = nil;
     
-    for (int i = 0; i < [expression length]; i++)
+    NSMutableString *expression = [NSMutableString stringWithString:expr];
+    
+    for (int position = 0; position < [expression length]; position++)
     {
-        unichar c = [expression characterAtIndex:i];
+        unichar c = [expression characterAtIndex:position];
         
         if ([kSeparatorCharacterSet characterIsMember:c])
         {
@@ -121,6 +123,21 @@ static NSCharacterSet *kStartTokenCharacterSet;
         {
             // 3-2  -> 3,-,2
             // 3+-2 -> 3, +, -2
+        }
+        else if ([kLeftParen characterIsMember:c] && previousTokenType == [TokenType identifier])
+        {
+            // blah( -> assume func with single arg
+            NSRange r = [expression rangeOfCharacterFromSet:kRightParen options:NSLiteralSearch
+                                                      range:NSMakeRange(position, [expression length] - position)];
+            [expression deleteCharactersInRange:r];
+            
+            // need to work with higher level data structure, ie a "Token" instead of an NSString,
+            // the TokenType could be set right here
+            currentToken = [NSMutableString stringWithFormat:@"%@(", previousToken];
+            [tokens removeLastObject];
+            
+            [tokens addObject:currentToken];
+            currentToken = nil;
         }
         else if ([kSingleCharacterTokenCharacterSet characterIsMember:c])
         {
