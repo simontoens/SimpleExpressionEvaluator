@@ -111,6 +111,15 @@
 
 - (void)testPrecedence
 {
+    XCTAssertTrue([tokenizer getPrecedenceForToken:@"=" ofType:[TokenType assign]] ==
+                  [tokenizer getPrecedenceForToken:@"2" ofType:[TokenType constant]]);
+    
+    XCTAssertTrue([tokenizer getPrecedenceForToken:@"a" ofType:[TokenType identifier]] ==
+                  [tokenizer getPrecedenceForToken:@"2" ofType:[TokenType constant]]);
+    
+    XCTAssertTrue([tokenizer getPrecedenceForToken:@"func" ofType:[TokenType func]] ==
+                  [tokenizer getPrecedenceForToken:@"2" ofType:[TokenType constant]]);
+    
     XCTAssertTrue([tokenizer getPrecedenceForToken:@"+" ofType:[TokenType op]] >
                   [tokenizer getPrecedenceForToken:@"(" ofType:[TokenType paren]]);
     

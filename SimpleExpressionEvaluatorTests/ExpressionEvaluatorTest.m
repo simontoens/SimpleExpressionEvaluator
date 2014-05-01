@@ -45,7 +45,6 @@
     XCTAssertEqual([evaluator evaluate:@"-1*2"], (NSInteger)-2);
     XCTAssertEqual([evaluator evaluate:@"-1*-1"], (NSInteger)1);
     XCTAssertEqual([evaluator evaluate:@"-1*(-1+-3)"], (NSInteger)4);
-    
 }
 
 - (void)testEvaluateExpressionsWithVariables

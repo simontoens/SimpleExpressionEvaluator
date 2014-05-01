@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSString *value;
 @property (nonatomic, assign) TokenType *type;
 @property (nonatomic, assign) NSUInteger precedence;
+@property (nonatomic, assign) NSUInteger numArgs;
 
 @property (nonatomic, strong) Node *left;
 @property (nonatomic, strong) Node *right;

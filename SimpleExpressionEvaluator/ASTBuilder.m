@@ -62,7 +62,7 @@
                 }
             }
         }
-        else if (token.type == [TokenType assign] || token.type == [TokenType op])
+        else if (token.type == [TokenType assign] || token.type == [TokenType op] || token.type == [TokenType func])
         {
             Node *previousToken = _operatorStack.empty ? nil : [_operatorStack peek];
             if (!previousToken || token.precedence > previousToken.precedence)
@@ -72,9 +72,12 @@
             }
             else
             {
-                if (token.type == [TokenType assign] && previousToken.type == [TokenType assign])
+                if ([self isRightAssociative:token previousToken:previousToken])
                 {
-                    // for assignment we want right associativity: a=b=3 -> a=(b=3) so don't reduce
+                    // for assignment we want right associativity: a=b=3 -> a=(b=3)
+                    // same for functions if previous operator is an op: 2+func(1) -> 2+(func(1))
+                    // so don't reduce
+                    // (need expression token type that encapsulates expression rules?)
                     [_operatorStack push:token];
                     tokenIndex += 1;
                 }
@@ -98,11 +101,20 @@
     return [_operandStack pop];
 }
 
+- (BOOL)isRightAssociative:(Node *)currentToken previousToken:(Node *)previousToken
+{
+    return
+        (currentToken.type == [TokenType assign] && previousToken.type == [TokenType assign]) ||
+        (currentToken.type == [TokenType func] && previousToken.type == [TokenType op]);
+}
+
 - (void)reduce
 {
     Node *root = [_operatorStack pop];
     root.right = [_operandStack pop];
-    root.left = [_operandStack pop];
+    if (root.numArgs > 1) { // fixme
+        root.left = [_operandStack pop];
+    }
     [_operandStack push:root];
 }
 

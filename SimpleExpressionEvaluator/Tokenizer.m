@@ -77,6 +77,7 @@ static NSCharacterSet *kStartTokenCharacterSet;
         node.value = token;
         node.type = tokenType;
         node.precedence = [self getPrecedenceForToken:token ofType:tokenType];
+        node.numArgs = 2;
         [nodes addObject:node];
     }
     return nodes;
@@ -162,7 +163,6 @@ static NSCharacterSet *kStartTokenCharacterSet;
         [self token:[token substringToIndex:1] matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] &&
         [self token:[token substringFromIndex:1] matchesCharacterSet:[NSCharacterSet decimalDigitCharacterSet]])
     {
-        // -1
         return [TokenType constant];
     }
     
@@ -172,6 +172,10 @@ static NSCharacterSet *kStartTokenCharacterSet;
 - (NSUInteger)getPrecedenceForToken:(NSString *)token ofType:(TokenType *)type
 {
     if (type == [TokenType assign] || type == [TokenType constant] || type == [TokenType identifier])
+    {
+        return 1;
+    }
+    if (type == [TokenType func])
     {
         return 1;
     }

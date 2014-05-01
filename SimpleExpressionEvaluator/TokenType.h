@@ -17,5 +17,6 @@
 + (TokenType *)identifier;
 + (TokenType *)op;
 + (TokenType *)paren;
++ (TokenType *)func;
 
 @end
