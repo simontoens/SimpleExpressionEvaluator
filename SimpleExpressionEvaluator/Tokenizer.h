@@ -10,6 +10,9 @@
 
 @interface Tokenizer : NSObject
 
+/**
+ * Returns an array of Token instances.
+ */
 - (NSArray *)tokenize:(NSString *)expression;
 
 @end

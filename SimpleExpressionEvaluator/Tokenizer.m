@@ -7,6 +7,7 @@
 //
 
 #import "Node.h"
+#import "Token.h"
 #import "Tokenizer.h"
 #import "Preconditions.h"
 
