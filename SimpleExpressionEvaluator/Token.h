@@ -11,7 +11,10 @@
 
 @interface Token : NSObject
 
-@property (nonatomic, strong) NSString *value;
-@property (nonatomic, strong) TokenType *tokenType;
+- (instancetype)init __unavailable;
+- (instancetype)initWithValue:(NSString *)value type:(TokenType *)type;
+
+@property (nonatomic, strong, readonly) NSString *value;
+@property (nonatomic, assign, readonly) TokenType *type;
 
 @end

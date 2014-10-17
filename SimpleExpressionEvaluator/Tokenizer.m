@@ -67,17 +67,16 @@ static NSCharacterSet *kStartTokenCharacterSet;
 - (NSArray *)tokenize:(NSString *)expression
 {
     NSMutableArray *nodes = [[NSMutableArray alloc] init];
-    for (NSString *token in [self split:expression])
+    for (Token *token in [self split:expression])
     {
-        TokenType *tokenType = [self getTokenType:token];
-        if (!tokenType)
+        if (!token.type)
         {
             // error handling
         }
         Node *node = [[Node alloc] init];
-        node.value = token;
-        node.type = tokenType;
-        node.precedence = [self getPrecedenceForToken:token ofType:tokenType];
+        node.value = token.value;
+        node.type = token.type;
+        node.precedence = [self getPrecedenceForToken:token.value ofType:token.type];
         node.numArgs = 2;
         [nodes addObject:node];
     }
@@ -88,7 +87,7 @@ static NSCharacterSet *kStartTokenCharacterSet;
 {
     NSMutableArray *tokens = [[NSMutableArray alloc] init];
     
-    NSMutableString *currentToken = nil;
+    NSMutableString *currentTokenValue = nil;
     
     NSMutableString *expression = [NSMutableString stringWithString:expr];
     
@@ -98,10 +97,11 @@ static NSCharacterSet *kStartTokenCharacterSet;
         
         if ([kSeparatorCharacterSet characterIsMember:c])
         {
-            if (currentToken)
+            if (currentTokenValue)
             {
-                [tokens addObject:currentToken];
-                currentToken = nil;
+                Token *t = [[Token alloc] initWithValue:currentTokenValue type:[self getTokenType:currentTokenValue]];
+                [tokens addObject:t];
+                currentTokenValue = nil;
             }
             if ([[NSCharacterSet whitespaceAndNewlineCharacterSet] characterIsMember:c])
             {
@@ -109,23 +109,22 @@ static NSCharacterSet *kStartTokenCharacterSet;
             }
         }
         
-        if (!currentToken)
+        if (!currentTokenValue)
         {
-            currentToken = [[NSMutableString alloc] init];
+            currentTokenValue = [[NSMutableString alloc] init];
         }
         
-        [currentToken appendString:[NSString stringWithFormat:@"%C", c]];
-        
-        NSString *previousToken = [tokens count] > 0 ? [tokens lastObject] : nil;
-        TokenType *previousTokenType = previousToken ? [self getTokenType:previousToken] : nil;
-        
+        [currentTokenValue appendString:[NSString stringWithFormat:@"%C", c]];
+
+        Token *previousToken = [tokens count] > 0 ? [tokens lastObject] : nil;
+
         if ([kStartTokenCharacterSet characterIsMember:c] &&
-            previousTokenType != [TokenType constant] && previousTokenType != [TokenType identifier])
+            previousToken.type != [TokenType constant] && previousToken.type != [TokenType identifier])
         {
             // 3-2  -> 3,-,2
             // 3+-2 -> 3, +, -2
         }
-        else if ([kLeftParen characterIsMember:c] && previousTokenType == [TokenType identifier])
+        else if ([kLeftParen characterIsMember:c] && previousToken.type == [TokenType identifier])
         {
             // blah( -> assume func with single arg
             NSRange r = [expression rangeOfCharacterFromSet:kRightParen options:NSLiteralSearch
@@ -134,22 +133,25 @@ static NSCharacterSet *kStartTokenCharacterSet;
             
             // need to work with higher level data structure, ie a "Token" instead of an NSString,
             // the TokenType could be set right here
-            currentToken = [NSMutableString stringWithFormat:@"%@(", previousToken];
+            currentTokenValue = [NSMutableString stringWithFormat:@"%@(", previousToken.value];
             [tokens removeLastObject];
             
-            [tokens addObject:currentToken];
-            currentToken = nil;
+            Token *t = [[Token alloc] initWithValue:currentTokenValue type:[self getTokenType:currentTokenValue]];
+            [tokens addObject:t];
+            currentTokenValue = nil;
         }
         else if ([kSingleCharacterTokenCharacterSet characterIsMember:c])
         {
-            [tokens addObject:currentToken];
-            currentToken = nil;
+            Token *t = [[Token alloc] initWithValue:currentTokenValue type:[self getTokenType:currentTokenValue]];
+            [tokens addObject:t];
+            currentTokenValue = nil;
         }
     }
     
-    if (currentToken)
+    if (currentTokenValue)
     {
-        [tokens addObject:currentToken];
+        Token *t = [[Token alloc] initWithValue:currentTokenValue type:[self getTokenType:currentTokenValue]];
+        [tokens addObject:t];
     }
     
     return tokens;

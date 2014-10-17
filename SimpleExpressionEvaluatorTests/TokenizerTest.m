@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "Node.h"
+#import "Token.h"
 #import "Tokenizer.h"
 
 @interface Tokenizer()
@@ -33,51 +34,63 @@
 
 - (void)testSplit
 {
-    NSArray *expected = @[@"1"];
+    NSArray *expected = @[[self v:@"1" t:[TokenType constant]]];
     XCTAssertEqualObjects([tokenizer split:@"1"], expected);
     XCTAssertEqualObjects([tokenizer split:@"   1  "], expected);
-    
-    expected = @[@"1", @"2", @"3"];
+
+    expected = @[[self v:@"1" t:[TokenType constant]], [self v:@"2" t:[TokenType constant]], [self v:@"3" t:[TokenType constant]]];
     XCTAssertEqualObjects([tokenizer split:@" 1  2   3  "], expected);
-    
-    expected = @[@"1", @"+", @"3"];
+
+    expected = @[[self v:@"1" t:[TokenType constant]], [self v:@"+" t:[TokenType op]], [self v:@"3" t:[TokenType constant]]];
     XCTAssertEqualObjects([tokenizer split:@"1 + 3"], expected);
-    
-    expected = @[@"1", @"+", @"3"];
+
+    expected = @[[self v:@"1" t:[TokenType constant]], [self v:@"+" t:[TokenType op]], [self v:@"3" t:[TokenType constant]]];
     XCTAssertEqualObjects([tokenizer split:@"1+3"], expected);
-    
-    expected = @[@"1", @"+", @"(", @"3", @")"];
+
+    expected = @[[self v:@"1" t:[TokenType constant]],
+                 [self v:@"+" t:[TokenType op]],
+                 [self v:@"(" t:[TokenType paren]],
+                 [self v:@"3" t:[TokenType constant]],
+                 [self v:@")" t:[TokenType paren]]];
     XCTAssertEqualObjects([tokenizer split:@"1+(3)"], expected);
-    
-    expected = @[@"1", @"/", @"2", @"-", @"3"];
+
+    expected = @[[self v:@"1" t:[TokenType constant]],
+                 [self v:@"/" t:[TokenType op]],
+                 [self v:@"2" t:[TokenType constant]],
+                 [self v:@"-" t:[TokenType op]],
+                 [self v:@"3" t:[TokenType constant]]];
     XCTAssertEqualObjects([tokenizer split:@"1/2-3"], expected);
-    
-    expected = @[@"-1"];
+
+    expected = @[[self v:@"-1" t:[TokenType constant]]];
     XCTAssertEqualObjects([tokenizer split:@"-1"], expected);
-    
-    expected = @[@"-1", @"+", @"3"];
+
+    expected = @[[self v:@"-1" t:[TokenType constant]], [self v:@"+" t:[TokenType op]], [self v:@"3" t:[TokenType constant]]];
     XCTAssertEqualObjects([tokenizer split:@"-1+3"], expected);
-    
-    expected = @[@"-1", @"*", @"-3"];
+
+    expected = @[[self v:@"-1" t:[TokenType constant]], [self v:@"*" t:[TokenType op]], [self v:@"-3" t:[TokenType constant]]];
     XCTAssertEqualObjects([tokenizer split:@"-1*-3"], expected);
-    
-    expected = @[@"-1", @"*", @"(", @"-3", @")"];
+
+    expected = @[[self v:@"-1" t:[TokenType constant]],
+                 [self v:@"*" t:[TokenType op]],
+                 [self v:@"(" t:[TokenType paren]],
+                 [self v:@"-3" t:[TokenType constant]],
+                 [self v:@")" t:[TokenType paren]]];
     XCTAssertEqualObjects([tokenizer split:@"-1*(-3)"], expected);
-    
-    expected = @[@"="];
+
+    expected = @[[self v:@"=" t:[TokenType assign]]];
     XCTAssertEqualObjects([tokenizer split:@"="], expected);
     
-    expected = @[@"x", @"=", @"1"];
+    expected = @[[self v:@"x" t:[TokenType identifier]], [self v:@"=" t:[TokenType assign]], [self v:@"1" t:[TokenType constant]]];
     XCTAssertEqualObjects([tokenizer split:@"x=1"], expected);
-
-    expected = @[@"myvar", @"=", @"1"];
-    XCTAssertEqualObjects([tokenizer split:@"myvar=1"], expected);
     
-    expected = @[@"myvar", @"+", @"yourvar"];
+    expected = @[[self v:@"myvar" t:[TokenType identifier]], [self v:@"=" t:[TokenType assign]], [self v:@"1" t:[TokenType constant]]];
+    XCTAssertEqualObjects([tokenizer split:@"myvar=1"], expected);
+
+    expected = @[[self v:@"myvar" t:[TokenType identifier]], [self v:@"+" t:[TokenType op]], [self v:@"yourvar" t:[TokenType identifier]]];
     XCTAssertEqualObjects([tokenizer split:@"myvar+yourvar"], expected);
     
-//    expected = @[@"f", @"2"];
-//    XCTAssertEqualObjects([tokenizer split:@"f(2)"], expected);
+    //expected = @[@"f", @"2"];
+    //XCTAssertEqualObjects([tokenizer split:@"f(2)"], expected);
 }
 
 - (void)testGetNodeType
@@ -158,6 +171,11 @@
     XCTAssertEqualObjects(((Node *)[tokens objectAtIndex:2]).value, @"+");
     XCTAssertEqualObjects(((Node *)[tokens objectAtIndex:3]).value, @"+");
     XCTAssertEqualObjects(((Node *)[tokens objectAtIndex:4]).value, @"-12");
+}
+
+- (Token *)v:(NSString *)value t:(TokenType *)type\
+{
+    return [[Token alloc] initWithValue:value type:type];
 }
 
 @end
