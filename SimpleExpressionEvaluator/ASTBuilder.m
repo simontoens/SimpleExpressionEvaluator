@@ -31,30 +31,30 @@
     return self;
 }
 
-- (Node *)build:(NSArray *)tokens
+- (Node *)build:(NSArray *)nodes
 {
-    for (int tokenIndex = 0; tokenIndex < [tokens count];)
+    for (int nodeIndex = 0; nodeIndex < [nodes count];)
     {
-        Node *token = [tokens objectAtIndex:tokenIndex];
+        Node *node = [nodes objectAtIndex:nodeIndex];
         
-        if (token.type == [TokenType constant] || token.type == [TokenType identifier])
+        if (node.type == [TokenType constant] || node.type == [TokenType identifier])
         {
-            [_operandStack push:token];
-            tokenIndex += 1;
+            [_operandStack push:node];
+            nodeIndex += 1;
         }
-        else if (token.type == [TokenType paren])
+        else if (node.type == [TokenType paren])
         {
-            if ([token.value isEqualToString:@"("])
+            if ([node.value isEqualToString:@"("])
             {
-                [_operatorStack push:token];
-                tokenIndex += 1;
+                [_operatorStack push:node];
+                nodeIndex += 1;
             }
             else
             {
                 if ([((Node *)[_operatorStack peek]).value isEqualToString:@"("])
                 {
                     [_operatorStack pop];
-                    tokenIndex += 1;
+                    nodeIndex += 1;
                 }
                 else
                 {
@@ -62,24 +62,24 @@
                 }
             }
         }
-        else if (token.type == [TokenType assign] || token.type == [TokenType op] || token.type == [TokenType func])
+        else if (node.type == [TokenType assign] || node.type == [TokenType op] || node.type == [TokenType func])
         {
-            Node *previousToken = _operatorStack.empty ? nil : [_operatorStack peek];
-            if (!previousToken || token.precedence > previousToken.precedence)
+            Node *previousNode = _operatorStack.empty ? nil : [_operatorStack peek];
+            if (!previousNode || node.precedence > previousNode.precedence)
             {
-                [_operatorStack push:token];
-                tokenIndex += 1;
+                [_operatorStack push:node];
+                nodeIndex += 1;
             }
             else
             {
-                if ([self isRightAssociative:token previousToken:previousToken])
+                if ([self isRightAssociative:node previousNode:previousNode])
                 {
                     // for assignment we want right associativity: a=b=3 -> a=(b=3)
                     // same for functions if previous operator is an op: 2+func(1) -> 2+(func(1))
                     // so don't reduce
                     // (need expression token type that encapsulates expression rules?)
-                    [_operatorStack push:token];
-                    tokenIndex += 1;
+                    [_operatorStack push:node];
+                    nodeIndex += 1;
                 }
                 else
                 {
@@ -101,11 +101,11 @@
     return [_operandStack pop];
 }
 
-- (BOOL)isRightAssociative:(Node *)currentToken previousToken:(Node *)previousToken
+- (BOOL)isRightAssociative:(Node *)currentNode previousNode:(Node *)previousNode
 {
     return
-        (currentToken.type == [TokenType assign] && previousToken.type == [TokenType assign]) ||
-        (currentToken.type == [TokenType func] && previousToken.type == [TokenType op]);
+        (currentNode.type == [TokenType assign] && previousNode.type == [TokenType assign]) ||
+        (currentNode.type == [TokenType func] && previousNode.type == [TokenType op]);
 }
 
 - (void)reduce

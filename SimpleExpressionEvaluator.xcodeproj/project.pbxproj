@@ -34,6 +34,12 @@
 		BEE4EF731846EBDF00AFBE36 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF721846EBDF00AFBE36 /* Node.m */; };
 		BEE4EF771846ECC500AFBE36 /* ASTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF761846ECC500AFBE36 /* ASTBuilder.m */; };
 		BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4EF7C1846EE7D00AFBE36 /* Stack.m */; };
+		BEED748619F1E3AB00F21094 /* Lexer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEED748519F1E3AB00F21094 /* Lexer.m */; };
+		BEED748719F1E3AB00F21094 /* Lexer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEED748519F1E3AB00F21094 /* Lexer.m */; };
+		BEED748A19F1E6DE00F21094 /* CharacterSets.m in Sources */ = {isa = PBXBuildFile; fileRef = BEED748919F1E6DE00F21094 /* CharacterSets.m */; };
+		BEED748B19F1E6DE00F21094 /* CharacterSets.m in Sources */ = {isa = PBXBuildFile; fileRef = BEED748919F1E6DE00F21094 /* CharacterSets.m */; };
+		BEED748E19F1F86800F21094 /* TokenTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEED748D19F1F86800F21094 /* TokenTest.m */; };
+		BEED749119F1FBBC00F21094 /* LexerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEED749019F1FBBC00F21094 /* LexerTest.m */; };
 		BEF84A6A18490C9F0045B490 /* Tokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A6918490C9F0045B490 /* Tokenizer.m */; };
 		BEF84A6C18490DDC0045B490 /* TokenizerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A6B18490DDC0045B490 /* TokenizerTest.m */; };
 		BEF84A6F184916D20045B490 /* Preconditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF84A6E184916D20045B490 /* Preconditions.m */; };
@@ -92,6 +98,12 @@
 		BEE4EF761846ECC500AFBE36 /* ASTBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASTBuilder.m; sourceTree = "<group>"; };
 		BEE4EF7B1846EE7D00AFBE36 /* Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stack.h; path = Submodules/STObjCToolbelt/Source/Stack.h; sourceTree = SOURCE_ROOT; };
 		BEE4EF7C1846EE7D00AFBE36 /* Stack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Stack.m; path = Submodules/STObjCToolbelt/Source/Stack.m; sourceTree = SOURCE_ROOT; };
+		BEED748419F1E3AB00F21094 /* Lexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lexer.h; sourceTree = "<group>"; };
+		BEED748519F1E3AB00F21094 /* Lexer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lexer.m; sourceTree = "<group>"; };
+		BEED748819F1E6DE00F21094 /* CharacterSets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterSets.h; sourceTree = "<group>"; };
+		BEED748919F1E6DE00F21094 /* CharacterSets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterSets.m; sourceTree = "<group>"; };
+		BEED748D19F1F86800F21094 /* TokenTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenTest.m; sourceTree = "<group>"; };
+		BEED749019F1FBBC00F21094 /* LexerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LexerTest.m; sourceTree = "<group>"; };
 		BEF84A6818490C9F0045B490 /* Tokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tokenizer.h; sourceTree = "<group>"; };
 		BEF84A6918490C9F0045B490 /* Tokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tokenizer.m; sourceTree = "<group>"; };
 		BEF84A6B18490DDC0045B490 /* TokenizerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TokenizerTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -167,12 +179,16 @@
 				BEE4EF761846ECC500AFBE36 /* ASTBuilder.m */,
 				BEB11CC91847F2F600F9BA77 /* ASTEvaluator.h */,
 				BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */,
+				BEED748819F1E6DE00F21094 /* CharacterSets.h */,
+				BEED748919F1E6DE00F21094 /* CharacterSets.m */,
 				BE9942FC18750D6A0080C499 /* Environment.h */,
 				BE9942FD18750D6A0080C499 /* Environment.m */,
 				BEF84A72184928E70045B490 /* ExpressionEvaluator.h */,
 				BEF84A73184928E70045B490 /* ExpressionEvaluator.m */,
 				BEAEB3B918830A64003C2CDE /* InvalidTokenException.h */,
 				BEAEB3BA18830A64003C2CDE /* InvalidTokenException.m */,
+				BEED748419F1E3AB00F21094 /* Lexer.h */,
+				BEED748519F1E3AB00F21094 /* Lexer.m */,
 				BEE4EF711846EBDF00AFBE36 /* Node.h */,
 				BEE4EF721846EBDF00AFBE36 /* Node.m */,
 				BEACF0071911FB260048B3F8 /* Token.h */,
@@ -208,7 +224,9 @@
 				BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */,
 				BE9942FF187512380080C499 /* EnvironmentTest.m */,
 				BEF84A7618492A280045B490 /* ExpressionEvaluatorTest.m */,
+				BEED749019F1FBBC00F21094 /* LexerTest.m */,
 				BE6E478A1848343F00672B69 /* NodeTest.m */,
+				BEED748D19F1F86800F21094 /* TokenTest.m */,
 				BEF84A6B18490DDC0045B490 /* TokenizerTest.m */,
 				BE44246E189895F3000FEE96 /* TokenTypeTest.m */,
 				BEE4EF621846EB9B00AFBE36 /* Supporting Files */,
@@ -347,9 +365,11 @@
 				BEE4EF4F1846EB9B00AFBE36 /* main.m in Sources */,
 				BE2836481849618A00E60DBD /* MainViewController.m in Sources */,
 				BEF84A6F184916D20045B490 /* Preconditions.m in Sources */,
+				BEED748A19F1E6DE00F21094 /* CharacterSets.m in Sources */,
 				BEF84A74184928E70045B490 /* ExpressionEvaluator.m in Sources */,
 				BEACF0091911FB260048B3F8 /* Token.m in Sources */,
 				BEE4EF771846ECC500AFBE36 /* ASTBuilder.m in Sources */,
+				BEED748619F1E3AB00F21094 /* Lexer.m in Sources */,
 				BE9942FE18750D6A0080C499 /* Environment.m in Sources */,
 				BE098BA918837FB6003E1308 /* TokenType.m in Sources */,
 				BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */,
@@ -362,13 +382,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEED748B19F1E6DE00F21094 /* CharacterSets.m in Sources */,
+				BEED748719F1E3AB00F21094 /* Lexer.m in Sources */,
 				BEF84A7718492A280045B490 /* ExpressionEvaluatorTest.m in Sources */,
 				BE994300187512380080C499 /* EnvironmentTest.m in Sources */,
 				BE44246F189895F3000FEE96 /* TokenTypeTest.m in Sources */,
 				BEACF00A1911FB260048B3F8 /* Token.m in Sources */,
 				BEE4EF681846EB9B00AFBE36 /* ASTBuilderTest.m in Sources */,
 				BE6E478B1848343F00672B69 /* NodeTest.m in Sources */,
+				BEED748E19F1F86800F21094 /* TokenTest.m in Sources */,
 				BEF84A6C18490DDC0045B490 /* TokenizerTest.m in Sources */,
+				BEED749119F1FBBC00F21094 /* LexerTest.m in Sources */,
 				BEB11CCD1848203000F9BA77 /* ASTEvaluatorTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

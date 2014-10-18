@@ -11,8 +11,13 @@
 
 @interface Token : NSObject
 
++ (instancetype)tokenWithValue:(NSString *)value;
+
 - (instancetype)init __unavailable;
+- (instancetype)initWithValue:(NSString *)value;
 - (instancetype)initWithValue:(NSString *)value type:(TokenType *)type;
+
+- (BOOL)matchesCharacterSet:(NSCharacterSet *)characterSet;
 
 @property (nonatomic, strong, readonly) NSString *value;
 @property (nonatomic, assign, readonly) TokenType *type;

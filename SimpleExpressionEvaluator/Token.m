@@ -6,10 +6,21 @@
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
+#import "CharacterSets.h"
 #import "Preconditions.h"
 #import "Token.h"
 
 @implementation Token
+
++ (instancetype)tokenWithValue:(NSString *)value
+{
+    return [[Token alloc] initWithValue:value];
+}
+
+- (instancetype)initWithValue:(NSString *)value
+{
+    return [self initWithValue:value type:[self getTokenType:value]];
+}
 
 - (instancetype)initWithValue:(NSString *)value type:(TokenType *)type
 {
@@ -48,6 +59,56 @@
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"%@ %@", _value, _type];
+}
+
+- (TokenType *)getTokenType:(NSString *)tokenValue
+{
+    if ([self value:tokenValue matchesCharacterSet:[NSCharacterSet decimalDigitCharacterSet]])
+    {
+        return [TokenType constant];
+    }
+    if ([self value:tokenValue matchesCharacterSet:kBinaryOperatorCharacterSet])
+    {
+        return [TokenType op];
+    }
+    if ([self value:tokenValue matchesCharacterSet:kParensCharacterSet])
+    {
+        return [TokenType paren];
+    }
+    if ([self value:tokenValue matchesCharacterSet:kAssignmentCharacterSet])
+    {
+        return [TokenType assign];
+    }
+    if ([self value:tokenValue matchesCharacterSet:kIdentifierCharacterSet])
+    {
+        return [TokenType identifier];
+    }
+    if ([tokenValue length] > 1 &&
+        [self value:[tokenValue substringToIndex:1] matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] &&
+        [self value:[tokenValue substringFromIndex:1] matchesCharacterSet:[NSCharacterSet decimalDigitCharacterSet]])
+    {
+        return [TokenType constant];
+    }
+    [Preconditions fail:[NSString stringWithFormat:@"Unable to determine token type for token value: %@", tokenValue]];
+    return nil;
+}
+
+- (BOOL)matchesCharacterSet:(NSCharacterSet *)characterSet
+{
+    return [self value:_value matchesCharacterSet:characterSet];
+}
+
+- (BOOL)value:(NSString *)value matchesCharacterSet:(NSCharacterSet *)characterSet
+{
+    for (int i = 0; i < [value length]; i++)
+    {
+        unichar c = [value characterAtIndex:i];
+        if (![characterSet characterIsMember:c])
+        {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 @end

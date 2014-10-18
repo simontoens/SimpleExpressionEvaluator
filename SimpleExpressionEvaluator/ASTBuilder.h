@@ -11,6 +11,6 @@
 
 @interface ASTBuilder : NSObject
 
-- (Node *)build:(NSArray *)tokens;
+- (Node *)build:(NSArray *)nodes;
 
 @end

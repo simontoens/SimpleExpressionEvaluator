@@ -6,90 +6,25 @@
 //  Copyright (c) 2013 Simon Toens. All rights reserved.
 //
 
-#import "Node.h"
+#import "CharacterSets.h"
 #import "Token.h"
 #import "Tokenizer.h"
 #import "Preconditions.h"
 
 @implementation Tokenizer
 
-static NSCharacterSet *kLeftParen;
-static NSCharacterSet *kRightParen;
-static NSCharacterSet *kParensCharacterSet;
-
-static NSCharacterSet *kBinaryOperatorLowerPrecedenceCharacterSet;
-static NSCharacterSet *kBinaryOperatorHigherPrecedenceCharacterSet;
-static NSCharacterSet *kBinaryOperatorCharacterSet;
-
-static NSCharacterSet *kAssignmentCharacterSet;
-static NSCharacterSet *kIdentifierCharacterSet;
-
-static NSCharacterSet *kSeparatorCharacterSet;
-static NSCharacterSet *kSingleCharacterTokenCharacterSet;
-static NSCharacterSet *kStartTokenCharacterSet;
-
 + (void)initialize
 {
-    kLeftParen = [NSCharacterSet characterSetWithCharactersInString:@"("];
-    kRightParen = [NSCharacterSet characterSetWithCharactersInString:@")"];
-    NSMutableCharacterSet *s = [[NSMutableCharacterSet alloc] init];
-    [s formUnionWithCharacterSet:kLeftParen];
-    [s formUnionWithCharacterSet:kRightParen];
-    kParensCharacterSet = s;
-    
-    kBinaryOperatorLowerPrecedenceCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"-+"];
-    kBinaryOperatorHigherPrecedenceCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"*/"];
-    kAssignmentCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"="];
-    kIdentifierCharacterSet = [NSCharacterSet letterCharacterSet];
-    
-    s =[[NSMutableCharacterSet alloc] init];
-    [s formUnionWithCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet];
-    [s formUnionWithCharacterSet:kBinaryOperatorHigherPrecedenceCharacterSet];
-    kBinaryOperatorCharacterSet = s;
-    
-    s = [[NSMutableCharacterSet alloc] init];
-    [s formUnionWithCharacterSet:kParensCharacterSet];
-    [s formUnionWithCharacterSet:kBinaryOperatorCharacterSet];
-    [s formUnionWithCharacterSet:kAssignmentCharacterSet];
-    kSingleCharacterTokenCharacterSet = s;
-    
-    s = [[NSMutableCharacterSet alloc] init];
-    [s formUnionWithCharacterSet:kSingleCharacterTokenCharacterSet];
-    [s formUnionWithCharacterSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    kSeparatorCharacterSet = s;
-    
-    s = [[NSMutableCharacterSet alloc] init];
-    [s formUnionWithCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet];
-    [s formUnionWithCharacterSet:[NSCharacterSet decimalDigitCharacterSet]];
-    kStartTokenCharacterSet = s;
+    [CharacterSets class];
 }
 
-- (NSArray *)tokenize:(NSString *)expression
-{
-    NSMutableArray *nodes = [[NSMutableArray alloc] init];
-    for (Token *token in [self split:expression])
-    {
-        if (!token.type)
-        {
-            // error handling
-        }
-        Node *node = [[Node alloc] init];
-        node.value = token.value;
-        node.type = token.type;
-        node.precedence = [self getPrecedenceForToken:token.value ofType:token.type];
-        node.numArgs = 2;
-        [nodes addObject:node];
-    }
-    return nodes;
-}
-
-- (NSArray *)split:(NSString *)expr
+- (NSArray *)tokenize:(NSString *)stringExpression
 {
     NSMutableArray *tokens = [[NSMutableArray alloc] init];
     
     NSMutableString *currentTokenValue = nil;
     
-    NSMutableString *expression = [NSMutableString stringWithString:expr];
+    NSMutableString *expression = [NSMutableString stringWithString:stringExpression];
     
     for (int position = 0; position < [expression length]; position++)
     {
@@ -99,8 +34,7 @@ static NSCharacterSet *kStartTokenCharacterSet;
         {
             if (currentTokenValue)
             {
-                Token *t = [[Token alloc] initWithValue:currentTokenValue type:[self getTokenType:currentTokenValue]];
-                [tokens addObject:t];
+                [tokens addObject:[Token tokenWithValue:currentTokenValue]];
                 currentTokenValue = nil;
             }
             if ([[NSCharacterSet whitespaceAndNewlineCharacterSet] characterIsMember:c])
@@ -136,91 +70,22 @@ static NSCharacterSet *kStartTokenCharacterSet;
             currentTokenValue = [NSMutableString stringWithFormat:@"%@(", previousToken.value];
             [tokens removeLastObject];
             
-            Token *t = [[Token alloc] initWithValue:currentTokenValue type:[self getTokenType:currentTokenValue]];
-            [tokens addObject:t];
+            [tokens addObject:[Token tokenWithValue:currentTokenValue]];
             currentTokenValue = nil;
         }
         else if ([kSingleCharacterTokenCharacterSet characterIsMember:c])
         {
-            Token *t = [[Token alloc] initWithValue:currentTokenValue type:[self getTokenType:currentTokenValue]];
-            [tokens addObject:t];
+            [tokens addObject:[Token tokenWithValue:currentTokenValue]];
             currentTokenValue = nil;
         }
     }
     
     if (currentTokenValue)
     {
-        Token *t = [[Token alloc] initWithValue:currentTokenValue type:[self getTokenType:currentTokenValue]];
-        [tokens addObject:t];
+        [tokens addObject:[Token tokenWithValue:currentTokenValue]];
     }
     
     return tokens;
-}
-
-- (TokenType *)getTokenType:(NSString *)token
-{
-    if ([self token:token matchesCharacterSet:[NSCharacterSet decimalDigitCharacterSet]])
-    {
-        return [TokenType constant];
-    }
-    if ([self token:token matchesCharacterSet:kBinaryOperatorCharacterSet])
-    {
-        return [TokenType op];
-    }
-    if ([self token:token matchesCharacterSet:kParensCharacterSet])
-    {
-        return [TokenType paren];
-    }
-    if ([self token:token matchesCharacterSet:kAssignmentCharacterSet])
-    {
-        return [TokenType assign];
-    }
-    if ([self token:token matchesCharacterSet:kIdentifierCharacterSet])
-    {
-        return [TokenType identifier];
-    }
-    if ([token length] > 1 &&
-        [self token:[token substringToIndex:1] matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] &&
-        [self token:[token substringFromIndex:1] matchesCharacterSet:[NSCharacterSet decimalDigitCharacterSet]])
-    {
-        return [TokenType constant];
-    }
-    
-    return nil;
-}
-
-- (NSUInteger)getPrecedenceForToken:(NSString *)token ofType:(TokenType *)type
-{
-    if (type == [TokenType assign] || type == [TokenType constant] || type == [TokenType identifier])
-    {
-        return 1;
-    }
-    if (type == [TokenType func])
-    {
-        return 1;
-    }
-    if (type == [TokenType op])
-    {
-        return [self token:token matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] ? 2: 3;
-    }
-    if (type == [TokenType paren])
-    {
-        return [self token:token matchesCharacterSet:kLeftParen] ? 0 : 10;
-    }
-    return -1;
-}
-
-- (BOOL)token:(NSString *)token matchesCharacterSet:(NSCharacterSet *)charSet
-{
-    for (int i = 0; i < [token length]; i++)
-    {
-        unichar c = [token characterAtIndex:i];
-        if (![charSet characterIsMember:c])
-        {
-            return NO;
-        }
-    }
-    return YES;
 }
 
 @end

@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ * The Tokenizer parses an NSString into a list of Tokens.
+ */
 @interface Tokenizer : NSObject
 
 /**

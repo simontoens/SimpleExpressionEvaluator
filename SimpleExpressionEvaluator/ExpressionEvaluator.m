@@ -10,6 +10,7 @@
 #import "ASTEvaluator.h"
 #import "Environment.h"
 #import "ExpressionEvaluator.h"
+#import "Lexer.h"
 #import "Node.h"
 #import "Tokenizer.h"
 
@@ -32,8 +33,11 @@
     Tokenizer *tokenizer = [[Tokenizer alloc] init];
     NSArray *tokens = [tokenizer tokenize:expression];
     
+    Lexer *lexer = [[Lexer alloc] init];
+    NSArray *nodes = [lexer lex:tokens];
+    
     ASTBuilder *astBuilder = [[ASTBuilder alloc] init];
-    Node *ast = [astBuilder build:tokens];
+    Node *ast = [astBuilder build:nodes];
     _prefix = [ast prefix];
     
     ASTEvaluator *eval = [[ASTEvaluator alloc] initWithEnvironment:env];

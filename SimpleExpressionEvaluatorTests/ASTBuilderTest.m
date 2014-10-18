@@ -2,12 +2,13 @@
 
 #import <XCTest/XCTest.h>
 #import "ASTBuilder.h"
+#import "Lexer.h"
 #import "Node.h"
-#import "Tokenizer.h"
+#import "Token.h"
 
 @interface ASTBuilderTest : XCTestCase
 {
-    Tokenizer *tokenizer;
+    Lexer *_lexer;
 }
 @end
 
@@ -15,8 +16,8 @@
 - (NSArray *)preorder;
 @end;
 
-@interface Tokenizer()
-- (NSUInteger)getPrecedenceForToken:(NSString *)token ofType:(TokenType *)type;
+@interface Lexer()
+- (NSUInteger)getPrecedenceForToken:(Token *)token;
 @end
 
 @implementation ASTBuilderTest
@@ -24,15 +25,23 @@
 - (void)setUp
 {
     [super setUp];
-    tokenizer = [[Tokenizer alloc] init];
+    _lexer = [[Lexer alloc] init];
 }
 
-- (void)testExpr1
+- (void)testSimpleAddition
 {
     NSArray *tokens = @[[self v:@"1" t:[TokenType constant]],
                         [self v:@"+" t:[TokenType op]],
                         [self v:@"2" t:[TokenType constant]]];
     [self assertAST:tokens expectedPreorderTokens:@[@"+", @"1", @"2"]];
+}
+
+- (void)testSimpleMultiplication
+{
+    NSArray *tokens = @[[self v:@"1" t:[TokenType constant]],
+                        [self v:@"*" t:[TokenType op]],
+                        [self v:@"2" t:[TokenType constant]]];
+    [self assertAST:tokens expectedPreorderTokens:@[@"*", @"1", @"2"]];
 }
 
 - (void)testExpr2
@@ -132,28 +141,27 @@
 //    [self assertAST:tokens expectedPreorderTokens:@[@"func", @"1", @"2", @"3"]];
 //}
 
-
-- (Node *)v:(NSString *)value t:(TokenType *)tokenType
+- (Node *)v:(NSString *)value t:(TokenType *)type
 {
     Node *n = [[Node alloc] init];
     n.value = value;
-    n.type = tokenType;
-    n.precedence = [tokenizer getPrecedenceForToken:value ofType:tokenType];
-    n.numArgs = tokenType == [TokenType func] ? 1 : 2; // fixme
+    n.type = type;
+    n.precedence = [_lexer getPrecedenceForToken:[[Token alloc] initWithValue:value type:type]];
+    n.numArgs = type == [TokenType func] ? 1 : 2; // fixme
     return n;
 }
 
-- (void)assertAST:(NSArray *)tokens expectedPreorderTokens:(NSArray *)expectedTokens
+- (void)assertAST:(NSArray *)nodes expectedPreorderTokens:(NSArray *)expectedNodes
 {
     ASTBuilder *astBuilder = [[ASTBuilder alloc] init];
-    Node *ast = [astBuilder build:tokens];
+    Node *ast = [astBuilder build:nodes];
     NSArray *preorderderNodes = [ast preorder];
-    XCTAssertEqual([preorderderNodes count], [expectedTokens count], @"Unexpected node count");
+    XCTAssertEqual([preorderderNodes count], [expectedNodes count], @"Unexpected node count");
     
     for (int i = 0; i < [preorderderNodes count]; i++)
     {
         Node *node = [preorderderNodes objectAtIndex:i];
-        XCTAssertEqualObjects(node.value, [expectedTokens objectAtIndex:i], @"Unexpected token value");
+        XCTAssertEqualObjects(node.value, [expectedNodes objectAtIndex:i], @"Unexpected token value");
     }
 }
 
