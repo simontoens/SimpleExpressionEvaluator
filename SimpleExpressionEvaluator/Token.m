@@ -71,9 +71,13 @@
     {
         return [TokenType op];
     }
-    if ([self value:tokenValue matchesCharacterSet:kParensCharacterSet])
+    if ([self value:tokenValue matchesCharacterSet:kOpenParenCharacterSet])
     {
-        return [TokenType paren];
+        return [TokenType openParen];
+    }
+    if ([self value:tokenValue matchesCharacterSet:kCloseParenCharacterSet])
+    {
+        return [TokenType closeParen];
     }
     if ([self value:tokenValue matchesCharacterSet:kAssignmentCharacterSet])
     {

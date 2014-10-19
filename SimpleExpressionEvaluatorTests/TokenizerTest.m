@@ -43,9 +43,9 @@
 
     expected = @[[self v:@"1" t:[TokenType constant]],
                  [self v:@"+" t:[TokenType op]],
-                 [self v:@"(" t:[TokenType paren]],
+                 [self v:@"(" t:[TokenType openParen]],
                  [self v:@"3" t:[TokenType constant]],
-                 [self v:@")" t:[TokenType paren]]];
+                 [self v:@")" t:[TokenType closeParen]]];
     XCTAssertEqualObjects([tokenizer tokenize:@"1+(3)"], expected);
 
     expected = @[[self v:@"1" t:[TokenType constant]],
@@ -66,9 +66,9 @@
 
     expected = @[[self v:@"-1" t:[TokenType constant]],
                  [self v:@"*" t:[TokenType op]],
-                 [self v:@"(" t:[TokenType paren]],
+                 [self v:@"(" t:[TokenType openParen]],
                  [self v:@"-3" t:[TokenType constant]],
-                 [self v:@")" t:[TokenType paren]]];
+                 [self v:@")" t:[TokenType closeParen]]];
     XCTAssertEqualObjects([tokenizer tokenize:@"-1*(-3)"], expected);
 
     expected = @[[self v:@"=" t:[TokenType assign]]];

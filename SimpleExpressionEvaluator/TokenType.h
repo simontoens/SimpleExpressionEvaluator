@@ -16,7 +16,8 @@
 + (TokenType *)constant;
 + (TokenType *)identifier;
 + (TokenType *)op;
-+ (TokenType *)paren;
++ (TokenType *)openParen;
++ (TokenType *)closeParen;
 + (TokenType *)func;
 
 @end

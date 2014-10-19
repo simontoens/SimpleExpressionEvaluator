@@ -21,8 +21,8 @@
     XCTAssertEqual([Token tokenWithValue:@"*"].type, [TokenType op]);
     XCTAssertEqual([Token tokenWithValue:@"/"].type, [TokenType op]);
 
-    XCTAssertEqual([Token tokenWithValue:@"("].type, [TokenType paren]);
-    XCTAssertEqual([Token tokenWithValue:@")"].type, [TokenType paren]);
+    XCTAssertEqual([Token tokenWithValue:@"("].type, [TokenType openParen]);
+    XCTAssertEqual([Token tokenWithValue:@")"].type, [TokenType closeParen]);
     
     XCTAssertEqualObjects([Token tokenWithValue:@"1533"].type, [TokenType constant]);
     [self assertUnknownTokenType:@"2a3"];

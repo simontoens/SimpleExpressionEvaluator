@@ -46,9 +46,13 @@
     {
         return [token matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] ? 2: 3;
     }
-    if (token.type == [TokenType paren])
+    if (token.type == [TokenType openParen])
     {
-        return [token matchesCharacterSet:kLeftParen] ? 0 : 10;
+        return 0;
+    }
+    if (token.type == [TokenType closeParen])
+    {
+        return 10;
     }
     return -1;
 }

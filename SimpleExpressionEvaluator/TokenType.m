@@ -17,7 +17,8 @@ static TokenType *kAssign;
 static TokenType *kConstant;
 static TokenType *kIdentifer;
 static TokenType *kOp;
-static TokenType *kParen;
+static TokenType *kOpenParen;
+static TokenType *kCloseParen;
 static TokenType *kFunc;
 
 + (void)initialize
@@ -28,7 +29,8 @@ static TokenType *kFunc;
         kConstant = [[TokenType alloc] initPrivate:@"Const"];
         kIdentifer = [[TokenType alloc] initPrivate:@"Ident"];
         kOp = [[TokenType alloc] initPrivate:@"Op"];
-        kParen = [[TokenType alloc] initPrivate:@"Paren"];
+        kOpenParen = [[TokenType alloc] initPrivate:@"("];
+        kCloseParen = [[TokenType alloc] initPrivate:@")"];
         kFunc = [[TokenType alloc] initPrivate:@"Func"];
     });
 }
@@ -53,9 +55,14 @@ static TokenType *kFunc;
     return kOp;
 }
 
-+ (TokenType *)paren
++ (TokenType *)openParen
 {
-    return kParen;
+    return kOpenParen;
+}
+
++ (TokenType *)closeParen
+{
+    return kCloseParen;
 }
 
 + (TokenType *)func

@@ -10,9 +10,8 @@
 
 @implementation CharacterSets
 
-NSCharacterSet *kLeftParen;
-NSCharacterSet *kRightParen;
-NSCharacterSet *kParensCharacterSet;
+NSCharacterSet *kOpenParenCharacterSet;
+NSCharacterSet *kCloseParenCharacterSet;
 
 NSCharacterSet *kBinaryOperatorLowerPrecedenceCharacterSet;
 NSCharacterSet *kBinaryOperatorHigherPrecedenceCharacterSet;
@@ -29,25 +28,22 @@ NSCharacterSet *kStartTokenCharacterSet;
 {
     static dispatch_once_t once = 0;
     dispatch_once(&once, ^{
-        kLeftParen = [NSCharacterSet characterSetWithCharactersInString:@"("];
-        kRightParen = [NSCharacterSet characterSetWithCharactersInString:@")"];
-        NSMutableCharacterSet *s = [[NSMutableCharacterSet alloc] init];
-        [s formUnionWithCharacterSet:kLeftParen];
-        [s formUnionWithCharacterSet:kRightParen];
-        kParensCharacterSet = s;
+        kOpenParenCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"("];
+        kCloseParenCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@")"];
         
         kBinaryOperatorLowerPrecedenceCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"-+"];
         kBinaryOperatorHigherPrecedenceCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"*/"];
         kAssignmentCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"="];
         kIdentifierCharacterSet = [NSCharacterSet letterCharacterSet];
         
-        s =[[NSMutableCharacterSet alloc] init];
+        NSMutableCharacterSet *s =[[NSMutableCharacterSet alloc] init];
         [s formUnionWithCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet];
         [s formUnionWithCharacterSet:kBinaryOperatorHigherPrecedenceCharacterSet];
         kBinaryOperatorCharacterSet = s;
         
         s = [[NSMutableCharacterSet alloc] init];
-        [s formUnionWithCharacterSet:kParensCharacterSet];
+        [s formUnionWithCharacterSet:kOpenParenCharacterSet];
+        [s formUnionWithCharacterSet:kCloseParenCharacterSet];
         [s formUnionWithCharacterSet:kBinaryOperatorCharacterSet];
         [s formUnionWithCharacterSet:kAssignmentCharacterSet];
         kSingleCharacterTokenCharacterSet = s;

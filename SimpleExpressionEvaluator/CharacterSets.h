@@ -10,9 +10,8 @@
 
 @interface CharacterSets : NSObject
 
-extern NSCharacterSet *kLeftParen;
-extern NSCharacterSet *kRightParen;
-extern NSCharacterSet *kParensCharacterSet;
+extern NSCharacterSet *kOpenParenCharacterSet;
+extern NSCharacterSet *kCloseParenCharacterSet;
 
 extern NSCharacterSet *kBinaryOperatorLowerPrecedenceCharacterSet;
 extern NSCharacterSet *kBinaryOperatorHigherPrecedenceCharacterSet;

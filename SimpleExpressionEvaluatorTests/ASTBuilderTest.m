@@ -56,11 +56,11 @@
 
 - (void)testExprWithParens1
 {
-    NSArray *tokens = @[[self v:@"(" t:[TokenType paren]],
+    NSArray *tokens = @[[self v:@"(" t:[TokenType openParen]],
                         [self v:@"1" t:[TokenType constant]],
                         [self v:@"+" t:[TokenType op]],
                         [self v:@"2" t:[TokenType constant]],
-                        [self v:@")" t:[TokenType paren]],
+                        [self v:@")" t:[TokenType closeParen]],
                         [self v:@"*" t:[TokenType op]],
                         [self v:@"3" t:[TokenType constant]]];
     [self assertAST:tokens expectedPreorderTokens:@[@"*", @"+", @"1", @"2", @"3"]];

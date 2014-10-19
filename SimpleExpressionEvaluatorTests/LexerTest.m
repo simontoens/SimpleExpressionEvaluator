@@ -40,7 +40,7 @@
                   [_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"2" type:[TokenType constant]]]);
                                                                                   
     XCTAssertTrue([_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"+" type:[TokenType op]]] >
-                  [_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"(" type:[TokenType paren]]]);
+                  [_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"(" type:[TokenType openParen]]]);
                                                                                                   
     XCTAssertTrue([_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"+" type:[TokenType op]]] ==
                   [_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"-" type:[TokenType op]]]);
@@ -51,7 +51,7 @@
     XCTAssertTrue([_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"*" type:[TokenType op]]] ==
                   [_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"/" type:[TokenType op]]]);
                                                                                                                                                   
-    XCTAssertTrue([_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@")" type:[TokenType paren]]] >
+    XCTAssertTrue([_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@")" type:[TokenType closeParen]]] >
                   [_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"*" type:[TokenType op]]]);
 }
 

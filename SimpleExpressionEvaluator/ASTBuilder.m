@@ -42,16 +42,16 @@
             [_operandStack push:node];
             nodeIndex += 1;
         }
-        else if (node.token.type == [TokenType paren])
+        else if (node.token.type == [TokenType openParen] || node.token.type == [TokenType closeParen])
         {
-            if ([node.token.value isEqualToString:@"("])
+            if (node.token.type == [TokenType openParen])
             {
                 [_operatorStack push:node];
                 nodeIndex += 1;
             }
             else
             {
-                if ([((Node *)[_operatorStack peek]).token.value isEqualToString:@"("])
+                if (((Node *)[_operatorStack peek]).token.type == [TokenType openParen])
                 {
                     [_operatorStack pop];
                     nodeIndex += 1;
