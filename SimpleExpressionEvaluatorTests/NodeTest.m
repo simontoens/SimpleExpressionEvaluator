@@ -36,7 +36,7 @@
 - (Node *)v:(NSString *)value
 {
     Node *n = [[Node alloc] init];
-    n.value = value;
+    n.token = [Token tokenWithValue:value];
     return n;
 }
 

@@ -32,21 +32,21 @@
 - (NSInteger)evaluate:(Node *)ast
 {
     Node *result = [self evaluateRecusively:ast];
-    return [result.value integerValue];
+    return [result.token.value integerValue];
 }
 
 - (Node *)evaluateRecusively:(Node *)node
 {
-    if (node.type == [TokenType constant])
+    if (node.token.type == [TokenType constant])
     {
         return node;
     }
-    else if (node.type == [TokenType identifier])
+    else if (node.token.type == [TokenType identifier])
     {
         Node *n = [_environment resolve:node];
         return n ? n : node; // resolve to self if undefined
     }
-    else if (node.type == [TokenType assign])
+    else if (node.token.type == [TokenType assign])
     {
         Node *lhs = node.left;
         Node *rhs = [self evaluateRecusively:node.right];
@@ -62,17 +62,17 @@
 
 - (Node *)compute:(Node *)operator arg1:(Node *)arg1 arg2:(Node *)arg2
 {
-    Node *resultNode = [[Node alloc] init];
-    resultNode.type = [TokenType constant];
+    NSString *resultString = nil;
+    TokenType *resultType = nil;
     
-    if (operator.type == [TokenType op])
+    if (operator.token.type == [TokenType op])
     {
-        NSInteger i1 = [arg1.value integerValue];
-        NSInteger i2 = [arg2.value integerValue];
+        NSInteger i1 = [arg1.token.value integerValue];
+        NSInteger i2 = [arg2.token.value integerValue];
 
         NSInteger result = 0;
         
-        char op = [operator.value characterAtIndex:0];
+        char op = [operator.token.value characterAtIndex:0];
         
         switch (op)
         {
@@ -82,15 +82,18 @@
             case '/': result = i1 / i2; break;
         }
         
-        resultNode.value = [NSString stringWithFormat:@"%li", (long)result];
+        resultType = [TokenType constant];
+        resultString = [NSString stringWithFormat:@"%li", (long)result];
     }
-    else if (operator.type == [TokenType assign])
+    else if (operator.token.type == [TokenType assign])
     {
         [_environment bind:arg2 to:arg1];
-        resultNode.value = arg2.value;
+        resultType = [TokenType identifier];
+        resultString = arg2.token.value;
     }
-
-    return resultNode;
+    Node* node = [[Node alloc] init];
+    node.token = [[Token alloc] initWithValue:resultString type:resultType];
+    return node;
 }
 
 @end

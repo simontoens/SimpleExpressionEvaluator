@@ -58,21 +58,6 @@
             // 3-2  -> 3,-,2
             // 3+-2 -> 3, +, -2
         }
-        else if ([kLeftParen characterIsMember:c] && previousToken.type == [TokenType identifier])
-        {
-            // blah( -> assume func with single arg
-            NSRange r = [expression rangeOfCharacterFromSet:kRightParen options:NSLiteralSearch
-                                                      range:NSMakeRange(position, [expression length] - position)];
-            [expression deleteCharactersInRange:r];
-            
-            // need to work with higher level data structure, ie a "Token" instead of an NSString,
-            // the TokenType could be set right here
-            currentTokenValue = [NSMutableString stringWithFormat:@"%@(", previousToken.value];
-            [tokens removeLastObject];
-            
-            [tokens addObject:[Token tokenWithValue:currentTokenValue]];
-            currentTokenValue = nil;
-        }
         else if ([kSingleCharacterTokenCharacterSet characterIsMember:c])
         {
             [tokens addObject:[Token tokenWithValue:currentTokenValue]];

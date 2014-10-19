@@ -37,21 +37,21 @@
     {
         Node *node = [nodes objectAtIndex:nodeIndex];
         
-        if (node.type == [TokenType constant] || node.type == [TokenType identifier])
+        if (node.token.type == [TokenType constant] || node.token.type == [TokenType identifier])
         {
             [_operandStack push:node];
             nodeIndex += 1;
         }
-        else if (node.type == [TokenType paren])
+        else if (node.token.type == [TokenType paren])
         {
-            if ([node.value isEqualToString:@"("])
+            if ([node.token.value isEqualToString:@"("])
             {
                 [_operatorStack push:node];
                 nodeIndex += 1;
             }
             else
             {
-                if ([((Node *)[_operatorStack peek]).value isEqualToString:@"("])
+                if ([((Node *)[_operatorStack peek]).token.value isEqualToString:@"("])
                 {
                     [_operatorStack pop];
                     nodeIndex += 1;
@@ -62,7 +62,7 @@
                 }
             }
         }
-        else if (node.type == [TokenType assign] || node.type == [TokenType op] || node.type == [TokenType func])
+        else if (node.token.type == [TokenType assign] || node.token.type == [TokenType op] || node.token.type == [TokenType func])
         {
             Node *previousNode = _operatorStack.empty ? nil : [_operatorStack peek];
             if (!previousNode || node.precedence > previousNode.precedence)
@@ -104,8 +104,8 @@
 - (BOOL)isRightAssociative:(Node *)currentNode previousNode:(Node *)previousNode
 {
     return
-        (currentNode.type == [TokenType assign] && previousNode.type == [TokenType assign]) ||
-        (currentNode.type == [TokenType func] && previousNode.type == [TokenType op]);
+        (currentNode.token.type == [TokenType assign] && previousNode.token.type == [TokenType assign]) ||
+        (currentNode.token.type == [TokenType func] && previousNode.token.type == [TokenType op]);
 }
 
 - (void)reduce

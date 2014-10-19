@@ -144,8 +144,7 @@
 - (Node *)v:(NSString *)value t:(TokenType *)type
 {
     Node *n = [[Node alloc] init];
-    n.value = value;
-    n.type = type;
+    n.token = [[Token alloc] initWithValue:value type:type];
     n.precedence = [_lexer getPrecedenceForToken:[[Token alloc] initWithValue:value type:type]];
     n.numArgs = type == [TokenType func] ? 1 : 2; // fixme
     return n;
@@ -161,7 +160,7 @@
     for (int i = 0; i < [preorderderNodes count]; i++)
     {
         Node *node = [preorderderNodes objectAtIndex:i];
-        XCTAssertEqualObjects(node.value, [expectedNodes objectAtIndex:i], @"Unexpected token value");
+        XCTAssertEqualObjects(node.token.value, [expectedNodes objectAtIndex:i], @"Unexpected token value");
     }
 }
 

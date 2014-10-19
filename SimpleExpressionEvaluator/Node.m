@@ -42,7 +42,7 @@
     if (!node.left && !node.right)
     {
         [string appendString:@" "];
-        [string appendString:node.value];
+        [string appendString:node.token.value];
     }
     else
     {
@@ -51,7 +51,7 @@
             [string appendString:@" "];            
         }
         [string appendString:@"("];
-        [string appendString:node.value];
+        [string appendString:node.token.value];
         if (node.left)
         {
             [self prefix:node.left string:string];
@@ -66,7 +66,7 @@
 
 - (NSString *)description
 {
-    return self.value;
+    return self.token.value;
 }
 
 @end

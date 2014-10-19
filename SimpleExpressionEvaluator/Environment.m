@@ -24,12 +24,12 @@
 
 - (void)bind:(Node *)value to:(Node *)ident
 {
-    _env[ident.value] = value;
+    _env[ident.token.value] = value;
 }
 
 - (Node *)resolve:(Node *)reference
 {
-    return _env[reference.value];
+    return _env[reference.token.value];
 }
 
 - (instancetype)objectForKeyedSubscript:(id <NSCopying>)key

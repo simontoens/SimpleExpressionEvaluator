@@ -7,14 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TokenType.h"
+#import "Token.h"
 
 @interface Node : NSObject
 
 - (NSString *)prefix;
 
-@property (nonatomic, strong) NSString *value;
-@property (nonatomic, assign) TokenType *type;
+@property (nonatomic, strong) Token *token;
 @property (nonatomic, assign) NSUInteger precedence;
 @property (nonatomic, assign) NSUInteger numArgs;
 

@@ -24,8 +24,7 @@
     for (Token *token in tokens)
     {
         Node *node = [[Node alloc] init];
-        node.value = token.value;
-        node.type = token.type;
+        node.token = token;
         node.precedence = [self getPrecedenceForToken:token];
         node.numArgs = 2;
         [nodes addObject:node];
