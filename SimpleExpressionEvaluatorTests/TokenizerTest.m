@@ -83,8 +83,11 @@
     expected = @[[self v:@"myvar" t:[TokenType identifier]], [self v:@"+" t:[TokenType op]], [self v:@"yourvar" t:[TokenType identifier]]];
     XCTAssertEqualObjects([tokenizer tokenize:@"myvar+yourvar"], expected);
     
-    //expected = @[@"f", @"2"];
-    //XCTAssertEqualObjects([tokenizer tokenize:@"f(2)"], expected);
+    expected = @[[self v:@"f" t:[TokenType identifier]],
+                 [self v:@"(" t:[TokenType openParen]],
+                 [self v:@"1" t:[TokenType constant]],
+                 [self v:@")" t:[TokenType closeParen]]];
+    XCTAssertEqualObjects([tokenizer tokenize:@"f  ( 1)"], expected);
 }
 
 

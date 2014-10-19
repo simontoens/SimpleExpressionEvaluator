@@ -12,6 +12,7 @@
 @interface Token : NSObject
 
 + (instancetype)tokenWithValue:(NSString *)value;
++ (instancetype)tokenWithValue:(NSString *)value type:(TokenType *)type;
 
 - (instancetype)init __unavailable;
 - (instancetype)initWithValue:(NSString *)value;

@@ -28,6 +28,7 @@
         Token *token = [tokens objectAtIndex:i];
         node.token = token;
         node.precedence = [self getPrecedence:token];
+        node.type = [self getNodeType:i allTokens:tokens];
         [nodes addObject:node];
     }
     return nodes;
@@ -38,14 +39,17 @@
     Token *token = [tokens objectAtIndex:currentTokenIndex];
     if (token.type == [TokenType identifier])
     {
-        
+        if ([self nextTokenType:currentTokenIndex allTokens:tokens] == [TokenType openParen])
+        {
+            return [NodeType func];
+        }
     }
     return nil;
 }
 
-- (Token *)nextToken:(int)currentTokenIndex allTokens:(NSArray *)tokens
+- (TokenType *)nextTokenType:(int)currentTokenIndex allTokens:(NSArray *)tokens
 {
-    return nil;
+    return currentTokenIndex < [tokens count] - 1 ? ((Token *)[tokens objectAtIndex:currentTokenIndex + 1]).type : nil;
 }
 
 - (NSUInteger)getPrecedence:(Token *)token

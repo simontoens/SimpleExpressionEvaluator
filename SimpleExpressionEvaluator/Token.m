@@ -17,6 +17,11 @@
     return [[Token alloc] initWithValue:value];
 }
 
++ (instancetype)tokenWithValue:(NSString *)value type:(TokenType *)type
+{
+    return [[Token alloc] initWithValue:value type:type];
+}
+
 - (instancetype)initWithValue:(NSString *)value
 {
     return [self initWithValue:value type:[self getTokenType:value]];
