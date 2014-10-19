@@ -17,7 +17,7 @@
 @end;
 
 @interface Lexer()
-- (NSUInteger)getPrecedenceForToken:(Token *)token;
+- (NSUInteger)getPrecedence:(Token *)token;
 @end
 
 @implementation ASTBuilderTest
@@ -108,7 +108,7 @@
 {
     Node *n = [[Node alloc] init];
     n.token = [[Token alloc] initWithValue:value type:type];
-    n.precedence = [_lexer getPrecedenceForToken:[[Token alloc] initWithValue:value type:type]];
+    n.precedence = [_lexer getPrecedence:[[Token alloc] initWithValue:value type:type]];
     return n;
 }
 

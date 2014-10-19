@@ -9,6 +9,7 @@
 #import "CharacterSets.h"
 #import "Lexer.h"
 #import "Node.h"
+#import "NodeType.h"
 #import "Token.h"
 
 @implementation Lexer
@@ -21,17 +22,33 @@
 - (NSArray *)lex:(NSArray *)tokens
 {
     NSMutableArray *nodes = [[NSMutableArray alloc] initWithCapacity:[tokens count]];
-    for (Token *token in tokens)
+    for (int i = 0; i < [tokens count]; i++)
     {
         Node *node = [[Node alloc] init];
+        Token *token = [tokens objectAtIndex:i];
         node.token = token;
-        node.precedence = [self getPrecedenceForToken:token];
+        node.precedence = [self getPrecedence:token];
         [nodes addObject:node];
     }
     return nodes;
 }
 
-- (NSUInteger)getPrecedenceForToken:(Token *)token
+- (NodeType *)getNodeType:(int)currentTokenIndex allTokens:(NSArray *)tokens
+{
+    Token *token = [tokens objectAtIndex:currentTokenIndex];
+    if (token.type == [TokenType identifier])
+    {
+        
+    }
+    return nil;
+}
+
+- (Token *)nextToken:(int)currentTokenIndex allTokens:(NSArray *)tokens
+{
+    return nil;
+}
+
+- (NSUInteger)getPrecedence:(Token *)token
 {
     if (token.type == [TokenType assign] || token.type == [TokenType constant] || token.type == [TokenType identifier])
     {
