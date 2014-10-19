@@ -74,10 +74,7 @@
             {
                 if ([self isRightAssociative:node previousNode:previousNode])
                 {
-                    // for assignment we want right associativity: a=b=3 -> a=(b=3)
-                    // same for functions if previous operator is an op: 2+func(1) -> 2+(func(1))
-                    // so don't reduce
-                    // (need expression token type that encapsulates expression rules?)
+                    // for assignment we want right associativity: a=b=3 -> a=(b=3) so don't reduce
                     [_operatorStack push:node];
                     nodeIndex += 1;
                 }
