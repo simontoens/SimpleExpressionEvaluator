@@ -109,7 +109,6 @@
     Node *n = [[Node alloc] init];
     n.token = [[Token alloc] initWithValue:value type:type];
     n.precedence = [_lexer getPrecedenceForToken:[[Token alloc] initWithValue:value type:type]];
-    n.numArgs = 2;
     return n;
 }
 

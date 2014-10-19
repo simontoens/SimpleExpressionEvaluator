@@ -110,9 +110,7 @@
 {
     Node *root = [_operatorStack pop];
     root.right = [_operandStack pop];
-    if (root.numArgs > 1) { // fixme
-        root.left = [_operandStack pop];
-    }
+    root.left = [_operandStack pop];
     [_operandStack push:root];
 }
 

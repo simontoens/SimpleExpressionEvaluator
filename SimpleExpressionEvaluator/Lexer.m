@@ -26,7 +26,6 @@
         Node *node = [[Node alloc] init];
         node.token = token;
         node.precedence = [self getPrecedenceForToken:token];
-        node.numArgs = 2;
         [nodes addObject:node];
     }
     return nodes;
