@@ -77,4 +77,9 @@ static TokenType *kCloseParen;
     return self;
 }
 
+- (BOOL)paren
+{
+    return self == kOpenParen || self == kCloseParen;
+}
+
 @end

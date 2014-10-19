@@ -42,7 +42,7 @@
             [_operandStack push:node];
             nodeIndex += 1;
         }
-        else if (node.token.type == [TokenType openParen] || node.token.type == [TokenType closeParen])
+        else if ([node.token.type paren])
         {
             if (node.token.type == [TokenType openParen])
             {
