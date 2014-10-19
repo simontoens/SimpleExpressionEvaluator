@@ -104,49 +104,12 @@
     [self assertAST:tokens expectedPreorderTokens:@[@"-", @"-", @"3", @"2", @"1"]];
 }
 
-- (void)testFunc1
-{
-    NSArray *tokens = @[[self v:@"foo" t:[TokenType func]],
-                        [self v:@"2" t:[TokenType constant]]];
-    [self assertAST:tokens expectedPreorderTokens:@[@"foo", @"2"]];
-}
-
-- (void)testFunc2
-{
-    NSArray *tokens = @[[self v:@"foo" t:[TokenType func]],
-                        [self v:@"2" t:[TokenType constant]],
-                        [self v:@"-" t:[TokenType op]],
-                        [self v:@"1" t:[TokenType constant]]];
-
-    [self assertAST:tokens expectedPreorderTokens:@[@"foo", @"-", @"2", @"1"]];
-}
-
-- (void)testFunc3
-{
-    NSArray *tokens = @[[self v:@"3" t:[TokenType constant]],
-                        [self v:@"+" t:[TokenType op]],
-                        [self v:@"func" t:[TokenType func]],
-                        [self v:@"1" t:[TokenType constant]]];
-    
-    [self assertAST:tokens expectedPreorderTokens:@[@"+", @"3", @"func", @"1"]];
-}
-
-//- (void)testFuncMultipleArgs
-//{
-//    NSArray *tokens = @[[self v:@"func" t:[TokenType func]],
-//                        [self v:@"1" t:[TokenType constant]],
-//                        [self v:@"2" t:[TokenType constant]],
-//                        [self v:@"3" t:[TokenType constant]]];
-//    
-//    [self assertAST:tokens expectedPreorderTokens:@[@"func", @"1", @"2", @"3"]];
-//}
-
 - (Node *)v:(NSString *)value t:(TokenType *)type
 {
     Node *n = [[Node alloc] init];
     n.token = [[Token alloc] initWithValue:value type:type];
     n.precedence = [_lexer getPrecedenceForToken:[[Token alloc] initWithValue:value type:type]];
-    n.numArgs = type == [TokenType func] ? 1 : 2; // fixme
+    n.numArgs = 2;
     return n;
 }
 

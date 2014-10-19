@@ -18,6 +18,5 @@
 + (TokenType *)op;
 + (TokenType *)openParen;
 + (TokenType *)closeParen;
-+ (TokenType *)func;
 
 @end

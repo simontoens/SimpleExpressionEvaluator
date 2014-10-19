@@ -38,10 +38,6 @@
     {
         return 1;
     }
-    if (token.type == [TokenType func])
-    {
-        return 1;
-    }
     if (token.type == [TokenType op])
     {
         return [token matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] ? 2: 3;

@@ -35,10 +35,7 @@
                     
     XCTAssertTrue([_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"a" type:[TokenType identifier]]] ==
                   [_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"2" type:[TokenType constant]]]);
-                                    
-    XCTAssertTrue([_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"func" type:[TokenType func]]] ==
-                  [_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"2" type:[TokenType constant]]]);
-                                                                                  
+                                                                                                                      
     XCTAssertTrue([_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"+" type:[TokenType op]]] >
                   [_lexer getPrecedenceForToken:[[Token alloc] initWithValue:@"(" type:[TokenType openParen]]]);
                                                                                                   

@@ -62,7 +62,7 @@
                 }
             }
         }
-        else if (node.token.type == [TokenType assign] || node.token.type == [TokenType op] || node.token.type == [TokenType func])
+        else if (node.token.type == [TokenType assign] || node.token.type == [TokenType op])
         {
             Node *previousNode = _operatorStack.empty ? nil : [_operatorStack peek];
             if (!previousNode || node.precedence > previousNode.precedence)
@@ -103,9 +103,7 @@
 
 - (BOOL)isRightAssociative:(Node *)currentNode previousNode:(Node *)previousNode
 {
-    return
-        (currentNode.token.type == [TokenType assign] && previousNode.token.type == [TokenType assign]) ||
-        (currentNode.token.type == [TokenType func] && previousNode.token.type == [TokenType op]);
+    return currentNode.token.type == [TokenType assign] && previousNode.token.type == [TokenType assign];
 }
 
 - (void)reduce

@@ -19,7 +19,6 @@ static TokenType *kIdentifer;
 static TokenType *kOp;
 static TokenType *kOpenParen;
 static TokenType *kCloseParen;
-static TokenType *kFunc;
 
 + (void)initialize
 {
@@ -31,7 +30,6 @@ static TokenType *kFunc;
         kOp = [[TokenType alloc] initPrivate:@"Op"];
         kOpenParen = [[TokenType alloc] initPrivate:@"("];
         kCloseParen = [[TokenType alloc] initPrivate:@")"];
-        kFunc = [[TokenType alloc] initPrivate:@"Func"];
     });
 }
 
@@ -63,11 +61,6 @@ static TokenType *kFunc;
 + (TokenType *)closeParen
 {
     return kCloseParen;
-}
-
-+ (TokenType *)func
-{
-    return kFunc;
 }
 
 - (NSString *)description
