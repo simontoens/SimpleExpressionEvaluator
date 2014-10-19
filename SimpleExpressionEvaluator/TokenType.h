@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ * Syntactical types: type information that does not require context.
+ */
 @interface TokenType : NSObject
 
 - (id)init __unavailable;

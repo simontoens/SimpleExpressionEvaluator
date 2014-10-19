@@ -76,6 +76,8 @@
 		BEB11CC91847F2F600F9BA77 /* ASTEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTEvaluator.h; sourceTree = "<group>"; };
 		BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASTEvaluator.m; sourceTree = "<group>"; };
 		BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ASTEvaluatorTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		BEE1E09119F351C60013AC8A /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/NodeType.h; sourceTree = "<group>"; };
+		BEE1E09319F351C60013AC8A /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = en; path = en.lproj/NodeType.m; sourceTree = "<group>"; };
 		BEE4EF3F1846EB9B00AFBE36 /* SimpleExpressionEvaluator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleExpressionEvaluator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE4EF421846EB9B00AFBE36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BEE4EF441846EB9B00AFBE36 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -191,6 +193,8 @@
 				BEED748519F1E3AB00F21094 /* Lexer.m */,
 				BEE4EF711846EBDF00AFBE36 /* Node.h */,
 				BEE4EF721846EBDF00AFBE36 /* Node.m */,
+				BEE1E09019F351C60013AC8A /* NodeType.h */,
+				BEE1E09219F351C60013AC8A /* NodeType.m */,
 				BEACF0071911FB260048B3F8 /* Token.h */,
 				BEACF0081911FB260048B3F8 /* Token.m */,
 				BEF84A6818490C9F0045B490 /* Tokenizer.h */,
@@ -408,6 +412,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		BEE1E09019F351C60013AC8A /* NodeType.h */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEE1E09119F351C60013AC8A /* en */,
+			);
+			name = NodeType.h;
+			sourceTree = "<group>";
+		};
+		BEE1E09219F351C60013AC8A /* NodeType.m */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEE1E09319F351C60013AC8A /* en */,
+			);
+			name = NodeType.m;
+			sourceTree = "<group>";
+		};
 		BEE4EF4B1846EB9B00AFBE36 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
