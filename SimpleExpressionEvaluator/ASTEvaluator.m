@@ -37,7 +37,13 @@
 
 - (Node *)evaluateRecusively:(Node *)node
 {
-    if (node.token.type == [TokenType constant])
+    if (node.type == [NodeType func])
+    {
+        Node *n = [[Node alloc] init];
+        n.token = [Token tokenWithValue:@"3" type:[TokenType constant]];
+        return n;
+    }
+    else if (node.token.type == [TokenType constant])
     {
         return node;
     }

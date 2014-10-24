@@ -8,6 +8,7 @@
 
 @interface ASTBuilderTest : XCTestCase
 {
+    ASTBuilder *_astBuilder;
     Lexer *_lexer;
 }
 @end
@@ -16,100 +17,151 @@
 - (NSArray *)preorder;
 @end;
 
-@interface Lexer()
-- (NSUInteger)getPrecedence:(Token *)token;
-@end
-
 @implementation ASTBuilderTest
 
 - (void)setUp
 {
     [super setUp];
+    _astBuilder = [[ASTBuilder alloc] init];
     _lexer = [[Lexer alloc] init];
 }
 
 - (void)testSimpleAddition
 {
-    NSArray *tokens = @[[self v:@"1" t:[TokenType constant]],
-                        [self v:@"+" t:[TokenType op]],
-                        [self v:@"2" t:[TokenType constant]]];
-    [self assertAST:tokens expectedPreorderTokens:@[@"+", @"1", @"2"]];
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"1" type:[TokenType constant]],
+                                   [Token tokenWithValue:@"+" type:[TokenType op]],
+                                   [Token tokenWithValue:@"2" type:[TokenType constant]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"+", @"1", @"2"]];
 }
 
 - (void)testSimpleMultiplication
 {
-    NSArray *tokens = @[[self v:@"1" t:[TokenType constant]],
-                        [self v:@"*" t:[TokenType op]],
-                        [self v:@"2" t:[TokenType constant]]];
-    [self assertAST:tokens expectedPreorderTokens:@[@"*", @"1", @"2"]];
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"1" type:[TokenType constant]],
+                                   [Token tokenWithValue:@"*" type:[TokenType op]],
+                                   [Token tokenWithValue:@"2" type:[TokenType constant]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"*", @"1", @"2"]];
 }
 
 - (void)testExpr2
 {
-    NSArray *tokens = @[[self v:@"1" t:[TokenType constant]],
-                        [self v:@"+" t:[TokenType op]],
-                        [self v:@"2" t:[TokenType constant]],
-                        [self v:@"*" t:[TokenType op]],
-                        [self v:@"3" t:[TokenType constant]]];
-    [self assertAST:tokens expectedPreorderTokens:@[@"+", @"1", @"*", @"2", @"3"]];
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"1" type:[TokenType constant]],
+                                   [Token tokenWithValue:@"+" type:[TokenType op]],
+                                   [Token tokenWithValue:@"2" type:[TokenType constant]],
+                                   [Token tokenWithValue:@"*" type:[TokenType op]],
+                                   [Token tokenWithValue:@"3" type:[TokenType constant]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"+", @"1", @"*", @"2", @"3"]];
 }
 
-- (void)testExprWithParens1
+- (void)testParens
 {
-    NSArray *tokens = @[[self v:@"(" t:[TokenType openParen]],
-                        [self v:@"1" t:[TokenType constant]],
-                        [self v:@"+" t:[TokenType op]],
-                        [self v:@"2" t:[TokenType constant]],
-                        [self v:@")" t:[TokenType closeParen]],
-                        [self v:@"*" t:[TokenType op]],
-                        [self v:@"3" t:[TokenType constant]]];
-    [self assertAST:tokens expectedPreorderTokens:@[@"*", @"+", @"1", @"2", @"3"]];
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"1" type:[TokenType constant]],
+                                   [Token tokenWithValue:@"+" type:[TokenType op]],
+                                   [Token tokenWithValue:@"2" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@"*" type:[TokenType op]],
+                                   [Token tokenWithValue:@"3" type:[TokenType constant]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"*", @"+", @"1", @"2", @"3"]];
+}
+
+- (void)testParensAroundSingleConstant
+{
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"3" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@"*" type:[TokenType op]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"2" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"*", @"3", @"2"]];
+}
+
+- (void)testNestedParens
+{
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"1" type:[TokenType constant]],
+                                   [Token tokenWithValue:@"+" type:[TokenType op]],
+                                   [Token tokenWithValue:@"2" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@"*" type:[TokenType op]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"3" type:[TokenType constant]],
+                                   [Token tokenWithValue:@"-" type:[TokenType op]],
+                                   [Token tokenWithValue:@"4" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"*", @"+", @"1", @"2", @"-", @"3", @"4"]];
 }
 
 - (void)testAssignment1
 {
-    NSArray *tokens = @[[self v:@"x" t:[TokenType identifier]],
-                        [self v:@"=" t:[TokenType assign]],
-                        [self v:@"1" t:[TokenType constant]]];
-    [self assertAST:tokens expectedPreorderTokens:@[@"=", @"x", @"1"]];
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"x" type:[TokenType identifier]],
+                                   [Token tokenWithValue:@"=" type:[TokenType assign]],
+                                   [Token tokenWithValue:@"1" type:[TokenType constant]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"=", @"x", @"1"]];
 }
 
 - (void)testAssignment2
 {
-    NSArray *tokens = @[[self v:@"x" t:[TokenType identifier]],
-                        [self v:@"=" t:[TokenType assign]],
-                        [self v:@"1" t:[TokenType constant]],
-                        [self v:@"*" t:[TokenType op]],
-                        [self v:@"2" t:[TokenType constant]]];
-    [self assertAST:tokens expectedPreorderTokens:@[@"=", @"x", @"*", @"1", @"2"]];
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"x" type:[TokenType identifier]],
+                                   [Token tokenWithValue:@"=" type:[TokenType assign]],
+                                   [Token tokenWithValue:@"1" type:[TokenType constant]],
+                                   [Token tokenWithValue:@"*" type:[TokenType op]],
+                                   [Token tokenWithValue:@"2" type:[TokenType constant]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"=", @"x", @"*", @"1", @"2"]];
 }
 
 - (void)testAssignmentIsRightAssociative
 {
-    NSArray *tokens = @[[self v:@"a" t:[TokenType identifier]],
-                        [self v:@"=" t:[TokenType assign]],
-                        [self v:@"b" t:[TokenType identifier]],
-                        [self v:@"=" t:[TokenType assign]],
-                        [self v:@"3" t:[TokenType constant]]];
-    [self assertAST:tokens expectedPreorderTokens:@[@"=", @"a", @"=", @"b", @"3"]];
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"a" type:[TokenType identifier]],
+                                   [Token tokenWithValue:@"=" type:[TokenType assign]],
+                                   [Token tokenWithValue:@"b" type:[TokenType identifier]],
+                                   [Token tokenWithValue:@"=" type:[TokenType assign]],
+                                   [Token tokenWithValue:@"3" type:[TokenType constant]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"=", @"a", @"=", @"b", @"3"]];
 }
 
 - (void)testOtherOperatorsAreRightAssociative
 {
-    NSArray *tokens = @[[self v:@"3" t:[TokenType constant]],
-                        [self v:@"-" t:[TokenType op]],
-                        [self v:@"2" t:[TokenType constant]],
-                        [self v:@"-" t:[TokenType op]],
-                        [self v:@"1" t:[TokenType constant]]];
-    [self assertAST:tokens expectedPreorderTokens:@[@"-", @"-", @"3", @"2", @"1"]];
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"3" type:[TokenType constant]],
+                                   [Token tokenWithValue:@"-" type:[TokenType op]],
+                                   [Token tokenWithValue:@"2" type:[TokenType constant]],
+                                   [Token tokenWithValue:@"-" type:[TokenType op]],
+                                   [Token tokenWithValue:@"1" type:[TokenType constant]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"-", @"-", @"3", @"2", @"1"]];
 }
 
-- (Node *)v:(NSString *)value t:(TokenType *)type
+- (void)testFunctionWithConstantArguments
 {
-    Node *n = [[Node alloc] init];
-    n.token = [[Token alloc] initWithValue:value type:type];
-    n.precedence = [_lexer getPrecedence:[[Token alloc] initWithValue:value type:type]];
-    return n;
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"f" type:[TokenType identifier]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"1" type:[TokenType constant]],
+                                   [Token tokenWithValue:@"2" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"f", @"1", @"2"]];
+}
+
+- (void)testFunctionWithExpressionArguments
+{
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"f" type:[TokenType identifier]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"1" type:[TokenType constant]],
+                                   [Token tokenWithValue:@"+" type:[TokenType op]],
+                                   [Token tokenWithValue:@"2" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@"11" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"f", @"+", @"1", @"2", @"11"]];
 }
 
 - (void)assertAST:(NSArray *)nodes expectedPreorderTokens:(NSArray *)expectedNodes

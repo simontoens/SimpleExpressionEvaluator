@@ -60,7 +60,7 @@
     }
     if (token.type == [TokenType op])
     {
-        return [token matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] ? 2: 3;
+        return [token matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] ? 2 : 3;
     }
     if (token.type == [TokenType openParen])
     {

@@ -8,6 +8,7 @@
 
 #import "ASTBuilder.h"
 #import "Node.h"
+#import "NodeType.h"
 #import "Preconditions.h"
 #import "Stack.h"
 
@@ -37,7 +38,7 @@
     {
         Node *node = [nodes objectAtIndex:nodeIndex];
         
-        if (node.token.type == [TokenType constant] || node.token.type == [TokenType identifier])
+        if (node.type != [NodeType func] && (node.token.type == [TokenType constant] || node.token.type == [TokenType identifier]))
         {
             [_operandStack push:node];
             nodeIndex += 1;
@@ -62,7 +63,7 @@
                 }
             }
         }
-        else if (node.token.type == [TokenType assign] || node.token.type == [TokenType op])
+        else if (node.token.type == [TokenType assign] || node.token.type == [TokenType op] || node.type == [NodeType func])
         {
             Node *previousNode = _operatorStack.empty ? nil : [_operatorStack peek];
             if (!previousNode || node.precedence > previousNode.precedence)

@@ -41,9 +41,19 @@
     
     result = [eval compute:[self v:@"/" t:[TokenType op]] arg1:[self v:@"16"] arg2:[self v:@"4"]];
     XCTAssertEqualObjects(result.token.value, @"4");
-    
+   
     result = [eval compute:[self v:@"=" t:[TokenType assign]] arg1:[self v:@"x"] arg2:[self v:@"4"]];
     XCTAssertEqualObjects(result.token.value, @"4");
+}
+
+- (void)testFunction
+{
+    Node *n = [self v:@"f" t:[TokenType identifier]];
+    n.left = [self v:@"1"];
+    n.right = [self v:@"10"];
+    n.type = [NodeType func];
+    NSInteger result = [eval evaluate:n];
+    XCTAssertEqual(result, 3);
 }
 
 - (void)testEvalBinOp1
