@@ -74,4 +74,10 @@
     XCTAssertEqual([evaluator evaluate:@"b"], (NSInteger)3);
 }
 
+- (void)testEvaluateFunction
+{
+    XCTAssertEqual([evaluator evaluate:@"f((1+2) (2*2))"], (NSInteger)7);
+    XCTAssertEqual([evaluator evaluate:@"f(1 2)"], (NSInteger)3);
+}
+
 @end

@@ -8,6 +8,9 @@
 
 #import "Node.h"
 
+/**
+ * TODO: combine notion of token.type and type.
+ */
 @implementation Node
 
 - (NSArray *)preorder

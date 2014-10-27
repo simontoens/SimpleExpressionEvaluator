@@ -39,9 +39,11 @@
 {
     if (node.type == [NodeType func])
     {
-        Node *n = [[Node alloc] init];
-        n.token = [Token tokenWithValue:@"3" type:[TokenType constant]];
-        return n;
+        Node *lhs = [self evaluateRecusively:node.left];
+        Node *rhs = [self evaluateRecusively:node.right];
+        Node *op = [[Node alloc] init];
+        op.token = [Token tokenWithValue:@"+"]; // test function support as addition
+        return [self compute:op arg1:lhs arg2:rhs];
     }
     else if (node.token.type == [TokenType constant])
     {

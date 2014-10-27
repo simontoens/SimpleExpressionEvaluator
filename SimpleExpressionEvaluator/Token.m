@@ -12,6 +12,11 @@
 
 @implementation Token
 
++ (void)initialize
+{
+    [CharacterSets class];
+}
+
 + (instancetype)tokenWithValue:(NSString *)value
 {
     return [[Token alloc] initWithValue:value];
@@ -98,7 +103,7 @@
     {
         return [TokenType constant];
     }
-    [Preconditions fail:[NSString stringWithFormat:@"Unable to determine token type for token value: %@", tokenValue]];
+    [Preconditions fail:[NSString stringWithFormat:@"Unable to determine token type for '%@'", tokenValue]];
     return nil;
 }
 

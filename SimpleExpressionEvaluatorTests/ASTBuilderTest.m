@@ -152,6 +152,7 @@
 
 - (void)testFunctionWithExpressionArguments
 {
+    // for ast generation to work function arguments currently need to be within parens
     NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"f" type:[TokenType identifier]],
                                    [Token tokenWithValue:@"(" type:[TokenType openParen]],
                                    [Token tokenWithValue:@"(" type:[TokenType openParen]],

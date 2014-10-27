@@ -53,7 +53,7 @@
     n.right = [self v:@"10"];
     n.type = [NodeType func];
     NSInteger result = [eval evaluate:n];
-    XCTAssertEqual(result, 3);
+    XCTAssertEqual(result, 11);
 }
 
 - (void)testEvalBinOp1
