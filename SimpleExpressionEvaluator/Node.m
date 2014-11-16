@@ -8,10 +8,22 @@
 
 #import "Node.h"
 
-/**
- * TODO: combine notion of token.type and type.
- */
 @implementation Node
+
+@dynamic variable, function, group, groupStart, groupEnd;
+
++ (Node *)nodeWithToken:(Token *)token
+{
+    return [Node nodeWithToken:token nodeType:nil];
+}
+
++ (Node *)nodeWithToken:(Token *)token nodeType:(NodeType *)nodeType
+{
+    Node *n = [[Node alloc] init];
+    n.token = token;
+    n.type = nodeType;
+    return n;
+}
 
 - (NSArray *)preorder
 {
@@ -67,9 +79,44 @@
     }
 }
 
+- (BOOL)rightAssociative:(Node *)previousNode
+{
+    return _token.type == [TokenType assign] && previousNode.token.type == [TokenType assign];
+}
+
 - (NSString *)description
 {
     return self.token.value;
+}
+
+- (BOOL)variable
+{
+    return _token.type == [TokenType identifier] && _type != [NodeType func];
+}
+
+- (BOOL)function
+{
+    return _token.type == [TokenType op] || _token.type == [TokenType assign] || _type == [NodeType func];
+}
+
+- (BOOL)group
+{
+    return self.groupStart || self.groupEnd;
+}
+
+- (BOOL)groupStart
+{
+    return _token.type == [TokenType openParen];
+}
+
+- (BOOL)groupEnd
+{
+    return _token.type == [TokenType closeParen];
+}
+
+- (BOOL)argument
+{
+    return self.variable || _token.type == [TokenType constant];
 }
 
 @end

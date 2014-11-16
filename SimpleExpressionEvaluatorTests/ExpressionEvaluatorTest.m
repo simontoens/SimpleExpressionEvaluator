@@ -50,6 +50,7 @@
 - (void)testEvaluateExpressionsWithVariables
 {
     XCTAssertEqual([evaluator evaluate:@"x=2*3+1"], (NSInteger)7);
+    XCTAssertEqual([evaluator evaluate:@"x"], (NSInteger)7);
 
     XCTAssertEqual([evaluator evaluate:@"a=1"], (NSInteger)1);
     XCTAssertEqual([evaluator evaluate:@"b=2"], (NSInteger)2);
@@ -58,6 +59,11 @@
     XCTAssertEqual([evaluator evaluate:@"a+b"], (NSInteger)3);
     
     XCTAssertEqual([evaluator evaluate:@"x*a+b"], (NSInteger)9);
+}
+
+- (void)testEvaluateUndefinedVariable
+{
+    XCTAssertEqual([evaluator evaluate:@"x"], (NSInteger)0);
 }
 
 - (void)testReassignVariables

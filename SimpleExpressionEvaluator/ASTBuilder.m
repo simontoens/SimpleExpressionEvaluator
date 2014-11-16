@@ -15,8 +15,8 @@
 @interface ASTBuilder()
 {
     @private
-    Stack *_operatorStack;
-    Stack *_operandStack;
+    Stack *_argumentStack;
+    Stack *_functionStack;
 }
 @end
 
@@ -26,8 +26,8 @@
 {
     if (self = [super init])
     {
-        _operandStack = [[Stack alloc] init];
-        _operatorStack = [[Stack alloc] init];
+        _argumentStack = [[Stack alloc] init];
+        _functionStack = [[Stack alloc] init];
     }
     return self;
 }
@@ -38,23 +38,24 @@
     {
         Node *node = [nodes objectAtIndex:nodeIndex];
         
-        if (node.type != [NodeType func] && (node.token.type == [TokenType constant] || node.token.type == [TokenType identifier]))
+        if (node.argument) // abc, 123
         {
-            [_operandStack push:node];
+            [_argumentStack push:node];
             nodeIndex += 1;
         }
-        else if ([node.token.type paren])
+        else if (node.group) // (, )
         {
-            if (node.token.type == [TokenType openParen])
+            if (node.groupStart) // (
             {
-                [_operatorStack push:node];
+                [_functionStack push:node];
                 nodeIndex += 1;
             }
-            else
+            else // )
             {
-                if (((Node *)[_operatorStack peek]).token.type == [TokenType openParen])
+                Node *prevFuncNode = [_functionStack peek];
+                if (prevFuncNode.groupStart)
                 {
-                    [_operatorStack pop];
+                    [_functionStack pop];
                     nodeIndex += 1;
                 }
                 else
@@ -63,20 +64,20 @@
                 }
             }
         }
-        else if (node.token.type == [TokenType assign] || node.token.type == [TokenType op] || node.type == [NodeType func])
+        else if (node.function)
         {
-            Node *previousNode = _operatorStack.empty ? nil : [_operatorStack peek];
+            Node *previousNode = _functionStack.empty ? nil : [_functionStack peek];
             if (!previousNode || node.precedence > previousNode.precedence)
             {
-                [_operatorStack push:node];
+                [_functionStack push:node];
                 nodeIndex += 1;
             }
             else
             {
-                if ([self isRightAssociative:node previousNode:previousNode])
+                if ([node rightAssociative:previousNode])
                 {
-                    // for assignment we want right associativity: a=b=3 -> a=(b=3) so don't reduce
-                    [_operatorStack push:node];
+                    // for ex, assignment is right associative: we want a=b=3 -> a=(b=3), not (a=b)=3 so don't reduce
+                    [_functionStack push:node];
                     nodeIndex += 1;
                 }
                 else
@@ -91,25 +92,20 @@
         }
     }
     
-    while (!_operatorStack.empty)
+    while (!_functionStack.empty)
     {
         [self reduce];
     }
     
-    return [_operandStack pop];
-}
-
-- (BOOL)isRightAssociative:(Node *)currentNode previousNode:(Node *)previousNode
-{
-    return currentNode.token.type == [TokenType assign] && previousNode.token.type == [TokenType assign];
+    return [_argumentStack pop];
 }
 
 - (void)reduce
 {
-    Node *root = [_operatorStack pop];
-    root.right = [_operandStack pop];
-    root.left = [_operandStack pop];
-    [_operandStack push:root];
+    Node *root = [_functionStack pop];
+    root.right = [_argumentStack pop];
+    root.left = [_argumentStack pop];
+    [_argumentStack push:root];
 }
 
 @end

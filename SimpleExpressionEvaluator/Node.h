@@ -12,7 +12,15 @@
 
 @interface Node : NSObject
 
++ (Node *)nodeWithToken:(Token *)token;
++ (Node *)nodeWithToken:(Token *)token nodeType:(NodeType *)nodeType;
+
 - (NSString *)prefix;
+
+/**
+ * Returns whether the current node is right-associative, given the previous node.
+ */
+- (BOOL)rightAssociative:(Node *)previousNode;
 
 @property (nonatomic, strong) Token *token;
 @property (nonatomic, assign) NSUInteger precedence;
@@ -20,5 +28,17 @@
 
 @property (nonatomic, strong) Node *left;
 @property (nonatomic, strong) Node *right;
+
+
+/**
+ * Type attributes
+ */
+
+@property (nonatomic, assign, readonly) BOOL variable;
+@property (nonatomic, assign, readonly) BOOL function;
+@property (nonatomic, assign, readonly) BOOL group;
+@property (nonatomic, assign, readonly) BOOL groupStart;
+@property (nonatomic, assign, readonly) BOOL groupEnd;
+@property (nonatomic, assign, readonly) BOOL argument;
 
 @end
