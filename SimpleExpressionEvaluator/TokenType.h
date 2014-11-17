@@ -21,10 +21,6 @@
 + (TokenType *)op;
 + (TokenType *)openParen;
 + (TokenType *)closeParen;
-
-/**
- * Returns YES if this TokenType represents an opening or a closing parenthesis, NO otherwise.
- */
-- (BOOL)paren;
++ (TokenType *)argSep;
 
 @end

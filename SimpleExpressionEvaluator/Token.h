@@ -12,10 +12,10 @@
 @interface Token : NSObject
 
 + (instancetype)tokenWithValue:(NSString *)value;
++ (instancetype)tokenWithType:(TokenType *)type;
 + (instancetype)tokenWithValue:(NSString *)value type:(TokenType *)type;
 
 - (instancetype)init __unavailable;
-- (instancetype)initWithValue:(NSString *)value;
 - (instancetype)initWithValue:(NSString *)value type:(TokenType *)type;
 
 - (BOOL)matchesCharacterSet:(NSCharacterSet *)characterSet;

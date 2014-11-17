@@ -9,7 +9,6 @@
 #import "ASTBuilder.h"
 #import "Node.h"
 #import "NodeType.h"
-#import "Preconditions.h"
 #import "Stack.h"
 
 @interface ASTBuilder()
@@ -66,7 +65,7 @@
         }
         else if (node.function)
         {
-            Node *previousNode = _functionStack.empty ? nil : [_functionStack peek];
+            Node *previousNode = [_functionStack peek];
             if (!previousNode || node.precedence > previousNode.precedence)
             {
                 [_functionStack push:node];

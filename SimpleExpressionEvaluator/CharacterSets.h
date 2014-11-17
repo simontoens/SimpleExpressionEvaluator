@@ -19,6 +19,7 @@ extern NSCharacterSet *kBinaryOperatorCharacterSet;
 
 extern NSCharacterSet *kAssignmentCharacterSet;
 extern NSCharacterSet *kIdentifierCharacterSet;
+extern NSCharacterSet *kArgSeparatorCharacterSet;
 
 extern NSCharacterSet *kSeparatorCharacterSet;
 extern NSCharacterSet *kSingleCharacterTokenCharacterSet;

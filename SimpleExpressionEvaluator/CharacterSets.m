@@ -19,6 +19,7 @@ NSCharacterSet *kBinaryOperatorCharacterSet;
 
 NSCharacterSet *kAssignmentCharacterSet;
 NSCharacterSet *kIdentifierCharacterSet;
+NSCharacterSet *kArgSeparatorCharacterSet;
 
 NSCharacterSet *kSeparatorCharacterSet;
 NSCharacterSet *kSingleCharacterTokenCharacterSet;
@@ -34,6 +35,7 @@ NSCharacterSet *kStartTokenCharacterSet;
         kBinaryOperatorLowerPrecedenceCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"-+"];
         kBinaryOperatorHigherPrecedenceCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"*/"];
         kAssignmentCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"="];
+        kArgSeparatorCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@","];
         kIdentifierCharacterSet = [NSCharacterSet letterCharacterSet];
         
         NSMutableCharacterSet *s =[[NSMutableCharacterSet alloc] init];
@@ -46,6 +48,7 @@ NSCharacterSet *kStartTokenCharacterSet;
         [s formUnionWithCharacterSet:kCloseParenCharacterSet];
         [s formUnionWithCharacterSet:kBinaryOperatorCharacterSet];
         [s formUnionWithCharacterSet:kAssignmentCharacterSet];
+        [s formUnionWithCharacterSet:kArgSeparatorCharacterSet];
         kSingleCharacterTokenCharacterSet = s;
         
         s = [[NSMutableCharacterSet alloc] init];

@@ -19,17 +19,17 @@
 
 + (instancetype)tokenWithValue:(NSString *)value
 {
-    return [[Token alloc] initWithValue:value];
+    return [Token tokenWithValue:value type:[Token getTokenType:value]];
+}
+
++ (instancetype)tokenWithType:(TokenType *)type
+{
+    return [[Token alloc] initWithValue:[type description] type:type];
 }
 
 + (instancetype)tokenWithValue:(NSString *)value type:(TokenType *)type
 {
     return [[Token alloc] initWithValue:value type:type];
-}
-
-- (instancetype)initWithValue:(NSString *)value
-{
-    return [self initWithValue:value type:[self getTokenType:value]];
 }
 
 - (instancetype)initWithValue:(NSString *)value type:(TokenType *)type
@@ -71,7 +71,7 @@
     return [NSString stringWithFormat:@"%@ %@", _value, _type];
 }
 
-- (TokenType *)getTokenType:(NSString *)tokenValue
++ (TokenType *)getTokenType:(NSString *)tokenValue
 {
     if ([self value:tokenValue matchesCharacterSet:[NSCharacterSet decimalDigitCharacterSet]])
     {
@@ -93,6 +93,10 @@
     {
         return [TokenType assign];
     }
+    if ([self value:tokenValue matchesCharacterSet:kArgSeparatorCharacterSet])
+    {
+        return [TokenType argSep];
+    }
     if ([self value:tokenValue matchesCharacterSet:kIdentifierCharacterSet])
     {
         return [TokenType identifier];
@@ -109,10 +113,10 @@
 
 - (BOOL)matchesCharacterSet:(NSCharacterSet *)characterSet
 {
-    return [self value:_value matchesCharacterSet:characterSet];
+    return [Token value:_value matchesCharacterSet:characterSet];
 }
 
-- (BOOL)value:(NSString *)value matchesCharacterSet:(NSCharacterSet *)characterSet
++ (BOOL)value:(NSString *)value matchesCharacterSet:(NSCharacterSet *)characterSet
 {
     for (int i = 0; i < [value length]; i++)
     {

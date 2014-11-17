@@ -88,6 +88,14 @@
                  [self v:@"1" t:[TokenType constant]],
                  [self v:@")" t:[TokenType closeParen]]];
     XCTAssertEqualObjects([tokenizer tokenize:@"f  ( 1)"], expected);
+    
+    expected = @[[self v:@"f" t:[TokenType identifier]],
+                 [self v:@"(" t:[TokenType openParen]],
+                 [self v:@"1" t:[TokenType constant]],
+                 [self v:@"," t:[TokenType argSep]],
+                 [self v:@"2" t:[TokenType constant]],
+                 [self v:@")" t:[TokenType closeParen]]];
+    XCTAssertEqualObjects([tokenizer tokenize:@"f(1,2  )"], expected);
 }
 
 

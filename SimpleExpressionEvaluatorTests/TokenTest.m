@@ -38,6 +38,9 @@
     
     XCTAssertEqualObjects([Token tokenWithValue:@"a"].type, [TokenType identifier]);
     XCTAssertEqualObjects([Token tokenWithValue:@"abc"].type, [TokenType identifier]);
+    
+    XCTAssertEqualObjects([Token tokenWithValue:@","].type, [TokenType argSep]);
+    
     [self assertUnknownTokenType:@"abc1"];
 }
 
