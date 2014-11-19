@@ -25,11 +25,21 @@
     for (NSUInteger i = 0; i < [tokens count]; i++)
     {
         Token *token = [tokens objectAtIndex:i];
-        Node *node = [self getNodeForToken:token];
-        node.type = [self getNodeType:i allTokens:tokens];
-        [nodes addObject:node];
+        
+        if (token.type == [TokenType argSep])
+        {
+            // , -> )(   foo(1, 2, 3) -> foo(1)(2)(3)
+            [nodes addObject:[self getNodeForToken:[Token tokenWithType:[TokenType closeParen]]]];
+            [nodes addObject:[self getNodeForToken:[Token tokenWithType:[TokenType openParen]]]];
+        }
+        else
+        {
+            Node *node = [self getNodeForToken:token];
+            node.type = [self getNodeType:i allTokens:tokens];
+            [nodes addObject:node];
+        }
     }
-    return [self postProcessNodes:nodes];
+    return nodes;
 }
 
 - (Node *)getNodeForToken:(Token *)token
@@ -74,50 +84,6 @@
     return -1;
 }
 
-/**
- * Replaces , with () around args.  
- * Split this up into a chain of post processors if this needs to do anything else.
- */
-- (NSArray *)postProcessNodes:(NSArray *)nodes
-{
-    NSMutableArray *newNodes = [[NSMutableArray alloc] initWithCapacity:[nodes count] + 40]; // size ??
-    BOOL functionWithArgs = NO;
-    for (NSUInteger i = 0; i < [nodes count]; i++)
-    {
-        Node *node = [nodes objectAtIndex:i];
-        Node *potentialArg = [self nextNode:i + 1 allNodes:nodes];
-        if (functionWithArgs)
-        {
-            if (node.groupStart)
-            {
-                // func def starts with '(', leave it and close it after first arg
-            }
-            else if (node.token.type == [TokenType argSep])
-            {
-                [newNodes addObject:[self getNodeForToken:[Token tokenWithType:[TokenType closeParen]]]];
-                if (((Node *)[self nextNode:i allNodes:nodes]).argument)
-                {
-                    // there's another arg - add another start group
-                    [newNodes addObject:[self getNodeForToken:[Token tokenWithType:[TokenType openParen]]]];
-                }
-                continue;
-            }
-            if (node.groupEnd)
-            {
-                // func def ends with ')', it closes the '(' of the last arg.
-                functionWithArgs = NO;
-            }
-        }
-        else if (node.function && potentialArg.argument)
-        {
-            functionWithArgs = YES;
-        }
-        
-        [newNodes addObject:node];
-    }
-    return newNodes;
-}
-
 - (TokenType *)nextTokenType:(NSUInteger)currentTokenIndex allTokens:(NSArray *)tokens
 {
     return currentTokenIndex < [tokens count] - 1 ? ((Token *)[tokens objectAtIndex:currentTokenIndex + 1]).type : nil;
@@ -126,11 +92,6 @@
 - (Node *)nextNode:(NSUInteger)currentNodeIndex allNodes:(NSArray *)nodes
 {
     return currentNodeIndex < [nodes count] - 1 ? [nodes objectAtIndex:currentNodeIndex + 1] : nil;
-}
-
-- (Node *)previousNode:(NSUInteger)currentNodeIndex allNodes:(NSArray *)nodes
-{
-    return currentNodeIndex == 0 ? nil : [nodes objectAtIndex:currentNodeIndex - 1];
 }
 
 @end
