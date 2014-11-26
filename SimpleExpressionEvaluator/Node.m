@@ -94,6 +94,10 @@
 
 - (NSUInteger)precedence
 {
+    if (_type == [NodeType func])
+    {
+        return 5;
+    }
     if (_token.type == [TokenType assign] || _token.type == [TokenType constant] || _token.type == [TokenType identifier])
     {
         return 1;

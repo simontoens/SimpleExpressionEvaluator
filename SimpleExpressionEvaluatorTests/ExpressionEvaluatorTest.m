@@ -98,8 +98,15 @@
 
 - (void)testExpressionsWithFunctions
 {
-    XCTAssertEqual([evaluator evaluate:@"add(2,3)+2"], (NSInteger)7);
-    //XCTAssertEqual([evaluator evaluate:@"3+add(2,3)"], (NSInteger)8);
+    XCTAssertEqual([evaluator evaluate:@"add(2,3)*2"], (NSInteger)10);
+    XCTAssertEqual([evaluator evaluate:@"15/add(2,3)"], (NSInteger)3);
+    XCTAssertEqual([evaluator evaluate:@"add(2,3)*add(5,6)"], (NSInteger)55);
+}
+
+- (void)testVariablesWithFunctions
+{
+    XCTAssertEqual([evaluator evaluate:@"a=add(10,13)"], (NSInteger)23);
+    XCTAssertEqual([evaluator evaluate:@"a"], (NSInteger)23);
 }
 
 @end

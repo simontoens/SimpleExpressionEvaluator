@@ -38,12 +38,12 @@
     Node *n1 = [Node nodeWithToken:[Token tokenWithValue:@"="]];
     Node *n2 = [Node nodeWithToken:[Token tokenWithValue:@"="]];
     // a=b=3 -> a=(b=3)
-    XCTAssertTrue([n2 rightAssociative:n1], @"Expected = to be right associative when following another =");
+    XCTAssertTrue([n2 rightAssociative:n1], @"Expected '=' to be right associative when following another =");
     
     n1 = [Node nodeWithToken:[Token tokenWithValue:@"/"]];
     n2 = [Node nodeWithToken:[Token tokenWithValue:@"/"]];
     // 1000/100/2 = (1000/100)/2 = 5, not 1000/(100/2)
-    XCTAssertFalse([n2 rightAssociative:n1], @"Did not expect / to be right associative");
+    XCTAssertFalse([n2 rightAssociative:n1], @"Did not expect '/' to be right associative");
 }
 - (void)testPrecedence
 {
@@ -66,6 +66,9 @@
                    [Node nodeWithToken:[Token tokenWithValue:@"/" type:[TokenType op]]].precedence);
     
     XCTAssertTrue([Node nodeWithToken:[Token tokenWithType:[TokenType closeParen]]].precedence >
+                  [Node nodeWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence);
+    
+    XCTAssertTrue([Node nodeWithToken:[Token tokenWithType:[TokenType identifier]] nodeType:[NodeType func]].precedence >
                   [Node nodeWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence);
 }
 

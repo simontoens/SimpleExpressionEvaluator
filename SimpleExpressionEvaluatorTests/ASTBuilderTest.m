@@ -166,18 +166,52 @@
     [self assertAST:nodes expectedPreorderTokens:@[@"f", @"+", @"1", @"2", @"11"]];
 }
 
-- (void)testFunctionWithExpression
+- (void)testFunctionWithPostExpression
 {
-//    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"f" type:[TokenType identifier]],
-//                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
-//                                   [Token tokenWithValue:@"1" type:[TokenType constant]],
-//                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
-//                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
-//                                   [Token tokenWithValue:@"2" type:[TokenType constant]],
-//                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
-//                                   [Token tokenWithValue:@"+" type:[TokenType op]],
-//                                   [Token tokenWithValue:@"7" type:[TokenType constant]]]];
-//    [self assertAST:nodes expectedPreorderTokens:@[@"+"]];//, @"7", @"f", @"1", @"2"]];
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"f" type:[TokenType identifier]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"1" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"2" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@"+" type:[TokenType op]],
+                                   [Token tokenWithValue:@"7" type:[TokenType constant]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"+", @"f", @"1", @"2", @"7"]];
+}
+
+- (void)testFunctionWithPreExpression
+{
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"7" type:[TokenType constant]],
+                                  [Token tokenWithValue:@"-" type:[TokenType op]],
+                                  [Token tokenWithValue:@"f" type:[TokenType identifier]],
+                                  [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                  [Token tokenWithValue:@"1" type:[TokenType constant]],
+                                  [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                  [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                  [Token tokenWithValue:@"2" type:[TokenType constant]],
+                                  [Token tokenWithValue:@")" type:[TokenType closeParen]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"-", @"7", @"f", @"1", @"2"]];
+}
+
+- (void)testTwoFunctions
+{
+    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"f" type:[TokenType identifier]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"1" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"2" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@"*" type:[TokenType op]],
+                                   [Token tokenWithValue:@"f" type:[TokenType identifier]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"3" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+                                   [Token tokenWithValue:@"4" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]]]];
+    [self assertAST:nodes expectedPreorderTokens:@[@"*", @"f", @"1", @"2", @"f", @"3", @"4"]];
 }
 
 - (void)assertAST:(NSArray *)nodes expectedPreorderTokens:(NSArray *)expectedNodes
