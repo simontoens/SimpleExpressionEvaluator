@@ -26,7 +26,7 @@
     _lexer = [[Lexer alloc] init];
 }
 
-- (void)testSimpleAddition
+- (void)testAddition
 {
     NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"1" type:[TokenType constant]],
                                    [Token tokenWithValue:@"+" type:[TokenType op]],
@@ -34,7 +34,7 @@
     [self assertAST:nodes expectedPreorderTokens:@[@"+", @"1", @"2"]];
 }
 
-- (void)testSimpleMultiplication
+- (void)testMultiplication
 {
     NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"1" type:[TokenType constant]],
                                    [Token tokenWithValue:@"*" type:[TokenType op]],
@@ -42,7 +42,7 @@
     [self assertAST:nodes expectedPreorderTokens:@[@"*", @"1", @"2"]];
 }
 
-- (void)testExpr2
+- (void)testAdditionAndMultiplication
 {
     NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"1" type:[TokenType constant]],
                                    [Token tokenWithValue:@"+" type:[TokenType op]],
@@ -145,6 +145,8 @@
     NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"f" type:[TokenType identifier]],
                                    [Token tokenWithValue:@"(" type:[TokenType openParen]],
                                    [Token tokenWithValue:@"1" type:[TokenType constant]],
+                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
                                    [Token tokenWithValue:@"2" type:[TokenType constant]],
                                    [Token tokenWithValue:@")" type:[TokenType closeParen]]]];
     [self assertAST:nodes expectedPreorderTokens:@[@"f", @"1", @"2"]];
@@ -152,17 +154,30 @@
 
 - (void)testFunctionWithExpressionArguments
 {
-    // for ast generation to work function arguments currently need to be within parens
     NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"f" type:[TokenType identifier]],
-                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
                                    [Token tokenWithValue:@"(" type:[TokenType openParen]],
                                    [Token tokenWithValue:@"1" type:[TokenType constant]],
                                    [Token tokenWithValue:@"+" type:[TokenType op]],
                                    [Token tokenWithValue:@"2" type:[TokenType constant]],
                                    [Token tokenWithValue:@")" type:[TokenType closeParen]],
+                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
                                    [Token tokenWithValue:@"11" type:[TokenType constant]],
                                    [Token tokenWithValue:@")" type:[TokenType closeParen]]]];
     [self assertAST:nodes expectedPreorderTokens:@[@"f", @"+", @"1", @"2", @"11"]];
+}
+
+- (void)testFunctionWithExpression
+{
+//    NSArray *nodes = [_lexer lex:@[[Token tokenWithValue:@"f" type:[TokenType identifier]],
+//                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+//                                   [Token tokenWithValue:@"1" type:[TokenType constant]],
+//                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+//                                   [Token tokenWithValue:@"(" type:[TokenType openParen]],
+//                                   [Token tokenWithValue:@"2" type:[TokenType constant]],
+//                                   [Token tokenWithValue:@")" type:[TokenType closeParen]],
+//                                   [Token tokenWithValue:@"+" type:[TokenType op]],
+//                                   [Token tokenWithValue:@"7" type:[TokenType constant]]]];
+//    [self assertAST:nodes expectedPreorderTokens:@[@"+"]];//, @"7", @"f", @"1", @"2"]];
 }
 
 - (void)assertAST:(NSArray *)nodes expectedPreorderTokens:(NSArray *)expectedNodes
@@ -170,7 +185,7 @@
     ASTBuilder *astBuilder = [[ASTBuilder alloc] init];
     Node *ast = [astBuilder build:nodes];
     NSArray *preorderderNodes = [ast preorder];
-    XCTAssertEqual([preorderderNodes count], [expectedNodes count], @"Unexpected node count");
+    XCTAssertEqual([preorderderNodes count], [expectedNodes count], @"Unexpected node count, preorder nodes are %@", preorderderNodes);
     
     for (int i = 0; i < [preorderderNodes count]; i++)
     {

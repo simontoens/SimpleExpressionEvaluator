@@ -52,10 +52,13 @@
         Token *previousToken = [tokens count] > 0 ? [tokens lastObject] : nil;
 
         if ([kStartTokenCharacterSet characterIsMember:c] &&
-            previousToken.type != [TokenType constant] && previousToken.type != [TokenType identifier])
+            previousToken.type != [TokenType constant] &&
+            previousToken.type != [TokenType identifier] &&
+            previousToken.type != [TokenType closeParen])
         {
-            // 3-2  -> 3,-,2
-            // 3+-2 -> 3, +, -2
+            //   3-2 -> 3,-,2
+            //  3+-2 -> 3, +, -2
+            // (3)-2 -> (,3,),-,2
         }
         else if ([kSingleCharacterTokenCharacterSet characterIsMember:c])
         {

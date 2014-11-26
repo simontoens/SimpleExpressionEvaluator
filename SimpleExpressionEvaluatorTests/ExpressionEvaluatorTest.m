@@ -23,13 +23,12 @@
     evaluator = [[ExpressionEvaluator alloc] init];
 }
 
-- (void)testEvaluateExpressions
+- (void)testNumericalExpressions
 {
     XCTAssertEqual([evaluator evaluate:@"1 + 2"], (NSInteger)3);
     XCTAssertEqual([evaluator evaluate:@"15 * 2"], (NSInteger)30);
     
     XCTAssertEqual([evaluator evaluate:@"15 * 2 + 1"], (NSInteger)31);
-    XCTAssertEqual([evaluator evaluate:@"15 * (2 + 1)"], (NSInteger)45);
 
     XCTAssertEqual([evaluator evaluate:@"2 + 1 * 2 + 2 "], (NSInteger)6);
     XCTAssertEqual([evaluator evaluate:@"(2 + 1) * (2 + 2)"], (NSInteger)12);
@@ -44,10 +43,16 @@
     
     XCTAssertEqual([evaluator evaluate:@"-1*2"], (NSInteger)-2);
     XCTAssertEqual([evaluator evaluate:@"-1*-1"], (NSInteger)1);
+    XCTAssertEqual([evaluator evaluate:@"(3)+2"], (NSInteger)5);
+}
+
+- (void)testExpressionsWithParens
+{
+    XCTAssertEqual([evaluator evaluate:@"15 * (2 + 1)"], (NSInteger)45);
     XCTAssertEqual([evaluator evaluate:@"-1*(-1+-3)"], (NSInteger)4);
 }
 
-- (void)testEvaluateExpressionsWithVariables
+- (void)testExpressionsWithVariables
 {
     XCTAssertEqual([evaluator evaluate:@"x=2*3+1"], (NSInteger)7);
     XCTAssertEqual([evaluator evaluate:@"x"], (NSInteger)7);
@@ -61,7 +66,7 @@
     XCTAssertEqual([evaluator evaluate:@"x*a+b"], (NSInteger)9);
 }
 
-- (void)testEvaluateUndefinedVariable
+- (void)testUndefinedVariable
 {
     XCTAssertEqual([evaluator evaluate:@"x"], (NSInteger)0);
 }
@@ -80,10 +85,21 @@
     XCTAssertEqual([evaluator evaluate:@"b"], (NSInteger)3);
 }
 
-- (void)testEvaluateFunction
+- (void)testFunctionsWithConstantArguments
 {
-    XCTAssertEqual([evaluator evaluate:@"f((1+2) (2*2))"], (NSInteger)7);
-    XCTAssertEqual([evaluator evaluate:@"f(1 2)"], (NSInteger)3);
+    XCTAssertEqual([evaluator evaluate:@"add(1, 2)"], (NSInteger)3);
+}
+
+- (void)testFunctionsWithExpressionArguments
+{
+    XCTAssertEqual([evaluator evaluate:@"add(1+10 ,  3)"], (NSInteger)14);
+    XCTAssertEqual([evaluator evaluate:@"add((1+2),(2*2))"], (NSInteger)7);
+}
+
+- (void)testExpressionsWithFunctions
+{
+    XCTAssertEqual([evaluator evaluate:@"add(2,3)+2"], (NSInteger)7);
+    //XCTAssertEqual([evaluator evaluate:@"3+add(2,3)"], (NSInteger)8);
 }
 
 @end
