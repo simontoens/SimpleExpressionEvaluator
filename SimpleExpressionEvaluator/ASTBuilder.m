@@ -7,6 +7,7 @@
 //
 
 #import "ASTBuilder.h"
+#import "CharacterSets.h"
 #import "Node.h"
 #import "NodeType.h"
 #import "Stack.h"
@@ -20,6 +21,11 @@
 @end
 
 @implementation ASTBuilder
+
++ (void)initialize
+{
+    [CharacterSets class];
+}
 
 - (instancetype)init
 {

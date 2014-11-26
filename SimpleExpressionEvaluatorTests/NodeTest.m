@@ -45,6 +45,29 @@
     // 1000/100/2 = (1000/100)/2 = 5, not 1000/(100/2)
     XCTAssertFalse([n2 rightAssociative:n1], @"Did not expect / to be right associative");
 }
+- (void)testPrecedence
+{
+    XCTAssertEqual([Node nodeWithToken:[Token tokenWithType:[TokenType assign]]].precedence,
+                   [Node nodeWithToken:[Token tokenWithType:[TokenType constant]]].precedence);
+    
+    XCTAssertEqual([Node nodeWithToken:[Token tokenWithType:[TokenType identifier]]].precedence,
+                   [Node nodeWithToken:[Token tokenWithType:[TokenType constant]]].precedence);
+    
+    XCTAssertTrue([Node nodeWithToken:[Token tokenWithType:[TokenType op]]].precedence >
+                  [Node nodeWithToken:[Token tokenWithType:[TokenType openParen]]].precedence);
+    
+    XCTAssertEqual([Node nodeWithToken:[Token tokenWithValue:@"+" type:[TokenType op]]].precedence,
+                   [Node nodeWithToken:[Token tokenWithValue:@"-" type:[TokenType op]]].precedence);
+
+    XCTAssertTrue([Node nodeWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence >
+                  [Node nodeWithToken:[Token tokenWithValue:@"-" type:[TokenType op]]].precedence);
+    
+    XCTAssertEqual([Node nodeWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence,
+                   [Node nodeWithToken:[Token tokenWithValue:@"/" type:[TokenType op]]].precedence);
+    
+    XCTAssertTrue([Node nodeWithToken:[Token tokenWithType:[TokenType closeParen]]].precedence >
+                  [Node nodeWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence);
+}
 
 - (void)testConstant
 {

@@ -23,12 +23,13 @@
 - (BOOL)rightAssociative:(Node *)previousNode;
 
 @property (nonatomic, strong) Token *token;
-@property (nonatomic, assign) NSUInteger precedence;
 @property (nonatomic, strong) NodeType *type;
 
 @property (nonatomic, strong) Node *left;
 @property (nonatomic, strong) Node *right;
 
+
+@property (nonatomic, readonly) NSUInteger precedence;
 
 /**
  * Type attributes

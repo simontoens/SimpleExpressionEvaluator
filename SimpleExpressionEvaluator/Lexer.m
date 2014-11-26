@@ -6,18 +6,12 @@
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
-#import "CharacterSets.h"
 #import "Lexer.h"
 #import "Node.h"
 #import "NodeType.h"
 #import "Token.h"
 
 @implementation Lexer
-
-+ (void)initialize
-{
-    [CharacterSets class];
-}
 
 - (NSArray *)lex:(NSArray *)tokens
 {
@@ -29,25 +23,17 @@
         if (token.type == [TokenType argSep])
         {
             // , -> )(   foo(1, 2, 3) -> foo(1)(2)(3)
-            [nodes addObject:[self getNodeForToken:[Token tokenWithType:[TokenType closeParen]]]];
-            [nodes addObject:[self getNodeForToken:[Token tokenWithType:[TokenType openParen]]]];
+            [nodes addObject:[Node nodeWithToken:[Token tokenWithType:[TokenType closeParen]]]];
+            [nodes addObject:[Node nodeWithToken:[Token tokenWithType:[TokenType openParen]]]];
         }
         else
         {
-            Node *node = [self getNodeForToken:token];
+            Node *node = [Node nodeWithToken:token];
             node.type = [self getNodeType:i allTokens:tokens];
             [nodes addObject:node];
         }
     }
     return nodes;
-}
-
-- (Node *)getNodeForToken:(Token *)token
-{
-    Node *node = [[Node alloc] init];
-    node.token = token;
-    node.precedence = [self getPrecedence:token];
-    return node;
 }
 
 - (NodeType *)getNodeType:(NSUInteger)currentTokenIndex allTokens:(NSArray *)tokens
@@ -61,27 +47,6 @@
         }
     }
     return nil;
-}
-
-- (NSUInteger)getPrecedence:(Token *)token
-{
-    if (token.type == [TokenType assign] || token.type == [TokenType constant] || token.type == [TokenType identifier])
-    {
-        return 1;
-    }
-    if (token.type == [TokenType op])
-    {
-        return [token matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] ? 2 : 3;
-    }
-    if (token.type == [TokenType openParen])
-    {
-        return 0;
-    }
-    if (token.type == [TokenType closeParen])
-    {
-        return 10;
-    }
-    return -1;
 }
 
 - (TokenType *)nextTokenType:(NSUInteger)currentTokenIndex allTokens:(NSArray *)tokens

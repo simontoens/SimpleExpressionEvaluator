@@ -25,7 +25,7 @@ static TokenType *kArgSep;
 {
     static dispatch_once_t once = 0;
     dispatch_once(&once, ^{
-        kAssign = [[TokenType alloc] initPrivate:@"Assign"];
+        kAssign = [[TokenType alloc] initPrivate:@"="];
         kConstant = [[TokenType alloc] initPrivate:@"Const"];
         kIdentifer = [[TokenType alloc] initPrivate:@"Ident"];
         kOp = [[TokenType alloc] initPrivate:@"Op"];

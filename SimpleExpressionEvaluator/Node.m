@@ -6,11 +6,14 @@
 //  Copyright (c) 2013 Simon Toens. All rights reserved.
 //
 
+#import "CharacterSets.h"
 #import "Node.h"
 
 @implementation Node
 
+@dynamic precedence;
 @dynamic variable, function, group, groupStart, groupEnd;
+
 
 + (Node *)nodeWithToken:(Token *)token
 {
@@ -87,6 +90,27 @@
 - (NSString *)description
 {
     return self.token.value;
+}
+
+- (NSUInteger)precedence
+{
+    if (_token.type == [TokenType assign] || _token.type == [TokenType constant] || _token.type == [TokenType identifier])
+    {
+        return 1;
+    }
+    if (_token.type == [TokenType op])
+    {
+        return [_token matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] ? 2 : 3;
+    }
+    if (_token.type == [TokenType openParen])
+    {
+        return 0;
+    }
+    if (_token.type == [TokenType closeParen])
+    {
+        return 10;
+    }
+    return -1;
 }
 
 - (BOOL)variable
