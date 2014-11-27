@@ -22,7 +22,6 @@
 		BEA03D521A26B1B000042669 /* BaseFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA03D511A26B1B000042669 /* BaseFunction.m */; };
 		BEACF0091911FB260048B3F8 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = BEACF0081911FB260048B3F8 /* Token.m */; };
 		BEACF00A1911FB260048B3F8 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = BEACF0081911FB260048B3F8 /* Token.m */; };
-		BEAEB3BB18830A64003C2CDE /* InvalidTokenException.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAEB3BA18830A64003C2CDE /* InvalidTokenException.m */; };
 		BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */; };
 		BEB11CCD1848203000F9BA77 /* ASTEvaluatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */; };
 		BEDDC6E119F458B00031BB44 /* NodeType.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDDC6E019F458B00031BB44 /* NodeType.m */; };
@@ -84,8 +83,6 @@
 		BEA03D511A26B1B000042669 /* BaseFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseFunction.m; sourceTree = "<group>"; };
 		BEACF0071911FB260048B3F8 /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
 		BEACF0081911FB260048B3F8 /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
-		BEAEB3B918830A64003C2CDE /* InvalidTokenException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvalidTokenException.h; sourceTree = "<group>"; };
-		BEAEB3BA18830A64003C2CDE /* InvalidTokenException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvalidTokenException.m; sourceTree = "<group>"; };
 		BEB11CC91847F2F600F9BA77 /* ASTEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTEvaluator.h; sourceTree = "<group>"; };
 		BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASTEvaluator.m; sourceTree = "<group>"; };
 		BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ASTEvaluatorTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -215,8 +212,6 @@
 				BEF84A72184928E70045B490 /* ExpressionEvaluator.h */,
 				BEF84A73184928E70045B490 /* ExpressionEvaluator.m */,
 				BEA03D4B1A26A5CF00042669 /* Function.h */,
-				BEAEB3B918830A64003C2CDE /* InvalidTokenException.h */,
-				BEAEB3BA18830A64003C2CDE /* InvalidTokenException.m */,
 				BEED748419F1E3AB00F21094 /* Lexer.h */,
 				BEED748519F1E3AB00F21094 /* Lexer.m */,
 				BEE4EF711846EBDF00AFBE36 /* Node.h */,
@@ -392,7 +387,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEE4EF531846EB9B00AFBE36 /* AppDelegate.m in Sources */,
-				BEAEB3BB18830A64003C2CDE /* InvalidTokenException.m in Sources */,
 				BEF84A6A18490C9F0045B490 /* Tokenizer.m in Sources */,
 				BEE4EF4F1846EB9B00AFBE36 /* main.m in Sources */,
 				BE2836481849618A00E60DBD /* MainViewController.m in Sources */,
