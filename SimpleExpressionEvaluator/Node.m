@@ -57,27 +57,25 @@
 
 - (void)prefix:(Node *)node string:(NSMutableString *)string
 {
-    if (!node.left && !node.right)
+    if ([string length] > 0)
     {
         [string appendString:@" "];
-        [string appendString:node.token.value];
     }
-    else
+    if (node.function)
     {
-        if (self != node)
-        {
-            [string appendString:@" "];            
-        }
         [string appendString:@"("];
-        [string appendString:node.token.value];
-        if (node.left)
-        {
-            [self prefix:node.left string:string];
-        }
-        if (node.right)
-        {
-            [self prefix:node.right string:string];
-        }
+    }
+    [string appendString:node.token.value];
+    if (node.left)
+    {
+        [self prefix:node.left string:string];
+    }
+    if (node.right)
+    {
+        [self prefix:node.right string:string];
+    }
+    if (node.function)
+    {
         [string appendString:@")"];
     }
 }
