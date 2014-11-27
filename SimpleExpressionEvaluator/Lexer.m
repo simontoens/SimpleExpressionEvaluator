@@ -28,9 +28,8 @@
         }
         else
         {
-            Node *node = [Node nodeWithToken:token];
-            node.type = [self getNodeType:i allTokens:tokens];
-            [nodes addObject:node];
+            NodeType *nodeType = [self getNodeType:i allTokens:tokens];
+            [nodes addObject:[Node nodeWithToken:token nodeType:nodeType]];
         }
     }
     return nodes;

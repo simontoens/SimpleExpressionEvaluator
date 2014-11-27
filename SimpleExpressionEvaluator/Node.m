@@ -23,8 +23,8 @@
 + (Node *)nodeWithToken:(Token *)token nodeType:(NodeType *)nodeType
 {
     Node *n = [[Node alloc] init];
-    n.token = token;
-    n.type = nodeType;
+    n->_token = token;
+    n->_type = nodeType;
     return n;
 }
 

@@ -48,10 +48,9 @@
 
 - (void)testFunction
 {
-    Node *n = [self v:@"add" t:[TokenType identifier]];
+    Node *n = [Node nodeWithToken:[Token tokenWithValue:@"add"] nodeType:[NodeType func]];
     n.left = [self v:@"1"];
     n.right = [self v:@"10"];
-    n.type = [NodeType func];
     NSInteger result = [eval evaluate:n];
     XCTAssertEqual(result, 11);
 }
@@ -103,9 +102,7 @@
      
 - (Node *)v:(NSString *)value t:(TokenType *)type
 {
-    Node *n = [[Node alloc] init];
-    n.token = [[Token alloc] initWithValue:value type:type];
-    return n;
+    return [Node nodeWithToken:[Token tokenWithValue:value type:type]];
 }
 
 @end

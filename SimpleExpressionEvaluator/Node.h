@@ -22,8 +22,8 @@
  */
 - (BOOL)rightAssociative:(Node *)previousNode;
 
-@property (nonatomic, strong) Token *token;
-@property (nonatomic, strong) NodeType *type;
+@property (nonatomic, strong, readonly) Token *token;
+@property (nonatomic, strong, readonly) NodeType *type;
 
 @property (nonatomic, strong) Node *left;
 @property (nonatomic, strong) Node *right;
