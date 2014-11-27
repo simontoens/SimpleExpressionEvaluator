@@ -48,7 +48,7 @@
 
 - (void)testFunction
 {
-    Node *n = [self v:@"f" t:[TokenType identifier]];
+    Node *n = [self v:@"add" t:[TokenType identifier]];
     n.left = [self v:@"1"];
     n.right = [self v:@"10"];
     n.type = [NodeType func];

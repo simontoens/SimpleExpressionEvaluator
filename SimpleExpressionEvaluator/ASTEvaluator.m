@@ -7,12 +7,15 @@
 //
 
 #import "ASTEvaluator.h"
+#import "BuiltinFunctions.h"
 #import "Node.h"
+#import "Preconditions.h"
 #import "Stack.h"
 
 @implementation ASTEvaluator
 {
     Environment *_environment;
+    BuiltinFunctions *_builtins;
 }
 
 - (instancetype)init
@@ -25,6 +28,7 @@
     if (self = [super init])
     {
         _environment = environment;
+        _builtins = [[BuiltinFunctions alloc] init];
     }
     return self;
 }
@@ -41,9 +45,14 @@
     {
         Node *lhs = [self evaluateRecusively:node.left];
         Node *rhs = [self evaluateRecusively:node.right];
-        Node *op = [[Node alloc] init];
-        op.token = [Token tokenWithValue:@"+"]; // test function support as addition
-        return [self compute:op arg1:lhs arg2:rhs];
+        
+        id<Function> function = [_builtins getFunction:node.token.value];
+        if (!function)
+        {
+            [Preconditions fail:[NSString stringWithFormat:@"Unable to resolve function for %@", node]];
+        }
+        [function setArguments:@[lhs.token.value, rhs.token.value]];
+        return [Node nodeWithToken:[Token tokenWithValue:[function eval] type:[TokenType constant]]];
     }
     else if (node.token.type == [TokenType constant])
     {
@@ -60,18 +69,21 @@
         Node *rhs = [self evaluateRecusively:node.right];
         return [self compute:node arg1:lhs arg2:rhs];
     }
-    else
+    else if (node.token.type == [TokenType op])        
     {
         Node *lhs = [self evaluateRecusively:node.left];
         Node *rhs = [self evaluateRecusively:node.right];
         return [self compute:node arg1:lhs arg2:rhs];
+    } else
+    {
+        [Preconditions fail:[NSString stringWithFormat:@"Don't know how to evaluate node: %@", node]];
+        return nil;
     }
 }
 
 - (Node *)compute:(Node *)operator arg1:(Node *)arg1 arg2:(Node *)arg2
 {
     NSString *resultString = nil;
-    TokenType *resultType = nil;
     
     if (operator.token.type == [TokenType op])
     {
@@ -90,18 +102,14 @@
             case '/': result = i1 / i2; break;
         }
         
-        resultType = [TokenType constant];
         resultString = [NSString stringWithFormat:@"%li", (long)result];
     }
     else if (operator.token.type == [TokenType assign])
     {
         [_environment bind:arg2 to:arg1];
-        resultType = [TokenType identifier];
         resultString = arg2.token.value;
     }
-    Node* node = [[Node alloc] init];
-    node.token = [[Token alloc] initWithValue:resultString type:resultType];
-    return node;
+    return [Node nodeWithToken:[Token tokenWithValue:resultString type:[TokenType constant]]];
 }
 
 @end

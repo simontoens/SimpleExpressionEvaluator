@@ -15,6 +15,11 @@
 		BE6E478B1848343F00672B69 /* NodeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6E478A1848343F00672B69 /* NodeTest.m */; };
 		BE9942FE18750D6A0080C499 /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9942FD18750D6A0080C499 /* Environment.m */; };
 		BE994300187512380080C499 /* EnvironmentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9942FF187512380080C499 /* EnvironmentTest.m */; };
+		BEA03D481A26A52600042669 /* AddFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA03D471A26A52600042669 /* AddFunction.m */; };
+		BEA03D491A26A52600042669 /* AddFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA03D471A26A52600042669 /* AddFunction.m */; };
+		BEA03D4E1A26AB4100042669 /* BuiltinFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA03D4D1A26AB4100042669 /* BuiltinFunctions.m */; };
+		BEA03D4F1A26AB4100042669 /* BuiltinFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA03D4D1A26AB4100042669 /* BuiltinFunctions.m */; };
+		BEA03D521A26B1B000042669 /* BaseFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA03D511A26B1B000042669 /* BaseFunction.m */; };
 		BEACF0091911FB260048B3F8 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = BEACF0081911FB260048B3F8 /* Token.m */; };
 		BEACF00A1911FB260048B3F8 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = BEACF0081911FB260048B3F8 /* Token.m */; };
 		BEAEB3BB18830A64003C2CDE /* InvalidTokenException.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAEB3BA18830A64003C2CDE /* InvalidTokenException.m */; };
@@ -70,6 +75,13 @@
 		BE9942FC18750D6A0080C499 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		BE9942FD18750D6A0080C499 /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
 		BE9942FF187512380080C499 /* EnvironmentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvironmentTest.m; sourceTree = "<group>"; };
+		BEA03D461A26A52600042669 /* AddFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFunction.h; sourceTree = "<group>"; };
+		BEA03D471A26A52600042669 /* AddFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFunction.m; sourceTree = "<group>"; };
+		BEA03D4B1A26A5CF00042669 /* Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Function.h; sourceTree = "<group>"; };
+		BEA03D4C1A26AB4100042669 /* BuiltinFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuiltinFunctions.h; sourceTree = "<group>"; };
+		BEA03D4D1A26AB4100042669 /* BuiltinFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuiltinFunctions.m; sourceTree = "<group>"; };
+		BEA03D501A26B1B000042669 /* BaseFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseFunction.h; sourceTree = "<group>"; };
+		BEA03D511A26B1B000042669 /* BaseFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseFunction.m; sourceTree = "<group>"; };
 		BEACF0071911FB260048B3F8 /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
 		BEACF0081911FB260048B3F8 /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
 		BEAEB3B918830A64003C2CDE /* InvalidTokenException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvalidTokenException.h; sourceTree = "<group>"; };
@@ -141,6 +153,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BEA03D4A1A26A58300042669 /* BuiltinFunctions */ = {
+			isa = PBXGroup;
+			children = (
+				BEA03D461A26A52600042669 /* AddFunction.h */,
+				BEA03D471A26A52600042669 /* AddFunction.m */,
+				BEA03D501A26B1B000042669 /* BaseFunction.h */,
+				BEA03D511A26B1B000042669 /* BaseFunction.m */,
+				BEA03D4C1A26AB4100042669 /* BuiltinFunctions.h */,
+				BEA03D4D1A26AB4100042669 /* BuiltinFunctions.m */,
+			);
+			name = BuiltinFunctions;
+			sourceTree = "<group>";
+		};
 		BEE4EF361846EB9B00AFBE36 = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +201,7 @@
 		BEE4EF481846EB9B00AFBE36 /* SimpleExpressionEvaluator */ = {
 			isa = PBXGroup;
 			children = (
+				BEA03D4A1A26A58300042669 /* BuiltinFunctions */,
 				BEE4EF511846EB9B00AFBE36 /* AppDelegate.h */,
 				BEE4EF521846EB9B00AFBE36 /* AppDelegate.m */,
 				BEE4EF751846ECC500AFBE36 /* ASTBuilder.h */,
@@ -188,6 +214,7 @@
 				BE9942FD18750D6A0080C499 /* Environment.m */,
 				BEF84A72184928E70045B490 /* ExpressionEvaluator.h */,
 				BEF84A73184928E70045B490 /* ExpressionEvaluator.m */,
+				BEA03D4B1A26A5CF00042669 /* Function.h */,
 				BEAEB3B918830A64003C2CDE /* InvalidTokenException.h */,
 				BEAEB3BA18830A64003C2CDE /* InvalidTokenException.m */,
 				BEED748419F1E3AB00F21094 /* Lexer.h */,
@@ -375,11 +402,14 @@
 				BEF84A74184928E70045B490 /* ExpressionEvaluator.m in Sources */,
 				BEACF0091911FB260048B3F8 /* Token.m in Sources */,
 				BEE4EF771846ECC500AFBE36 /* ASTBuilder.m in Sources */,
+				BEA03D481A26A52600042669 /* AddFunction.m in Sources */,
 				BEED748619F1E3AB00F21094 /* Lexer.m in Sources */,
+				BEA03D4E1A26AB4100042669 /* BuiltinFunctions.m in Sources */,
 				BE9942FE18750D6A0080C499 /* Environment.m in Sources */,
 				BE098BA918837FB6003E1308 /* TokenType.m in Sources */,
 				BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */,
 				BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */,
+				BEA03D521A26B1B000042669 /* BaseFunction.m in Sources */,
 				BEE4EF731846EBDF00AFBE36 /* Node.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,7 +429,9 @@
 				BEED748E19F1F86800F21094 /* TokenTest.m in Sources */,
 				BEF84A6C18490DDC0045B490 /* TokenizerTest.m in Sources */,
 				BEED749119F1FBBC00F21094 /* LexerTest.m in Sources */,
+				BEA03D491A26A52600042669 /* AddFunction.m in Sources */,
 				BEB11CCD1848203000F9BA77 /* ASTEvaluatorTest.m in Sources */,
+				BEA03D4F1A26AB4100042669 /* BuiltinFunctions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
