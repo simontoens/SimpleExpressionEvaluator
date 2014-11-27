@@ -23,8 +23,7 @@
 @property (nonatomic, strong, readonly) Token *token;
 @property (nonatomic, strong, readonly) NodeType *type;
 
-@property (nonatomic, strong) Node *left;
-@property (nonatomic, strong) Node *right;
+@property (nonatomic, strong) NSArray *childNodes;
 
 @property (nonatomic, readonly) NSUInteger precedence;
 

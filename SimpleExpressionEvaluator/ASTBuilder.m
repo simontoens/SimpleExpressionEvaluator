@@ -108,8 +108,9 @@
 - (void)reduce
 {
     Node *root = [_functionStack pop];
-    root.right = [_argumentStack pop];
-    root.left = [_argumentStack pop];
+    Node *rhs = [_argumentStack pop];
+    Node *lhs = [_argumentStack pop];
+    root.childNodes = @[lhs, rhs];
     [_argumentStack push:root];
 }
 

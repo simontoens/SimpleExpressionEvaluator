@@ -46,53 +46,52 @@
     XCTAssertEqualObjects(result.token.value, @"4");
 }
 
-- (void)testFunction
-{
-    Node *n = [Node nodeWithToken:[Token tokenWithValue:@"add"] nodeType:[NodeType func]];
-    n.left = [self v:@"1"];
-    n.right = [self v:@"10"];
-    NSInteger result = [eval evaluate:n];
-    XCTAssertEqual(result, 11);
-}
-
-- (void)testEvalBinOp1
+- (void)testAddition
 {
     Node *root = [self v:@"+" t:[TokenType op]];
-    root.left = [self v:@"1" t:[TokenType constant]];
-    root.right = [self v:@"2" t:[TokenType constant]];
-    NSInteger result = [eval evaluate:root];
-    XCTAssertEqual(result, (NSInteger)3);
+    root.childNodes = @[[self v:@"1" t:[TokenType constant]],
+                        [self v:@"2" t:[TokenType constant]]];
+    XCTAssertEqual([eval evaluate:root], (NSInteger)3);
 }
 
-- (void)testEvalBinOp2
+- (void)testRightHandSideChildren
 {
     Node *root = [self v:@"+" t:[TokenType op]];
-    root.left = [self v:@"1" t:[TokenType constant]];
-    root.right = [self v:@"*" t:[TokenType op]];
-    root.right.left = [self v:@"4" t:[TokenType constant]];
-    root.right.right = [self v:@"2" t:[TokenType constant]];
+    Node *lc = [self v:@"1" t:[TokenType constant]];
+    Node *rc = [self v:@"*" t:[TokenType op]];
+    root.childNodes = @[lc, rc];
+    rc.childNodes = @[[self v:@"4" t:[TokenType constant]],
+                      [self v:@"2" t:[TokenType constant]]];
     NSInteger result = [eval evaluate:root];
     XCTAssertEqual(result, (NSInteger)9);
 }
 
-- (void)testEvalBinOp3
+- (void)testLeftHandSideChildren
 {
     Node *root = [self v:@"*" t:[TokenType op]];
-    root.left = [self v:@"+" t:[TokenType op]];
-    root.left.left = [self v:@"1" t:[TokenType constant]];
-    root.left.right = [self v:@"2" t:[TokenType constant]];
-    root.right = [self v:@"3" t:[TokenType constant]];
+    Node *lc = [self v:@"+" t:[TokenType op]];
+    Node *rc = [self v:@"3" t:[TokenType constant]];
+    root.childNodes = @[lc, rc];
+    lc.childNodes = @[[self v:@"1" t:[TokenType constant]],
+                      [self v:@"2" t:[TokenType constant]]];
     NSInteger result = [eval evaluate:root];
     XCTAssertEqual(result, (NSInteger)9);
 }
 
-- (void)testEvalAssignment
+- (void)testAssignment
 {
     Node *root = [self v:@"=" t:[TokenType assign]];
-    root.left = [self v:@"x" t:[TokenType identifier]];
-    root.right = [self v:@"2" t:[TokenType constant]];
+    root.childNodes = @[[self v:@"x" t:[TokenType identifier]], [self v:@"2" t:[TokenType constant]]];
     NSInteger result = [eval evaluate:root];
     XCTAssertEqual(result, (NSInteger)2);
+}
+
+- (void)testFunction
+{
+    Node *root = [Node nodeWithToken:[Token tokenWithValue:@"add"] nodeType:[NodeType func]];
+    root.childNodes = @[[self v:@"1"],
+                        [self v:@"10"]];
+    XCTAssertEqual([eval evaluate:root], 11);
 }
 
 - (Node *)v:(NSString *)value
