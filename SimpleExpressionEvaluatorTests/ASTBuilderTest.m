@@ -13,10 +13,6 @@
 }
 @end
 
-@interface Node()
-- (NSArray *)preorder;
-@end;
-
 @interface ASTBuilder()
 - (BOOL)rightAssociative:(Node *)currentNode previousNode:(Node *)previousNode;
 @end
@@ -235,13 +231,33 @@
 {
     ASTBuilder *astBuilder = [[ASTBuilder alloc] init];
     Node *ast = [astBuilder build:nodes];
-    NSArray *preorderderNodes = [ast preorder];
+    NSArray *preorderderNodes = [self preorder:ast];
     XCTAssertEqual([preorderderNodes count], [expectedNodes count], @"Unexpected node count, preorder nodes are %@", preorderderNodes);
     
     for (int i = 0; i < [preorderderNodes count]; i++)
     {
         Node *node = [preorderderNodes objectAtIndex:i];
         XCTAssertEqualObjects(node.token.value, [expectedNodes objectAtIndex:i], @"Unexpected token value");
+    }
+}
+
+- (NSArray *)preorder:(Node *)rootNode
+{
+    NSMutableArray *nodes = [[NSMutableArray alloc] init];
+    [self preorder:rootNode collectInto:nodes];
+    return nodes;
+}
+
+- (void)preorder:(Node *)node collectInto:(NSMutableArray *)nodes
+{
+    [nodes addObject:node];
+    if (node.left)
+    {
+        [self preorder:node.left collectInto:nodes];
+    }
+    if (node.right)
+    {
+        [self preorder:node.right collectInto:nodes];
     }
 }
 

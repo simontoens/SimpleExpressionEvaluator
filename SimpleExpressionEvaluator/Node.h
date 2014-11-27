@@ -15,6 +15,9 @@
 + (Node *)nodeWithToken:(Token *)token;
 + (Node *)nodeWithToken:(Token *)token nodeType:(NodeType *)nodeType;
 
+/**
+ * Returns a String representation of a 'prefix' traversal with this Node as the root.
+ */
 - (NSString *)prefix;
 
 @property (nonatomic, strong, readonly) Token *token;
@@ -22,7 +25,6 @@
 
 @property (nonatomic, strong) Node *left;
 @property (nonatomic, strong) Node *right;
-
 
 @property (nonatomic, readonly) NSUInteger precedence;
 

@@ -15,12 +15,20 @@
 
 @implementation NodeTest
 
-- (void)testPrefix
+- (void)testPrefixForOp
 {
     Node *root = [Node nodeWithToken:[Token tokenWithValue:@"*"]];
     root.left = [Node nodeWithToken:[Token tokenWithValue:@"1"]];
     root.right = [Node nodeWithToken:[Token tokenWithValue:@"2"]];
     XCTAssertEqualObjects([root prefix], @"(* 1 2)");
+}
+
+- (void)testPrefixForFunc
+{
+    Node *root = [Node nodeWithToken:[Token tokenWithValue:@"add"] nodeType:[NodeType func]];
+    root.left = [Node nodeWithToken:[Token tokenWithValue:@"1"]];
+    root.right = [Node nodeWithToken:[Token tokenWithValue:@"2"]];
+    XCTAssertEqualObjects([root prefix], @"(add 1 2)");
 }
 
 - (void)testPrecedence

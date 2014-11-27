@@ -28,26 +28,6 @@
     return n;
 }
 
-- (NSArray *)preorder
-{
-    NSMutableArray *nodes = [[NSMutableArray alloc] init];
-    [self preorder:self collectInto:nodes];
-    return nodes;
-}
-
-- (void)preorder:(Node *)node collectInto:(NSMutableArray *)nodes
-{
-    [nodes addObject:node];
-    if (node.left)
-    {
-        [self preorder:node.left collectInto:nodes];
-    }
-    if (node.right)
-    {
-        [self preorder:node.right collectInto:nodes];
-    }
-}
-
 - (NSString *)prefix
 {
     NSMutableString *s = [[NSMutableString alloc] init];
