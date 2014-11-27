@@ -251,13 +251,13 @@
 - (void)preorder:(Node *)node collectInto:(NSMutableArray *)nodes
 {
     [nodes addObject:node];
-    if ([node.childNodes count] >= 1)
+    if ([node.children count] >= 1)
     {
-        [self preorder:[node.childNodes objectAtIndex:0] collectInto:nodes];
+        [self preorder:[node.children objectAtIndex:0] collectInto:nodes];
     }
-    if ([node.childNodes count] >= 2)
+    if ([node.children count] >= 2)
     {
-        [self preorder:[node.childNodes objectAtIndex:1] collectInto:nodes];
+        [self preorder:[node.children objectAtIndex:1] collectInto:nodes];
     }
 }
 

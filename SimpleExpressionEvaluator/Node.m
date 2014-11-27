@@ -46,13 +46,13 @@
         [string appendString:@"("];
     }
     [string appendString:node.token.value];
-    if ([node.childNodes count] >= 1)
+    if ([node.children count] >= 1)
     {
-        [self prefix:[node.childNodes objectAtIndex:0]  string:string];
+        [self prefix:[node.children objectAtIndex:0]  string:string];
     }
-    if ([node.childNodes count] >= 2)
+    if ([node.children count] >= 2)
     {
-        [self prefix:[node.childNodes objectAtIndex:1] string:string];
+        [self prefix:[node.children objectAtIndex:1] string:string];
     }
     if (node.function)
     {

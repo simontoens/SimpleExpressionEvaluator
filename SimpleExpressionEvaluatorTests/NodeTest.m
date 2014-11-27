@@ -18,16 +18,16 @@
 - (void)testPrefixForOp
 {
     Node *root = [Node nodeWithToken:[Token tokenWithValue:@"*"]];
-    root.childNodes = @[[Node nodeWithToken:[Token tokenWithValue:@"1"]],
-                        [Node nodeWithToken:[Token tokenWithValue:@"2"]]];
+    root.children = @[[Node nodeWithToken:[Token tokenWithValue:@"1"]],
+                      [Node nodeWithToken:[Token tokenWithValue:@"2"]]];
     XCTAssertEqualObjects([root prefix], @"(* 1 2)");
 }
 
 - (void)testPrefixForFunc
 {
     Node *root = [Node nodeWithToken:[Token tokenWithValue:@"add"] nodeType:[NodeType func]];
-    root.childNodes = @[[Node nodeWithToken:[Token tokenWithValue:@"1"]],
-                        [Node nodeWithToken:[Token tokenWithValue:@"2"]]];
+    root.children = @[[Node nodeWithToken:[Token tokenWithValue:@"1"]],
+                      [Node nodeWithToken:[Token tokenWithValue:@"2"]]];
     XCTAssertEqualObjects([root prefix], @"(add 1 2)");
 }
 

@@ -110,7 +110,7 @@
     Node *root = [_functionStack pop];
     Node *rhs = [_argumentStack pop];
     Node *lhs = [_argumentStack pop];
-    root.childNodes = @[lhs, rhs];
+    root.children = @[lhs, rhs];
     [_argumentStack push:root];
 }
 

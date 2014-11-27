@@ -49,8 +49,8 @@
 - (void)testAddition
 {
     Node *root = [self v:@"+" t:[TokenType op]];
-    root.childNodes = @[[self v:@"1" t:[TokenType constant]],
-                        [self v:@"2" t:[TokenType constant]]];
+    root.children = @[[self v:@"1" t:[TokenType constant]],
+                      [self v:@"2" t:[TokenType constant]]];
     XCTAssertEqual([eval evaluate:root], (NSInteger)3);
 }
 
@@ -59,9 +59,9 @@
     Node *root = [self v:@"+" t:[TokenType op]];
     Node *lc = [self v:@"1" t:[TokenType constant]];
     Node *rc = [self v:@"*" t:[TokenType op]];
-    root.childNodes = @[lc, rc];
-    rc.childNodes = @[[self v:@"4" t:[TokenType constant]],
-                      [self v:@"2" t:[TokenType constant]]];
+    root.children = @[lc, rc];
+    rc.children = @[[self v:@"4" t:[TokenType constant]],
+                    [self v:@"2" t:[TokenType constant]]];
     NSInteger result = [eval evaluate:root];
     XCTAssertEqual(result, (NSInteger)9);
 }
@@ -71,9 +71,9 @@
     Node *root = [self v:@"*" t:[TokenType op]];
     Node *lc = [self v:@"+" t:[TokenType op]];
     Node *rc = [self v:@"3" t:[TokenType constant]];
-    root.childNodes = @[lc, rc];
-    lc.childNodes = @[[self v:@"1" t:[TokenType constant]],
-                      [self v:@"2" t:[TokenType constant]]];
+    root.children = @[lc, rc];
+    lc.children = @[[self v:@"1" t:[TokenType constant]],
+                    [self v:@"2" t:[TokenType constant]]];
     NSInteger result = [eval evaluate:root];
     XCTAssertEqual(result, (NSInteger)9);
 }
@@ -81,7 +81,8 @@
 - (void)testAssignment
 {
     Node *root = [self v:@"=" t:[TokenType assign]];
-    root.childNodes = @[[self v:@"x" t:[TokenType identifier]], [self v:@"2" t:[TokenType constant]]];
+    root.children = @[[self v:@"x" t:[TokenType identifier]],
+                      [self v:@"2" t:[TokenType constant]]];
     NSInteger result = [eval evaluate:root];
     XCTAssertEqual(result, (NSInteger)2);
 }
@@ -89,8 +90,8 @@
 - (void)testFunction
 {
     Node *root = [Node nodeWithToken:[Token tokenWithValue:@"add"] nodeType:[NodeType func]];
-    root.childNodes = @[[self v:@"1"],
-                        [self v:@"10"]];
+    root.children = @[[self v:@"1"],
+                      [self v:@"10"]];
     XCTAssertEqual([eval evaluate:root], 11);
 }
 

@@ -43,8 +43,8 @@
 {
     if (node.type == [NodeType func])
     {
-        Node *lhs = [self evaluateRecusively:[node.childNodes objectAtIndex:0]];
-        Node *rhs = [self evaluateRecusively:[node.childNodes objectAtIndex:1]];
+        Node *lhs = [self evaluateRecusively:[node.children objectAtIndex:0]];
+        Node *rhs = [self evaluateRecusively:[node.children objectAtIndex:1]];
         
         id<Function> function = [_builtins getFunction:node.token.value];
         if (!function)
@@ -65,14 +65,14 @@
     }
     else if (node.token.type == [TokenType assign])
     {
-        Node *lhs = [node.childNodes objectAtIndex:0];
-        Node *rhs = [self evaluateRecusively:[node.childNodes objectAtIndex:1]];
+        Node *lhs = [node.children objectAtIndex:0];
+        Node *rhs = [self evaluateRecusively:[node.children objectAtIndex:1]];
         return [self compute:node arg1:lhs arg2:rhs];
     }
     else if (node.token.type == [TokenType op])        
     {
-        Node *lhs = [self evaluateRecusively:[node.childNodes objectAtIndex:0]];
-        Node *rhs = [self evaluateRecusively:[node.childNodes objectAtIndex:1]];
+        Node *lhs = [self evaluateRecusively:[node.children objectAtIndex:0]];
+        Node *rhs = [self evaluateRecusively:[node.children objectAtIndex:1]];
         return [self compute:node arg1:lhs arg2:rhs];
     } else
     {
