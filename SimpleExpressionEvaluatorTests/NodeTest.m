@@ -33,18 +33,6 @@
     XCTAssertEqualObjects([root prefix], @"(* 1 (+ 3 4))");
 }
 
-- (void)testRightAssociative
-{
-    Node *n1 = [Node nodeWithToken:[Token tokenWithValue:@"="]];
-    Node *n2 = [Node nodeWithToken:[Token tokenWithValue:@"="]];
-    // a=b=3 -> a=(b=3)
-    XCTAssertTrue([n2 rightAssociative:n1], @"Expected '=' to be right associative when following another =");
-    
-    n1 = [Node nodeWithToken:[Token tokenWithValue:@"/"]];
-    n2 = [Node nodeWithToken:[Token tokenWithValue:@"/"]];
-    // 1000/100/2 = (1000/100)/2 = 5, not 1000/(100/2)
-    XCTAssertFalse([n2 rightAssociative:n1], @"Did not expect '/' to be right associative");
-}
 - (void)testPrecedence
 {
     XCTAssertEqual([Node nodeWithToken:[Token tokenWithType:[TokenType assign]]].precedence,

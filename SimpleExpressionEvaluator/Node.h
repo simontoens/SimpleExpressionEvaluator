@@ -17,11 +17,6 @@
 
 - (NSString *)prefix;
 
-/**
- * Returns whether the current node is right-associative, given the previous node.
- */
-- (BOOL)rightAssociative:(Node *)previousNode;
-
 @property (nonatomic, strong, readonly) Token *token;
 @property (nonatomic, strong, readonly) NodeType *type;
 

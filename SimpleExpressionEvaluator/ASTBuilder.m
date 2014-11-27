@@ -79,7 +79,7 @@
             }
             else
             {
-                if ([node rightAssociative:previousNode])
+                if ([self rightAssociative:node previousNode:previousNode])
                 {
                     // for ex, assignment is right associative: we want a=b=3 -> a=(b=3), not (a=b)=3 so don't reduce
                     [_functionStack push:node];
@@ -111,6 +111,11 @@
     root.right = [_argumentStack pop];
     root.left = [_argumentStack pop];
     [_argumentStack push:root];
+}
+
+- (BOOL)rightAssociative:(Node *)currentNode previousNode:(Node *)previousNode
+{
+    return currentNode.token.type == [TokenType assign] && previousNode.token.type == [TokenType assign];
 }
 
 @end

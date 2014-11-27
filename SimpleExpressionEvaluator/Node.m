@@ -82,11 +82,6 @@
     }
 }
 
-- (BOOL)rightAssociative:(Node *)previousNode
-{
-    return _token.type == [TokenType assign] && previousNode.token.type == [TokenType assign];
-}
-
 - (NSString *)description
 {
     return self.token.value;
