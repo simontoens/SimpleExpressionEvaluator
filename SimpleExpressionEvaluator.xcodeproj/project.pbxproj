@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE098BA918837FB6003E1308 /* TokenType.m in Sources */ = {isa = PBXBuildFile; fileRef = BE098BA818837FB6003E1308 /* TokenType.m */; };
+		BE1A341D1A2AC12800E77595 /* Assertion.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A341C1A2AC12800E77595 /* Assertion.m */; };
 		BE2836451849615400E60DBD /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE2836441849615400E60DBD /* MainView.xib */; };
 		BE2836481849618A00E60DBD /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2836471849618A00E60DBD /* MainViewController.m */; };
 		BE44246F189895F3000FEE96 /* TokenTypeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE44246E189895F3000FEE96 /* TokenTypeTest.m */; };
@@ -65,6 +66,8 @@
 /* Begin PBXFileReference section */
 		BE098BA718837FB6003E1308 /* TokenType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenType.h; sourceTree = "<group>"; };
 		BE098BA818837FB6003E1308 /* TokenType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenType.m; sourceTree = "<group>"; };
+		BE1A341B1A2AC12800E77595 /* Assertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assertion.h; path = Submodules/STObjCToolbelt/Source/Assertion.h; sourceTree = SOURCE_ROOT; };
+		BE1A341C1A2AC12800E77595 /* Assertion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assertion.m; path = Submodules/STObjCToolbelt/Source/Assertion.m; sourceTree = SOURCE_ROOT; };
 		BE25108B184725E600EB6E1B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		BE2836441849615400E60DBD /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		BE2836461849618A00E60DBD /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -282,6 +285,8 @@
 		BEE4EF7A1846EE6700AFBE36 /* STObjCToolbelt */ = {
 			isa = PBXGroup;
 			children = (
+				BE1A341B1A2AC12800E77595 /* Assertion.h */,
+				BE1A341C1A2AC12800E77595 /* Assertion.m */,
 				BEF84A6D184916D20045B490 /* Preconditions.h */,
 				BEF84A6E184916D20045B490 /* Preconditions.m */,
 				BEE4EF7B1846EE7D00AFBE36 /* Stack.h */,
@@ -404,6 +409,7 @@
 				BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */,
 				BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */,
 				BEA03D521A26B1B000042669 /* BaseFunction.m in Sources */,
+				BE1A341D1A2AC12800E77595 /* Assertion.m in Sources */,
 				BEE4EF731846EBDF00AFBE36 /* Node.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

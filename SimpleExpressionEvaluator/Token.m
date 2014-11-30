@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
+#import "Assertion.h"
 #import "CharacterSets.h"
 #import "Preconditions.h"
 #import "Token.h"
@@ -107,8 +108,7 @@
     {
         return [TokenType constant];
     }
-    [Preconditions fail:[NSString stringWithFormat:@"Unable to determine token type for '%@'", tokenValue]];
-    return nil;
+    @throw [IllegalStateAssertion withReason:[NSString stringWithFormat:@"Unable to determine token type for '%@'", tokenValue]];
 }
 
 - (BOOL)matchesCharacterSet:(NSCharacterSet *)characterSet

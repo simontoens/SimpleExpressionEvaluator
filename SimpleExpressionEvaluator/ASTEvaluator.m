@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Simon Toens. All rights reserved.
 //
 
+#import "Assertion.h"
 #import "ASTEvaluator.h"
 #import "BuiltinFunctions.h"
 #import "Node.h"
-#import "Preconditions.h"
 #import "Stack.h"
 
 @implementation ASTEvaluator
@@ -49,7 +49,7 @@
         id<Function> function = [_builtins getFunction:node.token.value];
         if (!function)
         {
-            [Preconditions fail:[NSString stringWithFormat:@"Unable to resolve function for %@", node]];
+            @throw [IllegalStateAssertion withReason:[NSString stringWithFormat:@"Unable to resolve function for %@", node]];
         }
         [function setArguments:@[lhs.token.value, rhs.token.value]];
         return [Node nodeWithToken:[Token tokenWithValue:[function eval] type:[TokenType constant]]];
@@ -76,8 +76,7 @@
         return [self compute:node arg1:lhs arg2:rhs];
     } else
     {
-        [Preconditions fail:[NSString stringWithFormat:@"Don't know how to evaluate node: %@", node]];
-        return nil;
+        @throw [IllegalStateAssertion withReason:[NSString stringWithFormat:@"Unable to evaluate Node: %@", node]];
     }
 }
 
