@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
-#import "DivFunction.h"
+#import "Divide.h"
 
-@implementation DivFunction
+@implementation Divide
 
 - (NSArray *)getNames
 {

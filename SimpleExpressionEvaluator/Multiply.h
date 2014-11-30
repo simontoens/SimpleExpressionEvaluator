@@ -1,5 +1,5 @@
 //
-//  SubFunction.h
+//  MultFunction.h
 //  SimpleExpressionEvaluator
 //
 //  Created by Simon Toens on 11/30/14.
@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "BinOpFunction.h"
 
-@interface SubFunction : BinOpFunction <Function>
+@interface Multiply : BinOpFunction <Function>
 
 @end

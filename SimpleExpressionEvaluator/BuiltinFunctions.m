@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
-#import "AddFunction.h"
+#import "Add.h"
 #import "BuiltinFunctions.h"
-#import "DivFunction.h"
+#import "Divide.h"
 #import "Preconditions.h"
-#import "MultFunction.h"
-#import "SubFunction.h"
+#import "Multiply.h"
+#import "Subtract.h"
 
 @interface BuiltinFunctions()
 {
@@ -29,10 +29,10 @@
     {
         _nameToFunctionInstance = [[NSMutableDictionary alloc] init];
         
-        [self registerFunction:[[AddFunction alloc] init]];
-        [self registerFunction:[[DivFunction alloc] init]];
-        [self registerFunction:[[MultFunction alloc] init]];
-        [self registerFunction:[[SubFunction alloc] init]];
+        [self registerFunction:[[Add alloc] init]];
+        [self registerFunction:[[Divide alloc] init]];
+        [self registerFunction:[[Multiply alloc] init]];
+        [self registerFunction:[[Subtract alloc] init]];
     }
     return self;
 }

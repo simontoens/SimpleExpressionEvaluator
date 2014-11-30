@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
-#import "AddFunction.h"
+#import "Add.h"
 
-@implementation AddFunction
+@implementation Add
 
 - (NSArray *)getNames
 {
