@@ -27,20 +27,18 @@
     return self;
 }
 
-- (Node *)eval
+- (Node *)eval:(Environment *)environment
 {
-    Node *lhs = [[self.children objectAtIndex:0] eval];
-    Node *rhs = [[self.children objectAtIndex:1] eval];
+    Node *lhs = [[self.children objectAtIndex:0] eval:environment];
+    Node *rhs = [[self.children objectAtIndex:1] eval:environment];
     
     id<Function> function = [_builtins getFunction:self.token.value];
     if (!function)
     {
         @throw [IllegalStateAssertion withReason:[NSString stringWithFormat:@"Unable to resolve function for %@", self]];
     }
-    NSString *result = [function eval:@[lhs.token.value, rhs.token.value]];
+    NSString *result = [function run:@[lhs.token.value, rhs.token.value]];
     return [Node nodeWithToken:[Token tokenWithValue:result type:[TokenType constant]]];
-
-    return nil;
 }
 
 @end

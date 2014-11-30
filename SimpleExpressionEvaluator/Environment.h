@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Node.h"
+@class Node;
 
 @interface Environment : NSObject
 

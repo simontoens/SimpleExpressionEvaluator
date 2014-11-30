@@ -14,6 +14,6 @@
  */
 @interface BinOpFunction : NSObject <Function>
 
-- (NSUInteger)hook_eval:(NSUInteger)arg1 arg2:(NSUInteger)arg2;
+- (NSUInteger)hook_run:(NSUInteger)arg1 arg2:(NSUInteger)arg2;
 
 @end

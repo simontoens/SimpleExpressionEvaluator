@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "Environment.h"
+#import "Node.h"
 
 @interface EnvironmentTest : XCTestCase
 

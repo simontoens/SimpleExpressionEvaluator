@@ -10,7 +10,7 @@
 
 @implementation Constant
 
-- (Node *)eval
+- (Node *)eval:(Environment *)environment
 {
     return self;
 }

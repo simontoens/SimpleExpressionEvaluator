@@ -14,6 +14,6 @@
 
 - (NSUInteger)getNumArguments;
 
-- (NSString *)eval:(NSArray *)arguments;
+- (NSString *)run:(NSArray *)arguments;
 
 @end

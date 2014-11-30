@@ -16,21 +16,21 @@
     return 2;
 }
 
-- (NSString *)eval:(NSArray *)arguments
+- (NSString *)run:(NSArray *)arguments
 {
     NSUInteger i1 = [[arguments objectAtIndex:0] integerValue];
     NSUInteger i2 = [[arguments objectAtIndex:1] integerValue];
-    return [NSString stringWithFormat:@"%li", (long)[self hook_eval:i1 arg2:i2]];
+    return [NSString stringWithFormat:@"%li", (long)[self hook_run:i1 arg2:i2]];
 }
 
 - (NSArray *)getNames
 {
-    @throw [AbstractMethodAssertion assertion];
+    @throw [AbstractMethodAssertion forSelector:_cmd];
 }
 
-- (NSUInteger)hook_eval:(NSUInteger)arg1 arg2:(NSUInteger)arg2
+- (NSUInteger)hook_run:(NSUInteger)arg1 arg2:(NSUInteger)arg2
 {
-    @throw [AbstractMethodAssertion assertion];
+    @throw [AbstractMethodAssertion forSelector:_cmd];
 }
 
 @end

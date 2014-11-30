@@ -28,9 +28,9 @@
     return n;
 }
 
-- (Node *)eval
+- (Node *)eval:(Environment *)environment
 {
-    @throw [AbstractMethodAssertion assertion];
+    @throw [AbstractMethodAssertion forSelector:_cmd];
 }
 
 - (NSString *)prefix

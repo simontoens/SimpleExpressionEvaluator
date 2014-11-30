@@ -7,6 +7,7 @@
 //
 
 #import "Environment.h"
+#import "Node.h"
 
 @implementation Environment
 {

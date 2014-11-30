@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Environment.h"
 #import "NodeType.h"
 #import "Token.h"
 
@@ -15,7 +16,7 @@
 + (Node *)nodeWithToken:(Token *)token;
 + (Node *)nodeWithToken:(Token *)token nodeType:(NodeType *)nodeType;
 
-- (Node *)eval;
+- (Node *)eval:(Environment *)environment;
 
 /**
  * Returns a String representation of a 'prefix' traversal with this Node as the root.
