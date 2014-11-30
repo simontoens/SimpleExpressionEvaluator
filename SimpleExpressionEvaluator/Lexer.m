@@ -53,9 +53,4 @@
     return currentTokenIndex < [tokens count] - 1 ? ((Token *)[tokens objectAtIndex:currentTokenIndex + 1]).type : nil;
 }
 
-- (Node *)nextNode:(NSUInteger)currentNodeIndex allNodes:(NSArray *)nodes
-{
-    return currentNodeIndex < [nodes count] - 1 ? [nodes objectAtIndex:currentNodeIndex + 1] : nil;
-}
-
 @end
