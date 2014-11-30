@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Simon Toens. All rights reserved.
 //
 
+#import "Assertion.h"
 #import "CharacterSets.h"
 #import "Node.h"
 
@@ -13,7 +14,6 @@
 
 @dynamic precedence;
 @dynamic variable, function, group, groupStart, groupEnd;
-
 
 + (Node *)nodeWithToken:(Token *)token
 {
@@ -26,6 +26,11 @@
     n->_token = token;
     n->_type = nodeType;
     return n;
+}
+
+- (Node *)eval
+{
+    @throw [AbstractMethodAssertion assertion];
 }
 
 - (NSString *)prefix

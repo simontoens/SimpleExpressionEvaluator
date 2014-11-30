@@ -13,6 +13,8 @@
 		BE1A34231A2B019500E77595 /* Multiply.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A34221A2B019500E77595 /* Multiply.m */; };
 		BE1A34261A2B01F600E77595 /* BinOpFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A34251A2B01F600E77595 /* BinOpFunction.m */; };
 		BE1A34291A2B051100E77595 /* Divide.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A34281A2B051100E77595 /* Divide.m */; };
+		BE1A34301A2B0F8800E77595 /* Constant.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A342F1A2B0F8800E77595 /* Constant.m */; };
+		BE1A34331A2B103800E77595 /* FunctionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A34321A2B103800E77595 /* FunctionNode.m */; };
 		BE2836451849615400E60DBD /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE2836441849615400E60DBD /* MainView.xib */; };
 		BE2836481849618A00E60DBD /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2836471849618A00E60DBD /* MainViewController.m */; };
 		BE44246F189895F3000FEE96 /* TokenTypeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE44246E189895F3000FEE96 /* TokenTypeTest.m */; };
@@ -79,6 +81,10 @@
 		BE1A34251A2B01F600E77595 /* BinOpFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BinOpFunction.m; sourceTree = "<group>"; };
 		BE1A34271A2B051100E77595 /* Divide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Divide.h; sourceTree = "<group>"; };
 		BE1A34281A2B051100E77595 /* Divide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Divide.m; sourceTree = "<group>"; };
+		BE1A342E1A2B0F8800E77595 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		BE1A342F1A2B0F8800E77595 /* Constant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constant.m; sourceTree = "<group>"; };
+		BE1A34311A2B103800E77595 /* FunctionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunctionNode.h; sourceTree = "<group>"; };
+		BE1A34321A2B103800E77595 /* FunctionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunctionNode.m; sourceTree = "<group>"; };
 		BE25108B184725E600EB6E1B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		BE2836441849615400E60DBD /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		BE2836461849618A00E60DBD /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -165,6 +171,10 @@
 		BE1A342D1A2B0EFD00E77595 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
+				BE1A342E1A2B0F8800E77595 /* Constant.h */,
+				BE1A342F1A2B0F8800E77595 /* Constant.m */,
+				BE1A34311A2B103800E77595 /* FunctionNode.h */,
+				BE1A34321A2B103800E77595 /* FunctionNode.m */,
 				BEE4EF711846EBDF00AFBE36 /* Node.h */,
 				BEE4EF721846EBDF00AFBE36 /* Node.m */,
 			);
@@ -421,6 +431,7 @@
 				BEDDC6E119F458B00031BB44 /* NodeType.m in Sources */,
 				BEF84A6F184916D20045B490 /* Preconditions.m in Sources */,
 				BEED748A19F1E6DE00F21094 /* CharacterSets.m in Sources */,
+				BE1A34301A2B0F8800E77595 /* Constant.m in Sources */,
 				BEF84A74184928E70045B490 /* ExpressionEvaluator.m in Sources */,
 				BE1A34201A2B011F00E77595 /* Subtract.m in Sources */,
 				BEACF0091911FB260048B3F8 /* Token.m in Sources */,
@@ -437,6 +448,7 @@
 				BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */,
 				BE1A341D1A2AC12800E77595 /* Assertion.m in Sources */,
 				BEE4EF731846EBDF00AFBE36 /* Node.m in Sources */,
+				BE1A34331A2B103800E77595 /* FunctionNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,8 @@
 + (Node *)nodeWithToken:(Token *)token;
 + (Node *)nodeWithToken:(Token *)token nodeType:(NodeType *)nodeType;
 
+- (Node *)eval;
+
 /**
  * Returns a String representation of a 'prefix' traversal with this Node as the root.
  */
