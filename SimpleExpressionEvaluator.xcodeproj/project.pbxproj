@@ -162,7 +162,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BEA03D4A1A26A58300042669 /* BuiltinFunctions */ = {
+		BE1A342D1A2B0EFD00E77595 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				BEE4EF711846EBDF00AFBE36 /* Node.h */,
+				BEE4EF721846EBDF00AFBE36 /* Node.m */,
+			);
+			name = Nodes;
+			sourceTree = "<group>";
+		};
+		BEA03D4A1A26A58300042669 /* Functions */ = {
 			isa = PBXGroup;
 			children = (
 				BEA03D461A26A52600042669 /* Add.h */,
@@ -178,7 +187,7 @@
 				BE1A341E1A2B011F00E77595 /* Subtract.h */,
 				BE1A341F1A2B011F00E77595 /* Subtract.m */,
 			);
-			name = BuiltinFunctions;
+			name = Functions;
 			sourceTree = "<group>";
 		};
 		BEE4EF361846EB9B00AFBE36 = {
@@ -216,7 +225,8 @@
 		BEE4EF481846EB9B00AFBE36 /* SimpleExpressionEvaluator */ = {
 			isa = PBXGroup;
 			children = (
-				BEA03D4A1A26A58300042669 /* BuiltinFunctions */,
+				BE1A342D1A2B0EFD00E77595 /* Nodes */,
+				BEA03D4A1A26A58300042669 /* Functions */,
 				BEE4EF511846EB9B00AFBE36 /* AppDelegate.h */,
 				BEE4EF521846EB9B00AFBE36 /* AppDelegate.m */,
 				BEE4EF751846ECC500AFBE36 /* ASTBuilder.h */,
@@ -232,8 +242,6 @@
 				BEA03D4B1A26A5CF00042669 /* Function.h */,
 				BEED748419F1E3AB00F21094 /* Lexer.h */,
 				BEED748519F1E3AB00F21094 /* Lexer.m */,
-				BEE4EF711846EBDF00AFBE36 /* Node.h */,
-				BEE4EF721846EBDF00AFBE36 /* Node.m */,
 				BEDDC6DF19F458B00031BB44 /* NodeType.h */,
 				BEDDC6E019F458B00031BB44 /* NodeType.m */,
 				BEACF0071911FB260048B3F8 /* Token.h */,
