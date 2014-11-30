@@ -20,7 +20,6 @@
 		BEA03D491A26A52600042669 /* AddFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA03D471A26A52600042669 /* AddFunction.m */; };
 		BEA03D4E1A26AB4100042669 /* BuiltinFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA03D4D1A26AB4100042669 /* BuiltinFunctions.m */; };
 		BEA03D4F1A26AB4100042669 /* BuiltinFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA03D4D1A26AB4100042669 /* BuiltinFunctions.m */; };
-		BEA03D521A26B1B000042669 /* BaseFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA03D511A26B1B000042669 /* BaseFunction.m */; };
 		BEACF0091911FB260048B3F8 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = BEACF0081911FB260048B3F8 /* Token.m */; };
 		BEACF00A1911FB260048B3F8 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = BEACF0081911FB260048B3F8 /* Token.m */; };
 		BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */; };
@@ -82,8 +81,6 @@
 		BEA03D4B1A26A5CF00042669 /* Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Function.h; sourceTree = "<group>"; };
 		BEA03D4C1A26AB4100042669 /* BuiltinFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuiltinFunctions.h; sourceTree = "<group>"; };
 		BEA03D4D1A26AB4100042669 /* BuiltinFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuiltinFunctions.m; sourceTree = "<group>"; };
-		BEA03D501A26B1B000042669 /* BaseFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseFunction.h; sourceTree = "<group>"; };
-		BEA03D511A26B1B000042669 /* BaseFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseFunction.m; sourceTree = "<group>"; };
 		BEACF0071911FB260048B3F8 /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
 		BEACF0081911FB260048B3F8 /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
 		BEB11CC91847F2F600F9BA77 /* ASTEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTEvaluator.h; sourceTree = "<group>"; };
@@ -158,8 +155,6 @@
 			children = (
 				BEA03D461A26A52600042669 /* AddFunction.h */,
 				BEA03D471A26A52600042669 /* AddFunction.m */,
-				BEA03D501A26B1B000042669 /* BaseFunction.h */,
-				BEA03D511A26B1B000042669 /* BaseFunction.m */,
 				BEA03D4C1A26AB4100042669 /* BuiltinFunctions.h */,
 				BEA03D4D1A26AB4100042669 /* BuiltinFunctions.m */,
 			);
@@ -408,7 +403,6 @@
 				BE098BA918837FB6003E1308 /* TokenType.m in Sources */,
 				BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */,
 				BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */,
-				BEA03D521A26B1B000042669 /* BaseFunction.m in Sources */,
 				BE1A341D1A2AC12800E77595 /* Assertion.m in Sources */,
 				BEE4EF731846EBDF00AFBE36 /* Node.m in Sources */,
 			);

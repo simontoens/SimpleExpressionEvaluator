@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BaseFunction.h"
 #import "Function.h"
 
-@interface AddFunction : BaseFunction <Function>
+@interface AddFunction : NSObject <Function>
 
 @end

@@ -8,6 +8,7 @@
 
 #import "AddFunction.h"
 #import "BuiltinFunctions.h"
+#import "Preconditions.h"
 
 @interface BuiltinFunctions()
 {
@@ -24,16 +25,28 @@
     if (self = [super init])
     {
         _nameToFunctionInstance = [[NSMutableDictionary alloc] init];
-        
-        id<Function> add = [[AddFunction alloc] init];
-        [_nameToFunctionInstance setObject:add forKey:[add getName]];
+        [self registerFunction:[[AddFunction alloc] init]];
     }
     return self;
 }
 
 - (id<Function>)getFunction:(NSString *)name
 {
-    return [_nameToFunctionInstance objectForKey:name];
+    [Preconditions assertNotNil:name];
+    return [_nameToFunctionInstance objectForKey:[self normalizeFunctionName:name]];
+}
+
+- (void)registerFunction:(id<Function>) function
+{
+    for (NSString *name in [function getNames])
+    {
+        [_nameToFunctionInstance setObject:function forKey:[self normalizeFunctionName:name]];
+    }
+}
+
+- (NSString *)normalizeFunctionName:(NSString *)name
+{
+    return [name lowercaseString];
 }
 
 @end

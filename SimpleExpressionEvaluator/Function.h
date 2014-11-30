@@ -7,15 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Environment.h"
 
 @protocol Function <NSObject>
 
-- (NSString *)getName;
+- (NSArray *)getNames;
 
 - (NSUInteger)getNumArguments;
 
-- (void)setArguments:(NSArray *)arguments;
-
-- (NSString *)eval;
+- (NSString *)eval:(Environment *)environment arguments:(NSArray *)arguments;
 
 @end

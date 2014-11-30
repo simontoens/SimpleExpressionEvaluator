@@ -10,9 +10,9 @@
 
 @implementation AddFunction
 
-- (NSString *)getName
+- (NSArray *)getNames
 {
-    return @"add";
+    return @[@"add", @"+"];
 }
 
 - (NSUInteger)getNumArguments
@@ -20,11 +20,10 @@
     return 2;
 }
 
-- (NSString *)eval
+- (NSString *)eval:(Environment *)environment arguments:(NSArray *)arguments
 {
-    NSArray *args = [super getArguments];
-    NSUInteger i1 = [[args objectAtIndex:0] integerValue];
-    NSUInteger i2 = [[args objectAtIndex:1] integerValue];
+    NSUInteger i1 = [[arguments objectAtIndex:0] integerValue];
+    NSUInteger i2 = [[arguments objectAtIndex:1] integerValue];
     return [NSString stringWithFormat:@"%li", (long)i1 + i2];
 }
 

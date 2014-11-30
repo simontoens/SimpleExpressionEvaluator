@@ -51,8 +51,8 @@
         {
             @throw [IllegalStateAssertion withReason:[NSString stringWithFormat:@"Unable to resolve function for %@", node]];
         }
-        [function setArguments:@[lhs.token.value, rhs.token.value]];
-        return [Node nodeWithToken:[Token tokenWithValue:[function eval] type:[TokenType constant]]];
+        NSString *result = [function eval:_environment arguments:@[lhs.token.value, rhs.token.value]];
+        return [Node nodeWithToken:[Token tokenWithValue:result type:[TokenType constant]]];
     }
     else if (node.token.type == [TokenType constant])
     {
