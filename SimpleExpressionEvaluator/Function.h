@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Environment.h"
 
 @protocol Function <NSObject>
 
@@ -15,6 +14,6 @@
 
 - (NSUInteger)getNumArguments;
 
-- (NSString *)eval:(Environment *)environment arguments:(NSArray *)arguments;
+- (NSString *)eval:(NSArray *)arguments;
 
 @end

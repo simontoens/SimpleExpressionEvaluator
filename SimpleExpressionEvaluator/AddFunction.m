@@ -15,16 +15,9 @@
     return @[@"add", @"+"];
 }
 
-- (NSUInteger)getNumArguments
+- (NSUInteger)hook_eval:(NSUInteger)arg1 arg2:(NSUInteger)arg2
 {
-    return 2;
-}
-
-- (NSString *)eval:(Environment *)environment arguments:(NSArray *)arguments
-{
-    NSUInteger i1 = [[arguments objectAtIndex:0] integerValue];
-    NSUInteger i2 = [[arguments objectAtIndex:1] integerValue];
-    return [NSString stringWithFormat:@"%li", (long)i1 + i2];
+    return arg1 + arg2;
 }
 
 @end

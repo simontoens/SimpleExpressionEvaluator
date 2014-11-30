@@ -9,10 +9,6 @@
 #import <XCTest/XCTest.h>
 #import "ASTEvaluator.h"
 
-@interface ASTEvaluator()
-- (Node *)compute:(Node *)operator arg1:(Node *)op1 arg2:(Node *)op2;
-@end
-
 @interface ASTEvaluatorTest : XCTestCase
 {
     ASTEvaluator *eval;
@@ -26,24 +22,6 @@
 {
     [super setUp];
     eval = [[ASTEvaluator alloc] init];
-}
-
-- (void)testCompute
-{
-    Node *result = [eval compute:[self v:@"+" t:[TokenType op]] arg1:[self v:@"1"] arg2:[self v:@"3"]];
-    XCTAssertEqualObjects(result.token.value, @"4");
-    
-    result = [eval compute:[self v:@"*" t:[TokenType op]] arg1:[self v:@"2"] arg2:[self v:@"3"]];
-    XCTAssertEqualObjects(result.token.value, @"6");
-    
-    result = [eval compute:[self v:@"-" t:[TokenType op]] arg1:[self v:@"2"] arg2:[self v:@"3"]];
-    XCTAssertEqualObjects(result.token.value, @"-1");
-    
-    result = [eval compute:[self v:@"/" t:[TokenType op]] arg1:[self v:@"16"] arg2:[self v:@"4"]];
-    XCTAssertEqualObjects(result.token.value, @"4");
-   
-    result = [eval compute:[self v:@"=" t:[TokenType assign]] arg1:[self v:@"x"] arg2:[self v:@"4"]];
-    XCTAssertEqualObjects(result.token.value, @"4");
 }
 
 - (void)testAddition

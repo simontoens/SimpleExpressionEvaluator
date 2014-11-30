@@ -8,7 +8,10 @@
 
 #import "AddFunction.h"
 #import "BuiltinFunctions.h"
+#import "DivFunction.h"
 #import "Preconditions.h"
+#import "MultFunction.h"
+#import "SubFunction.h"
 
 @interface BuiltinFunctions()
 {
@@ -25,7 +28,11 @@
     if (self = [super init])
     {
         _nameToFunctionInstance = [[NSMutableDictionary alloc] init];
+        
         [self registerFunction:[[AddFunction alloc] init]];
+        [self registerFunction:[[DivFunction alloc] init]];
+        [self registerFunction:[[MultFunction alloc] init]];
+        [self registerFunction:[[SubFunction alloc] init]];
     }
     return self;
 }

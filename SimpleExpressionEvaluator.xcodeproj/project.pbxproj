@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		BE098BA918837FB6003E1308 /* TokenType.m in Sources */ = {isa = PBXBuildFile; fileRef = BE098BA818837FB6003E1308 /* TokenType.m */; };
 		BE1A341D1A2AC12800E77595 /* Assertion.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A341C1A2AC12800E77595 /* Assertion.m */; };
+		BE1A34201A2B011F00E77595 /* SubFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A341F1A2B011F00E77595 /* SubFunction.m */; };
+		BE1A34231A2B019500E77595 /* MultFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A34221A2B019500E77595 /* MultFunction.m */; };
+		BE1A34261A2B01F600E77595 /* BinOpFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A34251A2B01F600E77595 /* BinOpFunction.m */; };
+		BE1A34291A2B051100E77595 /* DivFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A34281A2B051100E77595 /* DivFunction.m */; };
 		BE2836451849615400E60DBD /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE2836441849615400E60DBD /* MainView.xib */; };
 		BE2836481849618A00E60DBD /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2836471849618A00E60DBD /* MainViewController.m */; };
 		BE44246F189895F3000FEE96 /* TokenTypeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE44246E189895F3000FEE96 /* TokenTypeTest.m */; };
@@ -67,6 +71,14 @@
 		BE098BA818837FB6003E1308 /* TokenType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenType.m; sourceTree = "<group>"; };
 		BE1A341B1A2AC12800E77595 /* Assertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assertion.h; path = Submodules/STObjCToolbelt/Source/Assertion.h; sourceTree = SOURCE_ROOT; };
 		BE1A341C1A2AC12800E77595 /* Assertion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assertion.m; path = Submodules/STObjCToolbelt/Source/Assertion.m; sourceTree = SOURCE_ROOT; };
+		BE1A341E1A2B011F00E77595 /* SubFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubFunction.h; sourceTree = "<group>"; };
+		BE1A341F1A2B011F00E77595 /* SubFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubFunction.m; sourceTree = "<group>"; };
+		BE1A34211A2B019500E77595 /* MultFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultFunction.h; sourceTree = "<group>"; };
+		BE1A34221A2B019500E77595 /* MultFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultFunction.m; sourceTree = "<group>"; };
+		BE1A34241A2B01F600E77595 /* BinOpFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinOpFunction.h; sourceTree = "<group>"; };
+		BE1A34251A2B01F600E77595 /* BinOpFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BinOpFunction.m; sourceTree = "<group>"; };
+		BE1A34271A2B051100E77595 /* DivFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivFunction.h; sourceTree = "<group>"; };
+		BE1A34281A2B051100E77595 /* DivFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivFunction.m; sourceTree = "<group>"; };
 		BE25108B184725E600EB6E1B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		BE2836441849615400E60DBD /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		BE2836461849618A00E60DBD /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -155,8 +167,16 @@
 			children = (
 				BEA03D461A26A52600042669 /* AddFunction.h */,
 				BEA03D471A26A52600042669 /* AddFunction.m */,
+				BE1A34241A2B01F600E77595 /* BinOpFunction.h */,
+				BE1A34251A2B01F600E77595 /* BinOpFunction.m */,
 				BEA03D4C1A26AB4100042669 /* BuiltinFunctions.h */,
 				BEA03D4D1A26AB4100042669 /* BuiltinFunctions.m */,
+				BE1A34271A2B051100E77595 /* DivFunction.h */,
+				BE1A34281A2B051100E77595 /* DivFunction.m */,
+				BE1A34211A2B019500E77595 /* MultFunction.h */,
+				BE1A34221A2B019500E77595 /* MultFunction.m */,
+				BE1A341E1A2B011F00E77595 /* SubFunction.h */,
+				BE1A341F1A2B011F00E77595 /* SubFunction.m */,
 			);
 			name = BuiltinFunctions;
 			sourceTree = "<group>";
@@ -394,12 +414,16 @@
 				BEF84A6F184916D20045B490 /* Preconditions.m in Sources */,
 				BEED748A19F1E6DE00F21094 /* CharacterSets.m in Sources */,
 				BEF84A74184928E70045B490 /* ExpressionEvaluator.m in Sources */,
+				BE1A34201A2B011F00E77595 /* SubFunction.m in Sources */,
 				BEACF0091911FB260048B3F8 /* Token.m in Sources */,
 				BEE4EF771846ECC500AFBE36 /* ASTBuilder.m in Sources */,
 				BEA03D481A26A52600042669 /* AddFunction.m in Sources */,
 				BEED748619F1E3AB00F21094 /* Lexer.m in Sources */,
 				BEA03D4E1A26AB4100042669 /* BuiltinFunctions.m in Sources */,
+				BE1A34231A2B019500E77595 /* MultFunction.m in Sources */,
 				BE9942FE18750D6A0080C499 /* Environment.m in Sources */,
+				BE1A34261A2B01F600E77595 /* BinOpFunction.m in Sources */,
+				BE1A34291A2B051100E77595 /* DivFunction.m in Sources */,
 				BE098BA918837FB6003E1308 /* TokenType.m in Sources */,
 				BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */,
 				BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */,

@@ -41,7 +41,14 @@
 
 - (Node *)evaluateRecusively:(Node *)node
 {
-    if (node.type == [NodeType func])
+    if (node.token.type == [TokenType assign])
+    {
+        Node *lhs = [node.children objectAtIndex:0];
+        Node *rhs = [self evaluateRecusively:[node.children objectAtIndex:1]];
+        [_environment bind:rhs to:lhs];
+        return rhs;
+    }
+    else if (node.function)
     {
         Node *lhs = [self evaluateRecusively:[node.children objectAtIndex:0]];
         Node *rhs = [self evaluateRecusively:[node.children objectAtIndex:1]];
@@ -51,7 +58,7 @@
         {
             @throw [IllegalStateAssertion withReason:[NSString stringWithFormat:@"Unable to resolve function for %@", node]];
         }
-        NSString *result = [function eval:_environment arguments:@[lhs.token.value, rhs.token.value]];
+        NSString *result = [function eval:@[lhs.token.value, rhs.token.value]];
         return [Node nodeWithToken:[Token tokenWithValue:result type:[TokenType constant]]];
     }
     else if (node.token.type == [TokenType constant])
@@ -62,53 +69,10 @@
     {
         Node *n = [_environment resolve:node];
         return n ? n : node; // resolve to self if undefined
-    }
-    else if (node.token.type == [TokenType assign])
-    {
-        Node *lhs = [node.children objectAtIndex:0];
-        Node *rhs = [self evaluateRecusively:[node.children objectAtIndex:1]];
-        return [self compute:node arg1:lhs arg2:rhs];
-    }
-    else if (node.token.type == [TokenType op])        
-    {
-        Node *lhs = [self evaluateRecusively:[node.children objectAtIndex:0]];
-        Node *rhs = [self evaluateRecusively:[node.children objectAtIndex:1]];
-        return [self compute:node arg1:lhs arg2:rhs];
     } else
     {
         @throw [IllegalStateAssertion withReason:[NSString stringWithFormat:@"Unable to evaluate Node: %@", node]];
     }
-}
-
-- (Node *)compute:(Node *)operator arg1:(Node *)arg1 arg2:(Node *)arg2
-{
-    NSString *resultString = nil;
-    
-    if (operator.token.type == [TokenType op])
-    {
-        NSInteger i1 = [arg1.token.value integerValue];
-        NSInteger i2 = [arg2.token.value integerValue];
-
-        NSInteger result = 0;
-        
-        char op = [operator.token.value characterAtIndex:0];
-        
-        switch (op)
-        {
-            case '+': result = i1 + i2; break;
-            case '-': result = i1 - i2; break;
-            case '*': result = i1 * i2; break;
-            case '/': result = i1 / i2; break;
-        }
-        
-        resultString = [NSString stringWithFormat:@"%li", (long)result];
-    }
-    else if (operator.token.type == [TokenType assign])
-    {
-        [_environment bind:arg2 to:arg1];
-        resultString = arg2.token.value;
-    }
-    return [Node nodeWithToken:[Token tokenWithValue:resultString type:[TokenType constant]]];
 }
 
 @end
