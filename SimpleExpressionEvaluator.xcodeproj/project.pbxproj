@@ -30,8 +30,7 @@
 		BEA03D4F1A26AB4100042669 /* BuiltinFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA03D4D1A26AB4100042669 /* BuiltinFunctions.m */; };
 		BEACF0091911FB260048B3F8 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = BEACF0081911FB260048B3F8 /* Token.m */; };
 		BEACF00A1911FB260048B3F8 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = BEACF0081911FB260048B3F8 /* Token.m */; };
-		BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */; };
-		BEB11CCD1848203000F9BA77 /* ASTEvaluatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */; };
+		BEB11CCD1848203000F9BA77 /* NodeEvalTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCC1848203000F9BA77 /* NodeEvalTest.m */; };
 		BEDDC6E119F458B00031BB44 /* NodeType.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDDC6E019F458B00031BB44 /* NodeType.m */; };
 		BEE4EF431846EB9B00AFBE36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF421846EB9B00AFBE36 /* Foundation.framework */; };
 		BEE4EF451846EB9B00AFBE36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF441846EB9B00AFBE36 /* CoreGraphics.framework */; };
@@ -107,9 +106,7 @@
 		BEA03D4D1A26AB4100042669 /* BuiltinFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuiltinFunctions.m; sourceTree = "<group>"; };
 		BEACF0071911FB260048B3F8 /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
 		BEACF0081911FB260048B3F8 /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
-		BEB11CC91847F2F600F9BA77 /* ASTEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTEvaluator.h; sourceTree = "<group>"; };
-		BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASTEvaluator.m; sourceTree = "<group>"; };
-		BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ASTEvaluatorTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		BEB11CCC1848203000F9BA77 /* NodeEvalTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = NodeEvalTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BEDDC6DF19F458B00031BB44 /* NodeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeType.h; sourceTree = "<group>"; };
 		BEDDC6E019F458B00031BB44 /* NodeType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeType.m; sourceTree = "<group>"; };
 		BEE4EF3F1846EB9B00AFBE36 /* SimpleExpressionEvaluator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleExpressionEvaluator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -251,8 +248,6 @@
 				BEE4EF521846EB9B00AFBE36 /* AppDelegate.m */,
 				BEE4EF751846ECC500AFBE36 /* ASTBuilder.h */,
 				BEE4EF761846ECC500AFBE36 /* ASTBuilder.m */,
-				BEB11CC91847F2F600F9BA77 /* ASTEvaluator.h */,
-				BEB11CCA1847F2F600F9BA77 /* ASTEvaluator.m */,
 				BEED748819F1E6DE00F21094 /* CharacterSets.h */,
 				BEED748919F1E6DE00F21094 /* CharacterSets.m */,
 				BE9942FC18750D6A0080C499 /* Environment.h */,
@@ -294,10 +289,10 @@
 			isa = PBXGroup;
 			children = (
 				BEE4EF671846EB9B00AFBE36 /* ASTBuilderTest.m */,
-				BEB11CCC1848203000F9BA77 /* ASTEvaluatorTest.m */,
 				BE9942FF187512380080C499 /* EnvironmentTest.m */,
 				BEF84A7618492A280045B490 /* ExpressionEvaluatorTest.m */,
 				BEED749019F1FBBC00F21094 /* LexerTest.m */,
+				BEB11CCC1848203000F9BA77 /* NodeEvalTest.m */,
 				BE6E478A1848343F00672B69 /* NodeTest.m */,
 				BEED748D19F1F86800F21094 /* TokenTest.m */,
 				BEF84A6B18490DDC0045B490 /* TokenizerTest.m */,
@@ -455,7 +450,6 @@
 				BE1A34261A2B01F600E77595 /* BinOpFunction.m in Sources */,
 				BE1A34291A2B051100E77595 /* DivideFunction.m in Sources */,
 				BE098BA918837FB6003E1308 /* TokenType.m in Sources */,
-				BEB11CCB1847F2F600F9BA77 /* ASTEvaluator.m in Sources */,
 				BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */,
 				BE1A341D1A2AC12800E77595 /* Assertion.m in Sources */,
 				BEE4EF731846EBDF00AFBE36 /* Node.m in Sources */,
@@ -480,7 +474,7 @@
 				BEF84A6C18490DDC0045B490 /* TokenizerTest.m in Sources */,
 				BEED749119F1FBBC00F21094 /* LexerTest.m in Sources */,
 				BEA03D491A26A52600042669 /* AddNode.m in Sources */,
-				BEB11CCD1848203000F9BA77 /* ASTEvaluatorTest.m in Sources */,
+				BEB11CCD1848203000F9BA77 /* NodeEvalTest.m in Sources */,
 				BEA03D4F1A26AB4100042669 /* BuiltinFunctions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

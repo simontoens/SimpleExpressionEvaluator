@@ -16,6 +16,10 @@
 + (Node *)nodeWithToken:(Token *)token;
 + (Node *)nodeWithToken:(Token *)token nodeType:(NodeType *)nodeType;
 
+- (instancetype)init __unavailable;
+
+- (instancetype)initWithToken:(Token *)token;
+
 - (Node *)eval:(Environment *)environment;
 
 /**
@@ -24,7 +28,7 @@
 - (NSString *)prefix;
 
 @property (nonatomic, strong, readonly) Token *token;
-@property (nonatomic, strong, readonly) NodeType *type;
+@property (nonatomic, strong) NodeType *type;
 
 @property (nonatomic, strong) NSArray *children;
 

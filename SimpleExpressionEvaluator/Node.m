@@ -22,10 +22,18 @@
 
 + (Node *)nodeWithToken:(Token *)token nodeType:(NodeType *)nodeType
 {
-    Node *n = [[Node alloc] init];
-    n->_token = token;
+    Node *n = [[Node alloc] initWithToken:token];
     n->_type = nodeType;
     return n;
+}
+
+- (instancetype)initWithToken:(Token *)token
+{
+    if (self = [super init])
+    {
+        _token = token;
+    }
+    return self;
 }
 
 - (Node *)eval:(Environment *)environment
@@ -72,7 +80,8 @@
 
 - (NSUInteger)precedence
 {
-    if (_type == [NodeType func])
+    // precendence is only required for bin op, really - eveything else is higher or special cased anyway
+    if (_type == [NodeType func] && _token.type != [TokenType op])
     {
         return 5;
     }

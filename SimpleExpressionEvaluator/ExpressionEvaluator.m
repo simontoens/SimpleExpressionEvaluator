@@ -7,7 +7,6 @@
 //
 
 #import "ASTBuilder.h"
-#import "ASTEvaluator.h"
 #import "Environment.h"
 #import "ExpressionEvaluator.h"
 #import "Lexer.h"
@@ -40,8 +39,8 @@
     Node *ast = [astBuilder build:nodes];
     _prefix = [ast prefix];
     
-    ASTEvaluator *eval = [[ASTEvaluator alloc] initWithEnvironment:env];
-    return [eval evaluate:ast];
+    Node *result = [ast eval:env];
+    return [result.token.value integerValue];
 }
 
 @end

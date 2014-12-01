@@ -18,11 +18,12 @@
 
 @implementation FunctionNode
 
-- (instancetype)initWithFunctionDefinitions:(BuiltinFunctions *)builtins
+- (instancetype)initWithToken:(Token *)token functionDefinitions:(BuiltinFunctions *)builtins
 {
-    if (self = [super init])
+    if (self = [super initWithToken:token])
     {
         _builtins = builtins;
+        self.type = [NodeType func];
     }
     return self;
 }

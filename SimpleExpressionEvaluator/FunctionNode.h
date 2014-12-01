@@ -14,6 +14,6 @@
 
 - (instancetype)init __unavailable;
 
-- (instancetype)initWithFunctionDefinitions:(BuiltinFunctions *)functions;
+- (instancetype)initWithToken:(Token *)token functionDefinitions:(BuiltinFunctions *)builtins;
 
 @end
