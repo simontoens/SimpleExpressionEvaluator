@@ -1,23 +1,23 @@
 //
-//  MultFunction.m
+//  SubFunction.m
 //  SimpleExpressionEvaluator
 //
 //  Created by Simon Toens on 11/30/14.
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
-#import "Multiply.h"
+#import "SubtractFunction.h"
 
-@implementation Multiply
+@implementation SubtractFunction
 
 - (NSArray *)getNames
 {
-    return @[@"mult", @"*"];
+    return @[@"sub", @"-"];
 }
 
 - (NSUInteger)hook_run:(NSUInteger)arg1 arg2:(NSUInteger)arg2
 {
-    return arg1 * arg2;
+    return arg1 - arg2;
 }
 
 @end

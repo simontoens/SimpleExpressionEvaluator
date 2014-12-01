@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
-#import "Add.h"
+#import "AddNode.h"
 
-@implementation Add
+@implementation AddNode
 
 - (NSArray *)getNames
 {

@@ -1,5 +1,5 @@
 //
-//  Constant.h
+//  SubFunction.h
 //  SimpleExpressionEvaluator
 //
 //  Created by Simon Toens on 11/30/14.
@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Node.h"
+#import "BinOpFunction.h"
 
-@interface Constant : Node
+@interface SubtractFunction : BinOpFunction <Function>
 
 @end

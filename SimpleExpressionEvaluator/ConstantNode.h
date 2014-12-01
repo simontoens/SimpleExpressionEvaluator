@@ -1,14 +1,14 @@
 //
-//  Assignment.h
+//  Constant.h
 //  SimpleExpressionEvaluator
 //
-//  Created by Simon Toens on 12/1/14.
+//  Created by Simon Toens on 11/30/14.
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "Node.h"
 
-@interface Assignment : Node
+@interface ConstantNode : Node
 
 @end

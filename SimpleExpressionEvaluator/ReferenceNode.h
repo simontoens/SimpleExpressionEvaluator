@@ -1,14 +1,14 @@
 //
-//  DivFunction.h
+//  Reference.h
 //  SimpleExpressionEvaluator
 //
-//  Created by Simon Toens on 11/30/14.
+//  Created by Simon Toens on 12/1/14.
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "BinOpFunction.h"
+#import "Node.h"
 
-@interface Divide : BinOpFunction <Function>
+@interface ReferenceNode : Node
 
 @end

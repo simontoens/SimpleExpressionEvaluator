@@ -1,23 +1,23 @@
 //
-//  SubFunction.m
+//  DivFunction.m
 //  SimpleExpressionEvaluator
 //
 //  Created by Simon Toens on 11/30/14.
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
-#import "Subtract.h"
+#import "DivideFunction.h"
 
-@implementation Subtract
+@implementation DivideFunction
 
 - (NSArray *)getNames
 {
-    return @[@"sub", @"-"];
+    return @[@"div", @"/"];
 }
 
 - (NSUInteger)hook_run:(NSUInteger)arg1 arg2:(NSUInteger)arg2
 {
-    return arg1 - arg2;
+    return arg1 / arg2;
 }
 
 @end

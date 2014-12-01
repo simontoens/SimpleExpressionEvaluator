@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
-#import "Assignment.h"
+#import "AssignmentNode.h"
 
-@implementation Assignment
+@implementation AssignmentNode
 
 - (Node *)eval:(Environment *)environment
 {

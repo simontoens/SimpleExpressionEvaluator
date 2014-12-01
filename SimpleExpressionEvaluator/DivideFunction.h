@@ -1,18 +1,14 @@
 //
-//  Constant.m
+//  DivFunction.h
 //  SimpleExpressionEvaluator
 //
 //  Created by Simon Toens on 11/30/14.
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
-#import "Constant.h"
+#import <Foundation/Foundation.h>
+#import "BinOpFunction.h"
 
-@implementation Constant
-
-- (Node *)eval:(Environment *)environment
-{
-    return self;
-}
+@interface DivideFunction : BinOpFunction <Function>
 
 @end

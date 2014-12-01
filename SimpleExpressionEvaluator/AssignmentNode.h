@@ -1,5 +1,5 @@
 //
-//  Reference.h
+//  Assignment.h
 //  SimpleExpressionEvaluator
 //
 //  Created by Simon Toens on 12/1/14.
@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "Node.h"
 
-@interface Reference : Node
+@interface AssignmentNode : Node
 
 @end

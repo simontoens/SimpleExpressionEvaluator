@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
-#import "Reference.h"
+#import "ReferenceNode.h"
 
-@implementation Reference
+@implementation ReferenceNode
 
 - (Node *)eval:(Environment *)environment
 {

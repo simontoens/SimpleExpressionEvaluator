@@ -10,7 +10,7 @@
 #import "Function.h"
 
 /**
- * Abstract
+ * Abstract base class for functions that take 2 numerical arguments.
  */
 @interface BinOpFunction : NSObject <Function>
 
