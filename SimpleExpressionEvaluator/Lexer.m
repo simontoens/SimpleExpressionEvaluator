@@ -11,6 +11,8 @@
 #import "BuiltinFunctions.h"
 #import "ConstantNode.h"
 #import "FunctionNode.h"
+#import "GroupEndNode.h"
+#import "GroupStartNode.h"
 #import "Lexer.h"
 #import "Node.h"
 #import "NodeType.h"
@@ -40,7 +42,15 @@
     NSMutableArray *nodes = [[NSMutableArray alloc] initWithCapacity:[tokens count]];
     for (NSUInteger i = 0; i < [tokens count]; i++)
     {
-        [nodes addObjectsFromArray:[self getNodesForTokenAt:i allTokens:tokens]];
+        id n = [self getNodesForTokenAt:i allTokens:tokens];
+        if ([n isKindOfClass:[Node class]])
+        {
+            [nodes addObject:n];
+        }
+        else
+        {
+            [nodes addObjectsFromArray:n];
+        }
     }
     return nodes;
 }
@@ -69,32 +79,44 @@
     return currentTokenIndex < [tokens count] - 1 ? ((Token *)[tokens objectAtIndex:currentTokenIndex + 1]).type : nil;
 }
 
-- (NSArray *)getNodesForTokenAt:(NSUInteger)currentTokenIndex allTokens:(NSArray *)allTokens
+/**
+ * Returns either single Node instance or an NSArray of many nodes.
+ */
+- (id)getNodesForTokenAt:(NSUInteger)currentTokenIndex allTokens:(NSArray *)allTokens
 {
     Token *token = [allTokens objectAtIndex:currentTokenIndex];
     if ([self isFunction:currentTokenIndex allTokens:allTokens])
     {
-        return @[[[FunctionNode alloc] initWithToken:token functionDefinitions:_builtins]];
+        return [[FunctionNode alloc] initWithToken:token functionDefinitions:_builtins];
     }
-    else if (token.type == [TokenType constant] || token.type == [TokenType openParen] || token.type == [TokenType closeParen])
+    else if (token.type == [TokenType constant])
     {
-        return @[[[ConstantNode alloc] initWithToken:token]];
+        return [[ConstantNode alloc] initWithToken:token];
+    }
+    else if (token.type == [TokenType openParen])
+    {
+        return [[GroupStartNode alloc] initWithToken:token];
+    }
+    else if (token.type == [TokenType closeParen])
+    {
+        return [[GroupEndNode alloc] initWithToken:token];
     }
     else if (token.type == [TokenType argSep])
     {
         // , -> () as in foo(1, 2*3+5) -> foo(1)(2*3+5)
         // this simplifies ast building at this point - function args are no different than bin op args
-        return @[[[ConstantNode alloc] initWithToken:[Token tokenWithType:[TokenType closeParen]]],
-                 [[ConstantNode alloc] initWithToken:[Token tokenWithType:[TokenType openParen]]]];
+        return @[[[GroupEndNode alloc] initWithToken:[Token tokenWithType:[TokenType closeParen]]],
+                 [[GroupStartNode alloc] initWithToken:[Token tokenWithType:[TokenType openParen]]]];
     }
     else if (token.type == [TokenType assign])
     {
-        return @[[[AssignmentNode alloc] initWithToken:token]];
+        return [[AssignmentNode alloc] initWithToken:token];
     }
     else if (token.type == [TokenType identifier])
     {
-        return @[[[ReferenceNode alloc] initWithToken:token]];
-    } else
+        return [[ReferenceNode alloc] initWithToken:token];
+    }
+    else
     {
         @throw [IllegalStateAssertion withReason:[NSString stringWithFormat:@"No node mapping for token %@", token]];
     }

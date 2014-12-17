@@ -7,7 +7,13 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "AssignmentNode.h"
+#import "ConstantNode.h"
+#import "FunctionNode.h"
+#import "GroupEndNode.h"
+#import "GroupStartNode.h"
 #import "Node.h"
+#import "ReferenceNode.h"
 
 @interface NodeTest : XCTestCase
 
@@ -17,112 +23,49 @@
 
 - (void)testPrefixForOp
 {
-    Node *root = [Node nodeWithToken:[Token tokenWithValue:@"*"]];
-    root.children = @[[Node nodeWithToken:[Token tokenWithValue:@"1"]],
-                      [Node nodeWithToken:[Token tokenWithValue:@"2"]]];
+    Node *root = [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*"] functionDefinitions:nil];
+    root.children = @[
+                      [[ConstantNode alloc] initWithToken:[Token tokenWithValue:@"1"]],
+                      [[ConstantNode alloc] initWithToken:[Token tokenWithValue:@"2"]]
+                    ];
     XCTAssertEqualObjects([root prefix], @"(* 1 2)");
 }
 
 - (void)testPrefixForFunc
 {
-    Node *root = [Node nodeWithToken:[Token tokenWithValue:@"add"] nodeType:[NodeType func]];
-    root.children = @[[Node nodeWithToken:[Token tokenWithValue:@"1"]],
-                      [Node nodeWithToken:[Token tokenWithValue:@"2"]]];
+    Node *root = [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"add"] functionDefinitions:nil];
+    root.children = @[
+                      [[ConstantNode alloc] initWithToken:[Token tokenWithValue:@"1"]],
+                      [[ConstantNode alloc] initWithToken:[Token tokenWithValue:@"2"]]
+                    ];
     XCTAssertEqualObjects([root prefix], @"(add 1 2)");
 }
 
 - (void)testPrecedence
 {
-    XCTAssertEqual([Node nodeWithToken:[Token tokenWithType:[TokenType assign]]].precedence,
-                   [Node nodeWithToken:[Token tokenWithType:[TokenType constant]]].precedence);
+    XCTAssertEqual([[AssignmentNode alloc] initWithToken:[Token tokenWithType:[TokenType assign]]].precedence,
+                   [[ConstantNode alloc] initWithToken:[Token tokenWithType:[TokenType constant]]].precedence);
     
-    XCTAssertEqual([Node nodeWithToken:[Token tokenWithType:[TokenType identifier]]].precedence,
-                   [Node nodeWithToken:[Token tokenWithType:[TokenType constant]]].precedence);
+    XCTAssertEqual([[ReferenceNode alloc] initWithToken:[Token tokenWithType:[TokenType identifier]]].precedence,
+                   [[ConstantNode alloc] initWithToken:[Token tokenWithType:[TokenType constant]]].precedence);
     
-    XCTAssertTrue([Node nodeWithToken:[Token tokenWithType:[TokenType op]]].precedence >
-                  [Node nodeWithToken:[Token tokenWithType:[TokenType openParen]]].precedence);
+    XCTAssertTrue([[FunctionNode alloc] initWithToken:[Token tokenWithType:[TokenType op]]].precedence >
+                  [[GroupStartNode alloc] initWithToken:[Token tokenWithType:[TokenType openParen]]].precedence);
     
-    XCTAssertEqual([Node nodeWithToken:[Token tokenWithValue:@"+" type:[TokenType op]]].precedence,
-                   [Node nodeWithToken:[Token tokenWithValue:@"-" type:[TokenType op]]].precedence);
+    XCTAssertEqual([[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"+" type:[TokenType op]]].precedence,
+                   [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"-" type:[TokenType op]]].precedence);
 
-    XCTAssertTrue([Node nodeWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence >
-                  [Node nodeWithToken:[Token tokenWithValue:@"-" type:[TokenType op]]].precedence);
+    XCTAssertTrue([[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence >
+                  [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"-" type:[TokenType op]]].precedence);
     
-    XCTAssertEqual([Node nodeWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence,
-                   [Node nodeWithToken:[Token tokenWithValue:@"/" type:[TokenType op]]].precedence);
+    XCTAssertEqual([[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence,
+                   [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"/" type:[TokenType op]]].precedence);
     
-    XCTAssertTrue([Node nodeWithToken:[Token tokenWithType:[TokenType closeParen]]].precedence >
-                  [Node nodeWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence);
+    XCTAssertTrue([[GroupEndNode alloc] initWithToken:[Token tokenWithType:[TokenType closeParen]]].precedence >
+                  [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence);
     
-    XCTAssertTrue([Node nodeWithToken:[Token tokenWithType:[TokenType identifier]] nodeType:[NodeType func]].precedence >
-                  [Node nodeWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence);
-}
-
-- (void)testConstant
-{
-    Node *n = [Node nodeWithToken:[Token tokenWithValue:@"33"]];
-    XCTAssertTrue(n.argument, @"Expected argument");
-    XCTAssertFalse(n.variable, @"Did not expect variable");
-    XCTAssertFalse(n.function, @"Did not expect function");
-    XCTAssertFalse(n.group, @"Did not expect group");
-}
-
-- (void)testVariable
-{
-    Node *n = [Node nodeWithToken:[Token tokenWithValue:@"a"]];
-    XCTAssertTrue(n.variable, @"Expected variable");
-    XCTAssertTrue(n.argument, @"Expected argument");
-    XCTAssertFalse(n.function, @"Did not expect function");
-    XCTAssertFalse(n.group, @"Did not expect group");
-}
-
-- (void)testFunction
-{
-    Node *n = [Node nodeWithToken:[Token tokenWithValue:@"f"] nodeType:[NodeType func]];
-    XCTAssertTrue(n.function, @"Expected function");
-    XCTAssertFalse(n.variable, @"Did not expect variable");
-    XCTAssertFalse(n.argument, @"Did not expect argument");
-    XCTAssertFalse(n.group, @"Did not expect group");
-}
-
-- (void)testOp
-{
-    Node *n = [Node nodeWithToken:[Token tokenWithValue:@"*"]];
-    XCTAssertTrue(n.function, @"Expected function");
-    XCTAssertFalse(n.variable, @"Did not expect variable");
-    XCTAssertFalse(n.argument, @"Did not expect argument");
-    XCTAssertFalse(n.group, @"Did not expect group");
-}
-
-- (void)testAssign
-{
-    Node *n = [Node nodeWithToken:[Token tokenWithValue:@"="]];
-    XCTAssertTrue(n.function, @"Expected function");
-    XCTAssertFalse(n.variable, @"Did not expect variable");
-    XCTAssertFalse(n.argument, @"Did not expect argument");
-    XCTAssertFalse(n.group, @"Did not expect group");
-}
-
-- (void)testGroupStart
-{
-    Node *n = [Node nodeWithToken:[Token tokenWithValue:@"("]];
-    XCTAssertTrue(n.group, @"Expected group");
-    XCTAssertTrue(n.groupStart, @"Expected group start");
-    XCTAssertFalse(n.groupEnd, @"Did not expect group end");
-    XCTAssertFalse(n.function, @"Did not expect function");
-    XCTAssertFalse(n.variable, @"Did not expect variable");
-    XCTAssertFalse(n.argument, @"Did not expect argument");
-}
-
-- (void)testGroupEnd
-{
-    Node *n = [Node nodeWithToken:[Token tokenWithValue:@")"]];
-    XCTAssertTrue(n.group, @"Expected group");
-    XCTAssertTrue(n.groupEnd, @"Expected group end");
-    XCTAssertFalse(n.groupStart, @"Did not expect group start");
-    XCTAssertFalse(n.function, @"Did not expect function");
-    XCTAssertFalse(n.variable, @"Did not expect variable");
-    XCTAssertFalse(n.argument, @"Did not expect argument");
+//    XCTAssertEqual([[FunctionNode alloc] initWithToken:[Token tokenWithType:[TokenType identifier]]].precedence,
+//                  [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence);
 }
 
 @end

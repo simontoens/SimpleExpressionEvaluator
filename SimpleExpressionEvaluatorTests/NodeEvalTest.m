@@ -20,7 +20,7 @@
 @end
 
 @interface Lexer()
-- (NSArray *)getNodesForTokenAt:(NSUInteger)currentTokenIndex allTokens:(NSArray *)allTokens;
+- (id)getNodesForTokenAt:(NSUInteger)currentTokenIndex allTokens:(NSArray *)allTokens;
 @end
 
 @implementation NodeEvalTest
@@ -81,12 +81,12 @@
 
 - (Node *)nodeFor:(NSString *)value
 {
-    return [[lexer getNodesForTokenAt:0 allTokens:@[[Token tokenWithValue:value]]] objectAtIndex:0];
+    return [lexer getNodesForTokenAt:0 allTokens:@[[Token tokenWithValue:value]]];
 }
 
 - (Node *)functionNodeFor:(NSString *)value
 {
-    return [[lexer getNodesForTokenAt:0 allTokens:@[[Token tokenWithValue:value], [Token tokenWithType:[TokenType openParen]]]] objectAtIndex:0];
+    return [lexer getNodesForTokenAt:0 allTokens:@[[Token tokenWithValue:value], [Token tokenWithType:[TokenType openParen]]]];
 }
 
 @end

@@ -18,4 +18,9 @@
     return rhs;
 }
 
+- (BOOL)function
+{
+    return YES;
+}
+
 @end

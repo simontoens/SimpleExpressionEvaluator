@@ -15,4 +15,9 @@
     return self;
 }
 
+- (BOOL)argument
+{
+    return YES;
+}
+
 @end

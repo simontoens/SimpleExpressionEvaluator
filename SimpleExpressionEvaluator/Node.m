@@ -12,9 +12,6 @@
 
 @implementation Node
 
-@dynamic precedence;
-@dynamic variable, function, group, groupStart, groupEnd;
-
 + (Node *)nodeWithToken:(Token *)token
 {
     return [Node nodeWithToken:token nodeType:nil];
@@ -104,34 +101,29 @@
     return -1;
 }
 
-- (BOOL)variable
+- (BOOL)argument
 {
-    return _token.type == [TokenType identifier] && _type != [NodeType func];
+    return NO;
 }
 
 - (BOOL)function
 {
-    return _token.type == [TokenType op] || _token.type == [TokenType assign] || _type == [NodeType func];
+    return NO;
 }
 
 - (BOOL)group
 {
-    return self.groupStart || self.groupEnd;
+    return NO;
 }
 
 - (BOOL)groupStart
 {
-    return _token.type == [TokenType openParen];
+    return NO;
 }
 
 - (BOOL)groupEnd
 {
-    return _token.type == [TokenType closeParen];
-}
-
-- (BOOL)argument
-{
-    return self.variable || _token.type == [TokenType constant];
+    return NO;
 }
 
 @end

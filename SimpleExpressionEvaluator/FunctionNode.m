@@ -42,4 +42,9 @@
     return [Node nodeWithToken:[Token tokenWithValue:result type:[TokenType constant]]];
 }
 
+- (BOOL)function
+{
+    return YES;
+}
+
 @end

@@ -11,6 +11,9 @@
 #import "NodeType.h"
 #import "Token.h"
 
+/**
+ * Abstract base class of node hierarchy.
+ */
 @interface Node : NSObject
 
 + (Node *)nodeWithToken:(Token *)token;
@@ -38,11 +41,10 @@
  * Type attributes
  */
 
-@property (nonatomic, assign, readonly) BOOL variable;
+@property (nonatomic, assign, readonly) BOOL argument;
 @property (nonatomic, assign, readonly) BOOL function;
 @property (nonatomic, assign, readonly) BOOL group;
 @property (nonatomic, assign, readonly) BOOL groupStart;
 @property (nonatomic, assign, readonly) BOOL groupEnd;
-@property (nonatomic, assign, readonly) BOOL argument;
 
 @end

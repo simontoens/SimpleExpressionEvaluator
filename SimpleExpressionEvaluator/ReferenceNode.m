@@ -16,4 +16,9 @@
     return n ? n : self; // resolve to self if undefined
 }
 
+- (BOOL)argument
+{
+    return YES;
+}
+
 @end
