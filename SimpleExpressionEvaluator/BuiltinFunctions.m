@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Simon Toens. All rights reserved.
 //
 
-#import "AddNode.h"
+#import "AddFunction.h"
 #import "BuiltinFunctions.h"
 #import "DivideFunction.h"
 #import "Preconditions.h"
@@ -29,7 +29,7 @@
     {
         _nameToFunctionInstance = [[NSMutableDictionary alloc] init];
         
-        [self registerFunction:[[AddNode alloc] init]];
+        [self registerFunction:[[AddFunction alloc] init]];
         [self registerFunction:[[DivideFunction alloc] init]];
         [self registerFunction:[[MultiplyFunction alloc] init]];
         [self registerFunction:[[SubtractFunction alloc] init]];

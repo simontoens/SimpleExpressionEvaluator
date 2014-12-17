@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "BinOpFunction.h"
 
-@interface AddNode : BinOpFunction <Function>
+@interface AddFunction : BinOpFunction <Function>
 
 @end
