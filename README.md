@@ -1,6 +1,7 @@
 SimpleExpressionEvaluator
 =========================
 
-2*(2+1) = 6 
+2*(2+1) = 6
 
-Bare-bones, no syntax checking.
+See [test cases](SimpleExpressionEvaluatorTests/ExpressionEvaluatorTest.m) for examples.
+

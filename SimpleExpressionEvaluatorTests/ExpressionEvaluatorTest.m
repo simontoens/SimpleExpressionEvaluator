@@ -109,4 +109,9 @@
     XCTAssertEqual([evaluator evaluate:@"a"], (NSInteger)23);
 }
 
+- (void)testNestedFunctions
+{
+    XCTAssertEqual([evaluator evaluate:@"add(10, mult(add(10, 13), 2))"], (NSInteger)56);
+}
+
 @end
