@@ -13,10 +13,6 @@
 }
 @end
 
-@interface ASTBuilder()
-- (BOOL)rightAssociative:(Node *)currentNode previousNode:(Node *)previousNode;
-@end
-
 @implementation ASTBuilderTest
 
 - (void)setUp
@@ -212,19 +208,6 @@
                                    [Token tokenWithValue:@"4" type:[TokenType constant]],
                                    [Token tokenWithValue:@")" type:[TokenType closeParen]]]];
     [self assertAST:nodes expectedPreorderTokens:@[@"*", @"f", @"1", @"2", @"f", @"3", @"4"]];
-}
-
-- (void)testRightAssociative
-{
-    Node *n1 = [Node nodeWithToken:[Token tokenWithValue:@"="]];
-    Node *n2 = [Node nodeWithToken:[Token tokenWithValue:@"="]];
-    // a=b=3 -> a=(b=3)
-    XCTAssertTrue([_astBuilder rightAssociative:n2 previousNode:n1], @"Expected '=' to be right associative when following another =");
-    
-    n1 = [Node nodeWithToken:[Token tokenWithValue:@"/"]];
-    n2 = [Node nodeWithToken:[Token tokenWithValue:@"/"]];
-    // 1000/100/2 = (1000/100)/2 = 5, not 1000/(100/2)
-    XCTAssertFalse([_astBuilder rightAssociative:n2 previousNode:n1], @"Did not expect '/' to be right associative");
 }
 
 - (void)assertAST:(NSArray *)nodes expectedPreorderTokens:(NSArray *)expectedNodes

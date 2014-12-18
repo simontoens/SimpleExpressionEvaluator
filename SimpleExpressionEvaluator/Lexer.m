@@ -8,7 +8,7 @@
 
 #import "Assertion.h"
 #import "AssignmentNode.h"
-#import "BinOpNode.h"
+#import "BinaryOperationNode.h"
 #import "BuiltinFunctions.h"
 #import "ConstantNode.h"
 #import "FunctionNode.h"
@@ -89,7 +89,7 @@
     if ([self isFunction:currentTokenIndex allTokens:allTokens])
     {
         return token.type == [TokenType op] ?
-            [[BinOpNode alloc] initWithToken:token functionDefinitions:_builtins] :
+            [[BinaryOperationNode alloc] initWithToken:token functionDefinitions:_builtins] :
             [[FunctionNode alloc] initWithToken:token functionDefinitions:_builtins];
     }
     else if (token.type == [TokenType constant])

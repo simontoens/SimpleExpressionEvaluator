@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "AssignmentNode.h"
+#import "BinaryOperationNode.h"
 #import "ConstantNode.h"
 #import "FunctionNode.h"
 #import "GroupEndNode.h"
@@ -41,31 +42,39 @@
     XCTAssertEqualObjects([root prefix], @"(add 1 2)");
 }
 
-//- (void)testPrecedence
-//{
-//    XCTAssertEqual([[AssignmentNode alloc] initWithToken:[Token tokenWithType:[TokenType assign]]].precedence,
-//                   [[ConstantNode alloc] initWithToken:[Token tokenWithType:[TokenType constant]]].precedence);
-//    
-//    XCTAssertEqual([[ReferenceNode alloc] initWithToken:[Token tokenWithType:[TokenType identifier]]].precedence,
-//                   [[ConstantNode alloc] initWithToken:[Token tokenWithType:[TokenType constant]]].precedence);
-//    
-//    XCTAssertTrue([[FunctionNode alloc] initWithToken:[Token tokenWithType:[TokenType op]]].precedence >
-//                  [[GroupStartNode alloc] initWithToken:[Token tokenWithType:[TokenType openParen]]].precedence);
-//    
-//    XCTAssertEqual([[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"+" type:[TokenType op]]].precedence,
-//                   [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"-" type:[TokenType op]]].precedence);
-//
-//    XCTAssertTrue([[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence >
-//                  [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"-" type:[TokenType op]]].precedence);
-//    
-//    XCTAssertEqual([[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence,
-//                   [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"/" type:[TokenType op]]].precedence);
-//    
-//    XCTAssertTrue([[GroupEndNode alloc] initWithToken:[Token tokenWithType:[TokenType closeParen]]].precedence >
-//                  [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence);
-//    
-////    XCTAssertEqual([[FunctionNode alloc] initWithToken:[Token tokenWithType:[TokenType identifier]]].precedence,
-////                  [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence);
-//}
+- (void)testBinOpIsLeftAssociative
+{
+    BinaryOperationNode *n = [[BinaryOperationNode alloc] initWithToken:[Token tokenWithValue:@"/"]];
+    // 100/2/2 -> (100/2)/2
+    XCTAssertTrue(n.leftAssociative, @"Expected '/' to be left associative");
+}
+
+- (void)testAssignmentIsRightAssociative
+{
+    AssignmentNode *n = [[AssignmentNode alloc] initWithToken:[Token tokenWithValue:@"="]];
+    // a=b=3 -> a=(b=3)
+    XCTAssertFalse(n.leftAssociative, @"Did not expect '=' to be left associative");
+}
+
+- (void)testPrecedence
+{
+    XCTAssertTrue([[AssignmentNode alloc] initWithToken:[Token tokenWithType:[TokenType assign]]].precedence <
+                  [[BinaryOperationNode alloc] initWithToken:[Token tokenWithValue:@"-"]].precedence);
+    
+    XCTAssertTrue([[AssignmentNode alloc] initWithToken:[Token tokenWithType:[TokenType assign]]].precedence <
+                  [[BinaryOperationNode alloc] initWithToken:[Token tokenWithValue:@"+"]].precedence);
+    
+    XCTAssertEqual([[BinaryOperationNode alloc] initWithToken:[Token tokenWithValue:@"-"]].precedence,
+                  [[BinaryOperationNode alloc] initWithToken:[Token tokenWithValue:@"+"]].precedence);
+    
+    XCTAssertTrue([[BinaryOperationNode alloc] initWithToken:[Token tokenWithValue:@"-"]].precedence <
+                   [[BinaryOperationNode alloc] initWithToken:[Token tokenWithValue:@"*"]].precedence);
+    
+    XCTAssertTrue([[BinaryOperationNode alloc] initWithToken:[Token tokenWithValue:@"-"]].precedence <
+                  [[BinaryOperationNode alloc] initWithToken:[Token tokenWithValue:@"/"]].precedence);
+    
+    XCTAssertEqual([[BinaryOperationNode alloc] initWithToken:[Token tokenWithValue:@"*"]].precedence,
+                   [[BinaryOperationNode alloc] initWithToken:[Token tokenWithValue:@"/"]].precedence);
+}
 
 @end

@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Node.h"
+#import "BinaryOperationNode.h"
 
-@interface AssignmentNode : Node
+@interface AssignmentNode : BinaryOperationNode
 
 @end

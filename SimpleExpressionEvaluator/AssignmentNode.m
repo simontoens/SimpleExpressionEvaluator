@@ -18,9 +18,16 @@
     return rhs;
 }
 
-- (BOOL)function
+- (BOOL)leftAssociative
 {
-    return YES;
+    // a=b=c is (a=(b=3)), *not* ((a=b)=3)
+    return NO;
+}
+
+- (NSUInteger)precedence
+{
+    // lowest bin op precedence
+    return 1;
 }
 
 @end

@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 Simon Toens. All rights reserved.
 //
 
+#import "Assertion.h"
 #import "ASTBuilder.h"
-#import "BinOpNode.h"
+#import "BinaryOperationNode.h"
 #import "CharacterSets.h"
 #import "FunctionNode.h"
 #import "Node.h"
@@ -74,27 +75,45 @@
         else if (node.function)
         {
             Node *previousNode = [_functionStack peek];
-            if (!previousNode || [self precedence:node] > [self precedence:previousNode])
+            BOOL reduce = NO;
+            
+            if ([node isKindOfClass:[BinaryOperationNode class]])
             {
-                [_functionStack push:node];
-                nodeIndex += 1;
+                BinaryOperationNode *binOpNode = (BinaryOperationNode *)node;
+                if (previousNode && previousNode.function)
+                {
+                    if ([previousNode isKindOfClass:[BinaryOperationNode class]])
+                    {
+                        BinaryOperationNode *prevBinOpNode = (BinaryOperationNode *)previousNode;
+                        if (prevBinOpNode.precedence == binOpNode.precedence)
+                        {
+                            reduce = binOpNode.leftAssociative;
+                        }
+                        else
+                        {
+                            reduce = prevBinOpNode.precedence > binOpNode.precedence;
+                        }
+                    }
+                    else
+                    {
+                        reduce = YES;
+                    }
+                }
+            }
+            
+            if (reduce)
+            {
+                // reduce if the current op's precedence is lower or equal to the precedence of the op on the stack
+                // 2*3+3 => (2*3)+3
+                // this also enforces left associativity of operators that have the same precedence:
+                // (100/2)/2, not 100/(2/2)
+                [self reduce];
+                
             }
             else
             {
-                if ([self rightAssociative:node previousNode:previousNode])
-                {
-                    // for ex, assignment is right associative: we want a=b=3 -> a=(b=3), not (a=b)=3 so don't reduce
-                    [_functionStack push:node];
-                    nodeIndex += 1;
-                }
-                else
-                {
-                    // reduce if the current op's precedence is lower or equal to the precedence of the op on the stack
-                    // 2*3+3 => (2*3)+3
-                    // this also enforces left associativity of operators that have the same precedence:
-                    // (100/2)/2, not 100/(2/2)
-                    [self reduce];
-                }
+                [_functionStack push:node];
+                nodeIndex += 1;
             }
         }
     }
@@ -114,42 +133,6 @@
     Node *lhs = [_argumentStack pop];
     root.children = @[lhs, rhs];
     [_argumentStack push:root];
-}
-
-- (BOOL)rightAssociative:(Node *)currentNode previousNode:(Node *)previousNode
-{
-    return currentNode.token.type == [TokenType assign] && previousNode.token.type == [TokenType assign];
-}
-
-- (NSUInteger)precedence:(Node *)node
-{
-    Class nodeType = [node class];
-    // precendence is only required for bin op, really - eveything else is higher or special cased anyway
-    if (nodeType == [FunctionNode class])
-    {
-        return 5;
-    }
-    if (nodeType == [BinOpNode class])
-    {
-        return [node.token matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] ? 2 : 3;
-    }
-    
-    // assign, constant, identifier
-    return 1;
-
-//    if (_token.type == [TokenType assign] || _token.type == [TokenType constant] || _token.type == [TokenType identifier])
-//    {
-//        return 1;
-//    }
-//    if (_token.type == [TokenType openParen])
-//    {
-//        return 0;
-//    }
-//    if (_token.type == [TokenType closeParen])
-//    {
-//        return 10;
-//    }
-//    return -1;
 }
 
 @end
