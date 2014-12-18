@@ -67,38 +67,8 @@
         else if (node.function)
         {
             Node *previousNode = [_functionStack peek];
-            BOOL reduce = NO;
-            
-            if ([node isKindOfClass:[BinaryOperationNode class]])
+            if ([self shouldReduce:node previousNode:previousNode])
             {
-                BinaryOperationNode *binOpNode = (BinaryOperationNode *)node;
-                if (previousNode && previousNode.function)
-                {
-                    if ([previousNode isKindOfClass:[BinaryOperationNode class]])
-                    {
-                        BinaryOperationNode *prevBinOpNode = (BinaryOperationNode *)previousNode;
-                        if (prevBinOpNode.precedence == binOpNode.precedence)
-                        {
-                            reduce = binOpNode.leftAssociative;
-                        }
-                        else
-                        {
-                            reduce = prevBinOpNode.precedence > binOpNode.precedence;
-                        }
-                    }
-                    else
-                    {
-                        reduce = YES;
-                    }
-                }
-            }
-            
-            if (reduce)
-            {
-                // reduce if the current op's precedence is lower or equal to the precedence of the op on the stack
-                // 2*3+3 => (2*3)+3
-                // this also enforces left associativity of operators that have the same precedence:
-                // (100/2)/2, not 100/(2/2)
                 [self reduce];
                 
             }
@@ -116,6 +86,35 @@
     }
     
     return [_argumentStack pop];
+}
+
+- (BOOL)shouldReduce:(Node *)node previousNode:(Node *)previousNode
+{
+    if ([node isKindOfClass:[BinaryOperationNode class]])
+    {
+        BinaryOperationNode *binOpNode = (BinaryOperationNode *)node;
+        if (previousNode && previousNode.function)
+        {
+            if ([previousNode isKindOfClass:[BinaryOperationNode class]])
+            {
+                BinaryOperationNode *prevBinOpNode = (BinaryOperationNode *)previousNode;
+                if (prevBinOpNode.precedence == binOpNode.precedence)
+                {
+                    return binOpNode.leftAssociative;
+                }
+                else
+                {
+                    // 2*3+3 => (2*3)+3
+                    return prevBinOpNode.precedence > binOpNode.precedence;
+                }
+            }
+            else
+            {
+                return YES;
+            }
+        }
+    }
+    return NO;
 }
 
 - (void)reduce
