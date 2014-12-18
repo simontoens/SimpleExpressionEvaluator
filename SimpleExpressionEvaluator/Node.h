@@ -35,8 +35,6 @@
 
 @property (nonatomic, strong) NSArray *children;
 
-@property (nonatomic, readonly) NSUInteger precedence;
-
 /**
  * Type attributes
  */

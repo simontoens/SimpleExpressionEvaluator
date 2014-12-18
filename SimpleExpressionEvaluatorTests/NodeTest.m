@@ -41,31 +41,31 @@
     XCTAssertEqualObjects([root prefix], @"(add 1 2)");
 }
 
-- (void)testPrecedence
-{
-    XCTAssertEqual([[AssignmentNode alloc] initWithToken:[Token tokenWithType:[TokenType assign]]].precedence,
-                   [[ConstantNode alloc] initWithToken:[Token tokenWithType:[TokenType constant]]].precedence);
-    
-    XCTAssertEqual([[ReferenceNode alloc] initWithToken:[Token tokenWithType:[TokenType identifier]]].precedence,
-                   [[ConstantNode alloc] initWithToken:[Token tokenWithType:[TokenType constant]]].precedence);
-    
-    XCTAssertTrue([[FunctionNode alloc] initWithToken:[Token tokenWithType:[TokenType op]]].precedence >
-                  [[GroupStartNode alloc] initWithToken:[Token tokenWithType:[TokenType openParen]]].precedence);
-    
-    XCTAssertEqual([[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"+" type:[TokenType op]]].precedence,
-                   [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"-" type:[TokenType op]]].precedence);
-
-    XCTAssertTrue([[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence >
-                  [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"-" type:[TokenType op]]].precedence);
-    
-    XCTAssertEqual([[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence,
-                   [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"/" type:[TokenType op]]].precedence);
-    
-    XCTAssertTrue([[GroupEndNode alloc] initWithToken:[Token tokenWithType:[TokenType closeParen]]].precedence >
-                  [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence);
-    
-//    XCTAssertEqual([[FunctionNode alloc] initWithToken:[Token tokenWithType:[TokenType identifier]]].precedence,
+//- (void)testPrecedence
+//{
+//    XCTAssertEqual([[AssignmentNode alloc] initWithToken:[Token tokenWithType:[TokenType assign]]].precedence,
+//                   [[ConstantNode alloc] initWithToken:[Token tokenWithType:[TokenType constant]]].precedence);
+//    
+//    XCTAssertEqual([[ReferenceNode alloc] initWithToken:[Token tokenWithType:[TokenType identifier]]].precedence,
+//                   [[ConstantNode alloc] initWithToken:[Token tokenWithType:[TokenType constant]]].precedence);
+//    
+//    XCTAssertTrue([[FunctionNode alloc] initWithToken:[Token tokenWithType:[TokenType op]]].precedence >
+//                  [[GroupStartNode alloc] initWithToken:[Token tokenWithType:[TokenType openParen]]].precedence);
+//    
+//    XCTAssertEqual([[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"+" type:[TokenType op]]].precedence,
+//                   [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"-" type:[TokenType op]]].precedence);
+//
+//    XCTAssertTrue([[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence >
+//                  [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"-" type:[TokenType op]]].precedence);
+//    
+//    XCTAssertEqual([[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence,
+//                   [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"/" type:[TokenType op]]].precedence);
+//    
+//    XCTAssertTrue([[GroupEndNode alloc] initWithToken:[Token tokenWithType:[TokenType closeParen]]].precedence >
 //                  [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence);
-}
+//    
+////    XCTAssertEqual([[FunctionNode alloc] initWithToken:[Token tokenWithType:[TokenType identifier]]].precedence,
+////                  [[FunctionNode alloc] initWithToken:[Token tokenWithValue:@"*" type:[TokenType op]]].precedence);
+//}
 
 @end

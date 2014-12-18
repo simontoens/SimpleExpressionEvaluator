@@ -8,6 +8,7 @@
 
 #import "Assertion.h"
 #import "AssignmentNode.h"
+#import "BinOpNode.h"
 #import "BuiltinFunctions.h"
 #import "ConstantNode.h"
 #import "FunctionNode.h"
@@ -87,7 +88,9 @@
     Token *token = [allTokens objectAtIndex:currentTokenIndex];
     if ([self isFunction:currentTokenIndex allTokens:allTokens])
     {
-        return [[FunctionNode alloc] initWithToken:token functionDefinitions:_builtins];
+        return token.type == [TokenType op] ?
+            [[BinOpNode alloc] initWithToken:token functionDefinitions:_builtins] :
+            [[FunctionNode alloc] initWithToken:token functionDefinitions:_builtins];
     }
     else if (token.type == [TokenType constant])
     {

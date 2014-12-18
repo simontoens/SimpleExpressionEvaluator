@@ -22,6 +22,7 @@
 		BE5E2F431A2BE36800B93F73 /* ReferenceNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5E2F421A2BE36800B93F73 /* ReferenceNode.m */; };
 		BE6B07581847D614003C7FDC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF5B1846EB9B00AFBE36 /* XCTest.framework */; };
 		BE6E478B1848343F00672B69 /* NodeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6E478A1848343F00672B69 /* NodeTest.m */; };
+		BE8D0B061A427759008CFCEE /* BinOpNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8D0B051A427759008CFCEE /* BinOpNode.m */; };
 		BE9942FE18750D6A0080C499 /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9942FD18750D6A0080C499 /* Environment.m */; };
 		BE994300187512380080C499 /* EnvironmentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9942FF187512380080C499 /* EnvironmentTest.m */; };
 		BEA03D481A26A52600042669 /* AddFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA03D471A26A52600042669 /* AddFunction.m */; };
@@ -100,6 +101,8 @@
 		BE5E2F411A2BE36800B93F73 /* ReferenceNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferenceNode.h; sourceTree = "<group>"; };
 		BE5E2F421A2BE36800B93F73 /* ReferenceNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferenceNode.m; sourceTree = "<group>"; };
 		BE6E478A1848343F00672B69 /* NodeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTest.m; sourceTree = "<group>"; };
+		BE8D0B041A427759008CFCEE /* BinOpNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinOpNode.h; sourceTree = "<group>"; };
+		BE8D0B051A427759008CFCEE /* BinOpNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BinOpNode.m; sourceTree = "<group>"; };
 		BE9942FC18750D6A0080C499 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		BE9942FD18750D6A0080C499 /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
 		BE9942FF187512380080C499 /* EnvironmentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvironmentTest.m; sourceTree = "<group>"; };
@@ -184,6 +187,8 @@
 			children = (
 				BE5E2F3E1A2BE17F00B93F73 /* AssignmentNode.h */,
 				BE5E2F3F1A2BE17F00B93F73 /* AssignmentNode.m */,
+				BE8D0B041A427759008CFCEE /* BinOpNode.h */,
+				BE8D0B051A427759008CFCEE /* BinOpNode.m */,
 				BE1A342E1A2B0F8800E77595 /* ConstantNode.h */,
 				BE1A342F1A2B0F8800E77595 /* ConstantNode.m */,
 				BE1A34311A2B103800E77595 /* FunctionNode.h */,
@@ -454,6 +459,7 @@
 				BEACF0091911FB260048B3F8 /* Token.m in Sources */,
 				BEFDEBF31A41855300854DCE /* GroupEndNode.m in Sources */,
 				BEFDEBEF1A4184DD00854DCE /* GroupStartNode.m in Sources */,
+				BE8D0B061A427759008CFCEE /* BinOpNode.m in Sources */,
 				BEE4EF771846ECC500AFBE36 /* ASTBuilder.m in Sources */,
 				BEA03D481A26A52600042669 /* AddFunction.m in Sources */,
 				BEED748619F1E3AB00F21094 /* Lexer.m in Sources */,

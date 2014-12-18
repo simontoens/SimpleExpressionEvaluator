@@ -7,7 +7,6 @@
 //
 
 #import "Assertion.h"
-#import "CharacterSets.h"
 #import "Node.h"
 
 @implementation Node
@@ -73,32 +72,6 @@
 - (NSString *)description
 {
     return self.token.value;
-}
-
-- (NSUInteger)precedence
-{
-    // precendence is only required for bin op, really - eveything else is higher or special cased anyway
-    if (_type == [NodeType func] && _token.type != [TokenType op])
-    {
-        return 5;
-    }
-    if (_token.type == [TokenType assign] || _token.type == [TokenType constant] || _token.type == [TokenType identifier])
-    {
-        return 1;
-    }
-    if (_token.type == [TokenType op])
-    {
-        return [_token matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] ? 2 : 3;
-    }
-    if (_token.type == [TokenType openParen])
-    {
-        return 0;
-    }
-    if (_token.type == [TokenType closeParen])
-    {
-        return 10;
-    }
-    return -1;
 }
 
 - (BOOL)argument

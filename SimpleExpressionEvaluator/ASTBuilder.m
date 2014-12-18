@@ -7,7 +7,9 @@
 //
 
 #import "ASTBuilder.h"
+#import "BinOpNode.h"
 #import "CharacterSets.h"
+#import "FunctionNode.h"
 #import "Node.h"
 #import "NodeType.h"
 #import "Stack.h"
@@ -72,7 +74,7 @@
         else if (node.function)
         {
             Node *previousNode = [_functionStack peek];
-            if (!previousNode || node.precedence > previousNode.precedence)
+            if (!previousNode || [self precedence:node] > [self precedence:previousNode])
             {
                 [_functionStack push:node];
                 nodeIndex += 1;
@@ -117,6 +119,37 @@
 - (BOOL)rightAssociative:(Node *)currentNode previousNode:(Node *)previousNode
 {
     return currentNode.token.type == [TokenType assign] && previousNode.token.type == [TokenType assign];
+}
+
+- (NSUInteger)precedence:(Node *)node
+{
+    Class nodeType = [node class];
+    // precendence is only required for bin op, really - eveything else is higher or special cased anyway
+    if (nodeType == [FunctionNode class])
+    {
+        return 5;
+    }
+    if (nodeType == [BinOpNode class])
+    {
+        return [node.token matchesCharacterSet:kBinaryOperatorLowerPrecedenceCharacterSet] ? 2 : 3;
+    }
+    
+    // assign, constant, identifier
+    return 1;
+
+//    if (_token.type == [TokenType assign] || _token.type == [TokenType constant] || _token.type == [TokenType identifier])
+//    {
+//        return 1;
+//    }
+//    if (_token.type == [TokenType openParen])
+//    {
+//        return 0;
+//    }
+//    if (_token.type == [TokenType closeParen])
+//    {
+//        return 10;
+//    }
+//    return -1;
 }
 
 @end
