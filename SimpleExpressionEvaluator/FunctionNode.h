@@ -14,6 +14,6 @@
 
 - (instancetype)init __unavailable;
 
-- (instancetype)initWithToken:(Token *)token functionDefinitions:(BuiltinFunctions *)builtins;
+- (instancetype)initWithValue:(NSString *)value functionDefinitions:(BuiltinFunctions *)builtins;
 
 @end

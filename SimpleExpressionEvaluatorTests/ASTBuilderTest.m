@@ -220,7 +220,7 @@
     for (int i = 0; i < [preorderderNodes count]; i++)
     {
         Node *node = [preorderderNodes objectAtIndex:i];
-        XCTAssertEqualObjects(node.token.value, [expectedNodes objectAtIndex:i], @"Unexpected token value");
+        XCTAssertEqualObjects(node.value, [expectedNodes objectAtIndex:i], @"Unexpected token value");
     }
 }
 

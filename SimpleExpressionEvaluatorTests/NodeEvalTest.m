@@ -76,7 +76,7 @@
 - (NSUInteger)eval:(Node *)node
 {
     Node *result = [node eval:env];
-    return [result.token.value integerValue];
+    return [result.value integerValue];
 }
 
 - (Node *)nodeFor:(NSString *)value

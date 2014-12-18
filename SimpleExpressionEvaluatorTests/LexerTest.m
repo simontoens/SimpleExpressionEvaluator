@@ -14,10 +14,6 @@
 @interface LexerTest : XCTestCase
 @end
 
-@interface Lexer()
-- (NSUInteger)getPrecedence:(Token *)token;
-@end;
-
 @implementation LexerTest
 {
     Lexer *_lexer;
@@ -40,29 +36,20 @@
                              [Token tokenWithValue:@"5" type:[TokenType constant]],
                              [Token tokenWithValue:@")" type:[TokenType closeParen]]];
     
-    NSArray *expectedTokens = @[[Token tokenWithValue:@"f" type:[TokenType identifier]],
-                                [Token tokenWithValue:@"(" type:[TokenType openParen]],
-                                [Token tokenWithValue:@"3" type:[TokenType constant]],
-                                [Token tokenWithValue:@")" type:[TokenType closeParen]],
-                                [Token tokenWithValue:@"(" type:[TokenType openParen]],
-                                [Token tokenWithValue:@"4" type:[TokenType constant]],
-                                [Token tokenWithValue:@")" type:[TokenType closeParen]],
-                                [Token tokenWithValue:@"(" type:[TokenType openParen]],
-                                [Token tokenWithValue:@"5" type:[TokenType constant]],
-                                [Token tokenWithValue:@")" type:[TokenType closeParen]]];
+    NSArray *expectedValues = @[@"f", @"[", @"3", @"]", @"[", @"4", @"]", @"[", @"5", @"]"];
     
-    [self assertTokenTypes:expectedTokens nodes:[_lexer lex:inputTokens]];
+    [self assertNodeValues:expectedValues nodes:[_lexer lex:inputTokens]];
     
 }
 
-- (void)assertTokenTypes:(NSArray *)expectedTokenTypes nodes:(NSArray *)nodes
+- (void)assertNodeValues:(NSArray *)expectedNodeValues nodes:(NSArray *)nodes
 {
-    NSMutableArray *actualTokenTypes = [[NSMutableArray alloc] init];
+    NSMutableArray *actualNodeValues = [[NSMutableArray alloc] init];
     for (Node *node in nodes)
     {
-        [actualTokenTypes addObject:node.token];
+        [actualNodeValues addObject:node.value];
     }
-    XCTAssertEqualObjects(actualTokenTypes, expectedTokenTypes);
+    XCTAssertEqualObjects(actualNodeValues, expectedNodeValues);
 }
 
 @end

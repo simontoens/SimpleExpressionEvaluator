@@ -10,6 +10,11 @@
 
 @implementation GroupStartNode
 
++ (GroupStartNode *)groupStart
+{
+    return [[GroupStartNode alloc] initWithValue:@"["];
+}
+
 - (BOOL)group
 {
     return YES;

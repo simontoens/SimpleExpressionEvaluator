@@ -17,7 +17,7 @@
 
 - (instancetype)init __unavailable;
 
-- (instancetype)initWithToken:(Token *)token;
+- (instancetype)initWithValue:(NSString *)value;
 
 - (Node *)eval:(Environment *)environment;
 
@@ -26,7 +26,7 @@
  */
 - (NSString *)prefix;
 
-@property (nonatomic, strong, readonly) Token *token;
+@property (nonatomic, strong, readonly) NSString *value;
 
 @property (nonatomic, strong) NSArray *children;
 

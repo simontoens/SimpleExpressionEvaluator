@@ -29,8 +29,8 @@
 
 - (void)testEnv
 {
-    Node *ref = [[ConstantNode alloc] initWithToken:[Token tokenWithValue:@"a"]];
-    Node *val = [[ReferenceNode alloc] initWithToken:[Token tokenWithValue:@"10"]];
+    Node *ref = [[ConstantNode alloc] initWithValue:@"a"];
+    Node *val = [[ReferenceNode alloc] initWithValue:@"10"];
     [_environment bind:val to:ref];
     XCTAssertEqualObjects([_environment resolve:ref], val);
 }

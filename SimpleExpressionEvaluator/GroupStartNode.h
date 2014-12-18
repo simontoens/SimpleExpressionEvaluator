@@ -14,4 +14,6 @@
  */
 @interface GroupStartNode : Node
 
++ (GroupStartNode *)groupStart;
+
 @end

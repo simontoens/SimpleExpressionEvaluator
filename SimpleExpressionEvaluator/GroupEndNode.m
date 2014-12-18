@@ -10,6 +10,11 @@
 
 @implementation GroupEndNode
 
++ (GroupEndNode *)groupEnd
+{
+    return [[GroupEndNode alloc] initWithValue:@"]"];
+}
+
 - (BOOL)group
 {
     return YES;

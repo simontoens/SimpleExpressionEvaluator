@@ -19,9 +19,9 @@
 
 @implementation FunctionNode
 
-- (instancetype)initWithToken:(Token *)token functionDefinitions:(BuiltinFunctions *)builtins
+- (instancetype)initWithValue:(NSString *)value functionDefinitions:(BuiltinFunctions *)builtins
 {
-    if (self = [super initWithToken:token])
+    if (self = [super initWithValue:value])
     {
         _builtins = builtins;
     }
@@ -33,13 +33,13 @@
     Node *lhs = [[self.children objectAtIndex:0] eval:environment];
     Node *rhs = [[self.children objectAtIndex:1] eval:environment];
     
-    id<Function> function = [_builtins getFunction:self.token.value];
+    id<Function> function = [_builtins getFunction:self.value];
     if (!function)
     {
         @throw [IllegalStateAssertion withReason:[NSString stringWithFormat:@"Unable to resolve function for %@", self]];
     }
-    NSString *result = [function run:@[lhs.token.value, rhs.token.value]];
-    return [[ConstantNode alloc] initWithToken:[Token tokenWithValue:result type:[TokenType constant]]];
+    NSString *result = [function run:@[lhs.value, rhs.value]];
+    return [[ConstantNode alloc] initWithValue:result];
 }
 
 - (BOOL)function

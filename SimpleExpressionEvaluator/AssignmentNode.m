@@ -10,6 +10,11 @@
 
 @implementation AssignmentNode
 
++ (AssignmentNode *)assign
+{
+    return [[super alloc] initWithValue:@"="];
+}
+
 - (Node *)eval:(Environment *)environment
 {
     Node *lhs = [self.children objectAtIndex:0];

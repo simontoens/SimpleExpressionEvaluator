@@ -11,4 +11,6 @@
 
 @interface AssignmentNode : BinaryOperationNode
 
++ (AssignmentNode *)assign;
+
 @end

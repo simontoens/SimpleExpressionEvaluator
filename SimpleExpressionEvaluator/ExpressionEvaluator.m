@@ -40,7 +40,7 @@
     _prefix = [ast prefix];
     
     Node *result = [ast eval:env];
-    return [result.token.value integerValue];
+    return [result.value integerValue];
 }
 
 @end

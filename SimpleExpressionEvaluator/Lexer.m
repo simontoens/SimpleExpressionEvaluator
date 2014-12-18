@@ -88,35 +88,34 @@
     if ([self isFunction:currentTokenIndex allTokens:allTokens])
     {
         return token.type == [TokenType op] ?
-            [[BinaryOperationNode alloc] initWithToken:token functionDefinitions:_builtins] :
-            [[FunctionNode alloc] initWithToken:token functionDefinitions:_builtins];
+            [[BinaryOperationNode alloc] initWithValue:token.value functionDefinitions:_builtins] :
+            [[FunctionNode alloc] initWithValue:token.value functionDefinitions:_builtins];
     }
     else if (token.type == [TokenType constant])
     {
-        return [[ConstantNode alloc] initWithToken:token];
+        return [[ConstantNode alloc] initWithValue:token.value];
     }
     else if (token.type == [TokenType openParen])
     {
-        return [[GroupStartNode alloc] initWithToken:token];
+        return [GroupStartNode groupStart];
     }
     else if (token.type == [TokenType closeParen])
     {
-        return [[GroupEndNode alloc] initWithToken:token];
+        return [GroupEndNode groupEnd];
     }
     else if (token.type == [TokenType argSep])
     {
         // , -> () as in foo(1, 2*3+5) -> foo(1)(2*3+5)
         // this simplifies ast building at this point - function args are no different than bin op args
-        return @[[[GroupEndNode alloc] initWithToken:[Token tokenWithType:[TokenType closeParen]]],
-                 [[GroupStartNode alloc] initWithToken:[Token tokenWithType:[TokenType openParen]]]];
+        return @[[GroupEndNode groupEnd], [GroupStartNode groupStart]];
     }
     else if (token.type == [TokenType assign])
     {
-        return [[AssignmentNode alloc] initWithToken:token];
+        return [AssignmentNode assign];
     }
     else if (token.type == [TokenType identifier])
     {
-        return [[ReferenceNode alloc] initWithToken:token];
+        return [[ReferenceNode alloc] initWithValue:token.value];
     }
     else
     {

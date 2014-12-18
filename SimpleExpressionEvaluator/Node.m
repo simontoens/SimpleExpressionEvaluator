@@ -11,11 +11,11 @@
 
 @implementation Node
 
-- (instancetype)initWithToken:(Token *)token
+- (instancetype)initWithValue:(NSString *)value
 {
     if (self = [super init])
     {
-        _token = token;
+        _value = value;
     }
     return self;
 }
@@ -42,7 +42,7 @@
     {
         [string appendString:@"("];
     }
-    [string appendString:node.token.value];
+    [string appendString:node->_value];
     if ([node.children count] >= 1)
     {
         [self prefix:[node.children objectAtIndex:0]  string:string];
@@ -59,7 +59,7 @@
 
 - (NSString *)description
 {
-    return self.token.value;
+    return _value;
 }
 
 - (BOOL)argument
