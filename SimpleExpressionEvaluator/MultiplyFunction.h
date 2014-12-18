@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BinOpFunction.h"
+#import "BinaryOperationFunction.h"
 
-@interface MultiplyFunction : BinOpFunction <Function>
+@interface MultiplyFunction : BinaryOperationFunction <Function>
 
 @end

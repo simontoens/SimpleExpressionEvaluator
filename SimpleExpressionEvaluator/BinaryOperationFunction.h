@@ -12,7 +12,7 @@
 /**
  * Abstract base class for functions that take 2 numerical arguments.
  */
-@interface BinOpFunction : NSObject <Function>
+@interface BinaryOperationFunction : NSObject <Function>
 
 - (NSUInteger)hook_run:(NSUInteger)arg1 arg2:(NSUInteger)arg2;
 

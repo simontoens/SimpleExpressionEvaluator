@@ -7,9 +7,9 @@
 //
 
 #import "Assertion.h"
-#import "BinOpFunction.h"
+#import "BinaryOperationFunction.h"
 
-@implementation BinOpFunction
+@implementation BinaryOperationFunction
 
 - (NSUInteger)getNumArguments
 {

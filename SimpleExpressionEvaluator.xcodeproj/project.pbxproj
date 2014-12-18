@@ -11,7 +11,7 @@
 		BE1A341D1A2AC12800E77595 /* Assertion.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A341C1A2AC12800E77595 /* Assertion.m */; };
 		BE1A34201A2B011F00E77595 /* SubtractFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A341F1A2B011F00E77595 /* SubtractFunction.m */; };
 		BE1A34231A2B019500E77595 /* MultiplyFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A34221A2B019500E77595 /* MultiplyFunction.m */; };
-		BE1A34261A2B01F600E77595 /* BinOpFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A34251A2B01F600E77595 /* BinOpFunction.m */; };
+		BE1A34261A2B01F600E77595 /* BinaryOperationFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A34251A2B01F600E77595 /* BinaryOperationFunction.m */; };
 		BE1A34291A2B051100E77595 /* DivideFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A34281A2B051100E77595 /* DivideFunction.m */; };
 		BE1A34301A2B0F8800E77595 /* ConstantNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A342F1A2B0F8800E77595 /* ConstantNode.m */; };
 		BE1A34331A2B103800E77595 /* FunctionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1A34321A2B103800E77595 /* FunctionNode.m */; };
@@ -83,8 +83,8 @@
 		BE1A341F1A2B011F00E77595 /* SubtractFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubtractFunction.m; sourceTree = "<group>"; };
 		BE1A34211A2B019500E77595 /* MultiplyFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplyFunction.h; sourceTree = "<group>"; };
 		BE1A34221A2B019500E77595 /* MultiplyFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplyFunction.m; sourceTree = "<group>"; };
-		BE1A34241A2B01F600E77595 /* BinOpFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinOpFunction.h; sourceTree = "<group>"; };
-		BE1A34251A2B01F600E77595 /* BinOpFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BinOpFunction.m; sourceTree = "<group>"; };
+		BE1A34241A2B01F600E77595 /* BinaryOperationFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryOperationFunction.h; sourceTree = "<group>"; };
+		BE1A34251A2B01F600E77595 /* BinaryOperationFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BinaryOperationFunction.m; sourceTree = "<group>"; };
 		BE1A34271A2B051100E77595 /* DivideFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivideFunction.h; sourceTree = "<group>"; };
 		BE1A34281A2B051100E77595 /* DivideFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivideFunction.m; sourceTree = "<group>"; };
 		BE1A342E1A2B0F8800E77595 /* ConstantNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantNode.h; sourceTree = "<group>"; };
@@ -210,8 +210,8 @@
 			children = (
 				BEA03D461A26A52600042669 /* AddFunction.h */,
 				BEA03D471A26A52600042669 /* AddFunction.m */,
-				BE1A34241A2B01F600E77595 /* BinOpFunction.h */,
-				BE1A34251A2B01F600E77595 /* BinOpFunction.m */,
+				BE1A34241A2B01F600E77595 /* BinaryOperationFunction.h */,
+				BE1A34251A2B01F600E77595 /* BinaryOperationFunction.m */,
 				BEA03D4C1A26AB4100042669 /* BuiltinFunctions.h */,
 				BEA03D4D1A26AB4100042669 /* BuiltinFunctions.m */,
 				BE1A34271A2B051100E77595 /* DivideFunction.h */,
@@ -467,7 +467,7 @@
 				BE1A34231A2B019500E77595 /* MultiplyFunction.m in Sources */,
 				BE5E2F431A2BE36800B93F73 /* ReferenceNode.m in Sources */,
 				BE9942FE18750D6A0080C499 /* Environment.m in Sources */,
-				BE1A34261A2B01F600E77595 /* BinOpFunction.m in Sources */,
+				BE1A34261A2B01F600E77595 /* BinaryOperationFunction.m in Sources */,
 				BE1A34291A2B051100E77595 /* DivideFunction.m in Sources */,
 				BE098BA918837FB6003E1308 /* TokenType.m in Sources */,
 				BEE4EF7D1846EE7D00AFBE36 /* Stack.m in Sources */,
