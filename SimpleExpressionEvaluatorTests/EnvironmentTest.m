@@ -7,8 +7,10 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "ConstantNode.h"
 #import "Environment.h"
 #import "Node.h"
+#import "ReferenceNode.h"
 
 @interface EnvironmentTest : XCTestCase
 
@@ -27,8 +29,8 @@
 
 - (void)testEnv
 {
-    Node *ref = [Node nodeWithToken:[Token tokenWithValue:@"a"]];
-    Node *val = [Node nodeWithToken:[Token tokenWithValue:@"10"]];
+    Node *ref = [[ConstantNode alloc] initWithToken:[Token tokenWithValue:@"a"]];
+    Node *val = [[ReferenceNode alloc] initWithToken:[Token tokenWithValue:@"10"]];
     [_environment bind:val to:ref];
     XCTAssertEqualObjects([_environment resolve:ref], val);
 }

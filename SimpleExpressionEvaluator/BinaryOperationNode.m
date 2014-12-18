@@ -11,6 +11,11 @@
 
 @implementation BinaryOperationNode
 
++ (void)initialize
+{
+    [CharacterSets class];
+}
+
 - (BOOL)leftAssociative
 {
     return YES;
@@ -19,6 +24,11 @@
 - (NSUInteger)precedence
 {
     return [self.token matchesCharacterSet:kBinaryOperatorHigherPrecedenceCharacterSet] ? 3 : 2;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@: %lu", [super description], self.precedence];
 }
 
 @end

@@ -16,7 +16,6 @@
 #import "GroupStartNode.h"
 #import "Lexer.h"
 #import "Node.h"
-#import "NodeType.h"
 #import "ReferenceNode.h"
 #import "Token.h"
 

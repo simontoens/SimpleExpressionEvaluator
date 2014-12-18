@@ -29,22 +29,6 @@
     _lexer = [[Lexer alloc] init];
 }
 
-- (void)testNodeType
-{
-    NSArray *tokens = @[[Token tokenWithValue:@"1" type:[TokenType constant]]];
-    [self assertNodeTypes:@[[NSNull null]] nodes:[_lexer lex:tokens]];
-    
-    tokens = @[[Token tokenWithValue:@"f" type:[TokenType identifier]],
-               [Token tokenWithValue:@"=" type:[TokenType assign]],
-               [Token tokenWithValue:@"3" type:[TokenType constant]]];
-    [self assertNodeTypes:@[[NSNull null], [NSNull null], [NSNull null]] nodes:[_lexer lex:tokens]];
-    
-    tokens = @[[Token tokenWithValue:@"f" type:[TokenType identifier]],
-               [Token tokenWithValue:@"(" type:[TokenType openParen]],
-               [Token tokenWithValue:@"3" type:[TokenType constant]]];
-    [self assertNodeTypes:@[[NodeType func], [NSNull null], [NSNull null]] nodes:[_lexer lex:tokens]];
-}
-
 - (void)testProcessArgSeparators
 {
     NSArray *inputTokens = @[[Token tokenWithValue:@"f" type:[TokenType identifier]],
@@ -69,22 +53,6 @@
     
     [self assertTokenTypes:expectedTokens nodes:[_lexer lex:inputTokens]];
     
-}
-
-- (void)assertNodeTypes:(NSArray *)expectedNodeTypes nodes:(NSArray *)nodes
-{
-    XCTAssertEqual([nodes count], [expectedNodeTypes count], @"Unexpected number of nodes");
-    for (NSUInteger i = 0 ; i < [nodes count]; i++)
-    {
-        if ([expectedNodeTypes objectAtIndex:i] == [NSNull null])
-        {
-            XCTAssertNil(((Node *)[nodes objectAtIndex:i]).type, @"Expected Node.type to be nil");
-        }
-        else
-        {
-            XCTAssertEqual(((Node *)[nodes objectAtIndex:i]).type, [expectedNodeTypes objectAtIndex:i], @"Unexpected node type at index %lu", i);
-        }
-    }
 }
 
 - (void)assertTokenTypes:(NSArray *)expectedTokenTypes nodes:(NSArray *)nodes

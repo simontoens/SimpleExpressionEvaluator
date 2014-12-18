@@ -9,10 +9,7 @@
 #import "Assertion.h"
 #import "ASTBuilder.h"
 #import "BinaryOperationNode.h"
-#import "CharacterSets.h"
-#import "FunctionNode.h"
 #import "Node.h"
-#import "NodeType.h"
 #import "Stack.h"
 
 @interface ASTBuilder()
@@ -24,11 +21,6 @@
 @end
 
 @implementation ASTBuilder
-
-+ (void)initialize
-{
-    [CharacterSets class];
-}
 
 - (instancetype)init
 {

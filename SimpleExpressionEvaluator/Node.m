@@ -11,18 +11,6 @@
 
 @implementation Node
 
-+ (Node *)nodeWithToken:(Token *)token
-{
-    return [Node nodeWithToken:token nodeType:nil];
-}
-
-+ (Node *)nodeWithToken:(Token *)token nodeType:(NodeType *)nodeType
-{
-    Node *n = [[Node alloc] initWithToken:token];
-    n->_type = nodeType;
-    return n;
-}
-
 - (instancetype)initWithToken:(Token *)token
 {
     if (self = [super init])

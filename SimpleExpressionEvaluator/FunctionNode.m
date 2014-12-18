@@ -7,6 +7,7 @@
 //
 
 #import "Assertion.h"
+#import "ConstantNode.h"
 #import "FunctionNode.h"
 
 @interface FunctionNode()
@@ -23,7 +24,6 @@
     if (self = [super initWithToken:token])
     {
         _builtins = builtins;
-        self.type = [NodeType func];
     }
     return self;
 }
@@ -39,7 +39,7 @@
         @throw [IllegalStateAssertion withReason:[NSString stringWithFormat:@"Unable to resolve function for %@", self]];
     }
     NSString *result = [function run:@[lhs.token.value, rhs.token.value]];
-    return [Node nodeWithToken:[Token tokenWithValue:result type:[TokenType constant]]];
+    return [[ConstantNode alloc] initWithToken:[Token tokenWithValue:result type:[TokenType constant]]];
 }
 
 - (BOOL)function

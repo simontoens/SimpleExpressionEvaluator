@@ -8,16 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "Environment.h"
-#import "NodeType.h"
 #import "Token.h"
 
 /**
  * Abstract base class of node hierarchy.
  */
 @interface Node : NSObject
-
-+ (Node *)nodeWithToken:(Token *)token;
-+ (Node *)nodeWithToken:(Token *)token nodeType:(NodeType *)nodeType;
 
 - (instancetype)init __unavailable;
 
@@ -31,7 +27,6 @@
 - (NSString *)prefix;
 
 @property (nonatomic, strong, readonly) Token *token;
-@property (nonatomic, strong) NodeType *type;
 
 @property (nonatomic, strong) NSArray *children;
 

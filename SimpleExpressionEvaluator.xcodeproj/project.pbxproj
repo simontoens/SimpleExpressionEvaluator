@@ -32,7 +32,6 @@
 		BEACF0091911FB260048B3F8 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = BEACF0081911FB260048B3F8 /* Token.m */; };
 		BEACF00A1911FB260048B3F8 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = BEACF0081911FB260048B3F8 /* Token.m */; };
 		BEB11CCD1848203000F9BA77 /* NodeEvalTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB11CCC1848203000F9BA77 /* NodeEvalTest.m */; };
-		BEDDC6E119F458B00031BB44 /* NodeType.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDDC6E019F458B00031BB44 /* NodeType.m */; };
 		BEE4EF431846EB9B00AFBE36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF421846EB9B00AFBE36 /* Foundation.framework */; };
 		BEE4EF451846EB9B00AFBE36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF441846EB9B00AFBE36 /* CoreGraphics.framework */; };
 		BEE4EF471846EB9B00AFBE36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4EF461846EB9B00AFBE36 /* UIKit.framework */; };
@@ -114,8 +113,6 @@
 		BEACF0071911FB260048B3F8 /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
 		BEACF0081911FB260048B3F8 /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
 		BEB11CCC1848203000F9BA77 /* NodeEvalTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = NodeEvalTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		BEDDC6DF19F458B00031BB44 /* NodeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeType.h; sourceTree = "<group>"; };
-		BEDDC6E019F458B00031BB44 /* NodeType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeType.m; sourceTree = "<group>"; };
 		BEE4EF3F1846EB9B00AFBE36 /* SimpleExpressionEvaluator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleExpressionEvaluator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE4EF421846EB9B00AFBE36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BEE4EF441846EB9B00AFBE36 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -274,8 +271,6 @@
 				BEA03D4B1A26A5CF00042669 /* Function.h */,
 				BEED748419F1E3AB00F21094 /* Lexer.h */,
 				BEED748519F1E3AB00F21094 /* Lexer.m */,
-				BEDDC6DF19F458B00031BB44 /* NodeType.h */,
-				BEDDC6E019F458B00031BB44 /* NodeType.m */,
 				BEACF0071911FB260048B3F8 /* Token.h */,
 				BEACF0081911FB260048B3F8 /* Token.m */,
 				BEF84A6818490C9F0045B490 /* Tokenizer.h */,
@@ -450,7 +445,6 @@
 				BEF84A6A18490C9F0045B490 /* Tokenizer.m in Sources */,
 				BEE4EF4F1846EB9B00AFBE36 /* main.m in Sources */,
 				BE2836481849618A00E60DBD /* MainViewController.m in Sources */,
-				BEDDC6E119F458B00031BB44 /* NodeType.m in Sources */,
 				BEF84A6F184916D20045B490 /* Preconditions.m in Sources */,
 				BEED748A19F1E6DE00F21094 /* CharacterSets.m in Sources */,
 				BE1A34301A2B0F8800E77595 /* ConstantNode.m in Sources */,
