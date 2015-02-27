@@ -44,7 +44,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"'%@' p:ch%lu", [super description], self.precedence];
+    return [NSString stringWithFormat:@"'%@' p:ch%lu", [super description], (unsigned long)self.precedence];
 }
 
 @end
