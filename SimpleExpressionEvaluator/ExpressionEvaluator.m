@@ -15,6 +15,7 @@
 
 @implementation ExpressionEvaluator
 {
+    @private
     Environment *env;
 }
 

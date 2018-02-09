@@ -11,6 +11,7 @@
 
 @implementation Environment
 {
+    @private
     NSMutableDictionary *_env;
 }
 
